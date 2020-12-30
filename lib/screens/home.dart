@@ -38,13 +38,17 @@ class Home extends StatelessWidget {
           crossAxisCount: 2,
           children: <Widget>[
             GestureDetector(
-              onLongPress: () {
-                print('I am Pressed');
-              },
               onTap: () {
                 Get.to(StudentListForRC(
                   clsNumber: 6,
                 ));
+              },
+              onLongPress: () {
+                Get.to(
+                  StudentListForDetail(
+                    clsNumber: 6,
+                  ),
+                );
               },
               child: Container(
                 padding: const EdgeInsets.all(8),
