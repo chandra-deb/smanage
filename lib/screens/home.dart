@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smanage/screens/student_list.dart';
+import 'package:smanage/screens/student_list_for_roll_call.dart';
 // import 'package:get/get.dart';
 // import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:smanage/services/auth.dart';
@@ -41,7 +41,7 @@ class Home extends StatelessWidget {
                 print('I am Pressed');
               },
               onTap: () {
-                Get.to(StudentList(
+                Get.to(StudentListForRC(
                   clsNumber: 6,
                 ));
               },
@@ -53,7 +53,7 @@ class Home extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Get.to(StudentList(
+                Get.to(StudentListForRC(
                   clsNumber: 7,
                 ));
               },
@@ -65,7 +65,7 @@ class Home extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Get.to(StudentList(
+                Get.to(StudentListForRC(
                   clsNumber: 8,
                 ));
               },
@@ -77,7 +77,7 @@ class Home extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Get.to(StudentList(
+                Get.to(StudentListForRC(
                   clsNumber: 9,
                 ));
               },
@@ -89,7 +89,7 @@ class Home extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Get.to(StudentList(
+                Get.to(StudentListForRC(
                   clsNumber: 10,
                 ));
               },
@@ -101,7 +101,7 @@ class Home extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Get.to(StudentList(
+                Get.to(StudentListForRC(
                   clsNumber: 11,
                 ));
               },

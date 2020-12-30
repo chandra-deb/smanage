@@ -4,11 +4,11 @@ import 'package:smanage/controllers/roll_call_controller.dart';
 import 'package:smanage/services/database.dart';
 import 'package:date_time_format/date_time_format.dart';
 
-class StudentList extends StatelessWidget {
+class StudentListForRC extends StatelessWidget {
   final _db = DB();
   final int clsNumber;
 
-  StudentList({this.clsNumber});
+  StudentListForRC({this.clsNumber});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,10 +29,6 @@ class StudentList extends StatelessWidget {
               return ListView.builder(
                 itemCount: docs.length,
                 itemBuilder: (context, index) {
-                  // var docRef =
-                  //     docs[index].reference.collection('attendence').doc('ll');
-                  // docRef.get().then((document) {});
-
                   return FutureBuilder(
                     future:
                         RollCallController(doc: docs[index]).attendenceFuture,
