@@ -33,7 +33,6 @@ class StudentList extends StatelessWidget {
                   //     docs[index].reference.collection('attendence').doc('ll');
                   // docRef.get().then((document) {});
 
-                  // ToDo : Here i will return getx
                   return FutureBuilder(
                     future:
                         RollCallController(doc: docs[index]).attendenceFuture,
@@ -86,73 +85,16 @@ class StudentList extends StatelessWidget {
                       }
                     },
                   );
-
-                  // StreamBuilder<DocumentSnapshot>(
-                  //     stream:
-                  //         RollCallController(doc: docs[index]).attendenceStream,
-                  //     builder: (context, snapshot) {
-                  //       if (snapshot.hasData) {
-                  //         return FlatButton(
-                  //           onPressed: () {
-                  //             print(snapshot.data.get('attendant'));
-                  //             RollCallController(doc: docs[index])
-                  //                 .changeAttendantToTrue();
-                  //           },
-                  //           onLongPress: () {
-                  //             RollCallController(doc: docs[index])
-                  //                 .changeAttendantToFalse();
-                  //           },
-                  //           child: Text(
-                  //             docs[index].data()['name'] +
-                  //                 docs[index].data()['roll'].toString(),
-                  //           ),
-                  //           color: snapshot.data.get('attendant') == true
-                  //               ? Colors.green
-                  //               : Colors.red,
-                  //         );
-                  //       } else {
-                  //         return Text('Something is wrong!');
-                  //       }
-                  //     });
                 },
               );
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
               return CircularProgressIndicator();
             }
-            return Text('no');
+            return Text('What is happening!?');
           },
         ),
       ),
     );
   }
 }
-
-//!! if anything goes wrong! backed up here!
-// StreamBuilder<DocumentSnapshot>(
-//                       stream:
-//                           RollCallController(doc: docs[index]).attendenceStream,
-//                       builder: (context, snapshot) {
-//                         if (snapshot.hasData) {
-//                           return FlatButton(
-//                             onPressed: () {
-//                               print(snapshot.data.get('attendant'));
-//                               RollCallController(doc: docs[index])
-//                                   .changeAttendantToTrue();
-//                             },
-//                             onLongPress: () {
-//                               RollCallController(doc: docs[index])
-//                                   .changeAttendantToFalse();
-//                             },
-//                             child: Text(
-//                               docs[index].data()['name'] +
-//                                   docs[index].data()['roll'].toString(),
-//                             ),
-//                             color: snapshot.data.get('attendant') == true
-//                                 ? Colors.green
-//                                 : Colors.red,
-//                           );
-//                         } else {
-//                           return Text('Something is wrong!');
-//                         }
-//                       });
