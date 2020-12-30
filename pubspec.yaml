@@ -32,7 +32,9 @@ dependencies:
   get:
   date_time_format: ^1.1.0
   modal_bottom_sheet: ^1.0.0+1
-
+  flutter_phone_direct_caller:
+    git:
+      url: https://github.com/yanisalfian/flutter-phone-direct-caller.git
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0

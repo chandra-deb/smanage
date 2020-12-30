@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smanage/screens/student_list_for_detail.dart';
 import 'package:smanage/screens/student_list_for_roll_call.dart';
 // import 'package:get/get.dart';
 // import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -90,6 +91,11 @@ class Home extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Get.to(StudentListForRC(
+                  clsNumber: 10,
+                ));
+              },
+              onLongPress: () {
+                Get.to(StudentListForDetail(
                   clsNumber: 10,
                 ));
               },
