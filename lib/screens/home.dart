@@ -37,47 +37,83 @@ class Home extends StatelessWidget {
           crossAxisCount: 2,
           children: <Widget>[
             GestureDetector(
+              onLongPress: () {
+                print('I am Pressed');
+              },
               onTap: () {
-                Get.to(StudentList());
+                Get.to(StudentList(
+                  clsNumber: 6,
+                ));
               },
               child: Container(
                 padding: const EdgeInsets.all(8),
-                child: const Text("He'd have you all unravel at the"),
+                child: const Text("Class 6"),
                 color: Colors.teal[100],
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: const Text('Heed not the rabble'),
-              color: Colors.teal[200],
+            GestureDetector(
+              onTap: () {
+                Get.to(StudentList(
+                  clsNumber: 7,
+                ));
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                child: const Text("Class 7"),
+                color: Colors.teal[100],
+              ),
             ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: const Text('Sound of screams but the'),
-              color: Colors.teal[300],
+            GestureDetector(
+              onTap: () {
+                Get.to(StudentList(
+                  clsNumber: 8,
+                ));
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                child: const Text("Class 8"),
+                color: Colors.teal[100],
+              ),
             ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: const Text('Who scream'),
-              color: Colors.teal[400],
+            GestureDetector(
+              onTap: () {
+                Get.to(StudentList(
+                  clsNumber: 9,
+                ));
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                child: const Text("Class 9"),
+                color: Colors.teal[100],
+              ),
             ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: const Text('Revolution is coming...'),
-              color: Colors.teal[500],
+            GestureDetector(
+              onTap: () {
+                Get.to(StudentList(
+                  clsNumber: 10,
+                ));
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                child: const Text("Class 10"),
+                color: Colors.teal[100],
+              ),
             ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: const Text('Revolution, they...'),
-              color: Colors.teal[600],
+            GestureDetector(
+              onTap: () {
+                Get.to(StudentList(
+                  clsNumber: 11,
+                ));
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                child: const Text("Class 11"),
+                color: Colors.teal[100],
+              ),
             ),
           ],
         ),
       ),
     );
   }
-
-  // showModalButton() {
-  //   return GetModalBottomSheetRoute(isScrollControlled: false);
-  // }
 }

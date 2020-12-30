@@ -6,15 +6,20 @@ import 'package:date_time_format/date_time_format.dart';
 
 class StudentList extends StatelessWidget {
   final _db = DB();
+  final int clsNumber;
+
+  StudentList({this.clsNumber});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Roll Call ${DateTime.now().format('D, M j')}'),
+        title: Text(
+            'Roll Call of Class $clsNumber (${DateTime.now().format('D, M j')})'),
+        centerTitle: true,
       ),
       body: Container(
         child: StreamBuilder<QuerySnapshot>(
-          stream: _db.getStudentOfClass(10),
+          stream: _db.getStudentOfClass(clsNumber),
           // initialData: initialData,
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -32,7 +37,6 @@ class StudentList extends StatelessWidget {
                   return FutureBuilder(
                     future:
                         RollCallController(doc: docs[index]).attendenceFuture,
-                    // initialData: InitialData,
                     // ignore: missing_return
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.hasError) {
