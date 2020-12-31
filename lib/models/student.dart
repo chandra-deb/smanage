@@ -1,8 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_format/date_time_format.dart';
 import 'package:smanage/services/auth.dart';
 import 'package:smanage/services/database.dart';
-import 'package:instant/instant.dart';
 
 class Student {
   final _db = DB();

@@ -20,7 +20,6 @@ class StudentListForRC extends StatelessWidget {
       body: Container(
         child: StreamBuilder<QuerySnapshot>(
           stream: _db.getStudentOfClass(clsNumber),
-          // initialData: initialData,
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
