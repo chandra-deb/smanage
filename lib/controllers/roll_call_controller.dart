@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_format/date_time_format.dart';
+import 'package:get/get.dart';
 
-class RollCallController {
+class RollCallController extends GetxController {
   final QueryDocumentSnapshot doc;
-
+  // Todo ljl
+  var dt = DateTime.now().obs;
   final date = DateTime.now().format('D, M j');
   RollCallController({this.doc});
 

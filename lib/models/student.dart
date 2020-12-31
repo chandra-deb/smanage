@@ -21,9 +21,9 @@ class Student {
     this.classNumber,
   });
 
-  void create() {
+  void create() async {
     final doc = _db.store.collection('students').doc();
-    doc.set({
+    await doc.set({
       'teacherUID': _auth.teacherUID,
       'name': name,
       'schoolName': schoolName,
@@ -31,14 +31,14 @@ class Student {
       'classNumber': classNumber,
       'phone': phoneNumber,
     });
-    doc
+    await doc
         .collection('attendance')
         .doc(
           DateTime.now().format('D, M j'),
         )
         .set({
       'attendant': false,
-      'time': DateTime.now().add(Duration(hours: 15)),
+      'time': DateTime.now(),
     });
   }
 
