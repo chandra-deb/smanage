@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_format/date_time_format.dart';
 import 'package:smanage/services/auth.dart';
 import 'package:smanage/services/database.dart';
+import 'package:instant/instant.dart';
 
 class Student {
   final _db = DB();
@@ -33,8 +35,13 @@ class Student {
     });
     doc
         .collection('attendance')
-        .doc(DateTime.now().format('D, M j'))
-        .set({'attendant': false});
+        .doc(
+          DateTime.now().format('D, M j'),
+        )
+        .set({
+      'attendant': false,
+      'time': DateTime.now().add(Duration(hours: 15)),
+    });
   }
 
   void updateAttendence() {}

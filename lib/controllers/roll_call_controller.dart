@@ -16,20 +16,19 @@ class RollCallController {
   Future<Stream<DocumentSnapshot>> get attendenceFuture async {
     var data = await doc.reference.collection('attendance').doc(date).get();
     if (!data.exists) {
-      await doc.reference
-          .collection('attendance')
-          .doc(date)
-          .set({'attendant': false});
+      await doc.reference.collection('attendance').doc(date).set({
+        'attendant': false,
+        'time': DateTime.now(),
+      });
     }
     return attendenceStream;
   }
 
   changeAttendantToTrue() async {
     try {
-      await doc.reference
-          .collection('attendance')
-          .doc(date)
-          .set({'attendant': true});
+      await doc.reference.collection('attendance').doc(date).update({
+        'attendant': true,
+      });
     } on Exception catch (e) {
       print(e);
     }
@@ -40,7 +39,7 @@ class RollCallController {
       await doc.reference
           .collection('attendance')
           .doc(date)
-          .set({'attendant': false});
+          .update({'attendant': false});
     } on Exception catch (e) {
       print(e);
     }

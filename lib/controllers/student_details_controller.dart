@@ -10,6 +10,9 @@ class StudentDetailsController {
     t.get().then((value) {
       print(value.docs[0].id);
     });
-    return await doc.reference.collection('attendance').get();
+    return await doc.reference
+        .collection('attendance')
+        .orderBy('time', descending: true)
+        .get();
   }
 }
