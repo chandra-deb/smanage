@@ -27,6 +27,7 @@ class StudentListForRC extends StatelessWidget {
               final docs = snapshot.data.docs;
 
               return ListView.builder(
+                physics: BouncingScrollPhysics(),
                 itemCount: docs.length,
                 itemBuilder: (context, index) {
                   return FutureBuilder(
