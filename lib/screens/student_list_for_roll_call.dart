@@ -39,33 +39,32 @@ class StudentListForRC extends StatelessWidget {
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.hasError) {
                           return Center(
-                            child: Text('Something Went Wrong!'),
+                            child: Text(''),
                           );
                         }
                         switch (snapshot.connectionState) {
                           case ConnectionState.waiting:
-                            return LinearProgressIndicator();
+                            return Text('');
 
                           case ConnectionState.done:
                             return StreamBuilder<DocumentSnapshot>(
                                 stream: RollCallController(doc: docs[index])
                                     .attendenceStream,
                                 builder: (context, snapshot) {
+                                  var doc = docs[index];
                                   if (snapshot.hasData) {
                                     return FlatButton(
                                       onPressed: () {
-                                        RollCallController(doc: docs[index])
+                                        RollCallController(doc: doc)
                                             .changeAttendantToTrue();
                                       },
                                       onLongPress: () {
-                                        RollCallController(doc: docs[index])
+                                        RollCallController(doc: doc)
                                             .changeAttendantToFalse();
                                       },
                                       child: Text(
-                                        docs[index].data()['name'] +
-                                            docs[index]
-                                                .data()['roll']
-                                                .toString(),
+                                        doc.data()['name'] +
+                                            doc.data()['roll'].toString(),
                                       ),
                                       color:
                                           snapshot.data.get('attendant') == true
