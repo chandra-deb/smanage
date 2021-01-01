@@ -3,10 +3,12 @@ import 'package:date_time_format/date_time_format.dart';
 import 'package:get/get.dart';
 
 class RollCallController extends GetxController {
+  static RxInt daysTimeTravel = 0.obs; //!For Time Travel
+  static get getDay => daysTimeTravel.value;
   final QueryDocumentSnapshot doc;
   // Todo ljl
-  var dt = DateTime.now().obs;
-  final date = DateTime.now().format('D, M j');
+  final date =
+      DateTime.now().add(Duration(days: daysTimeTravel.value)).format('D, M j');
   RollCallController({this.doc});
 
   Stream<DocumentSnapshot> get attendenceStream {
@@ -20,7 +22,7 @@ class RollCallController extends GetxController {
     if (!data.exists) {
       await doc.reference.collection('attendance').doc(date).set({
         'attendant': false,
-        'time': DateTime.now(),
+        'time': DateTime.now().add(Duration(days: daysTimeTravel.value)),
       });
     }
     return attendenceStream;
