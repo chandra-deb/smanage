@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:smanage/controllers/roll_call_controller.dart';
 import 'package:smanage/services/database.dart';
 import 'package:date_time_format/date_time_format.dart';
+print('No One');
 
 class StudentListForRC extends StatelessWidget {
   final _db = DB();
