@@ -101,10 +101,15 @@ class StudentListForRC extends StatelessWidget {
             FlatButton(
               onLongPress: () {},
               onPressed: () {
-                RollCallController.daysTimeTravel.value--;
-                print('I am called On the action Bar!');
+                if (DateTime.now()
+                        .add(Duration(
+                            days: RollCallController.daysTimeTravel.value - 1))
+                        .year ==
+                    DateTime.now().year) {
+                  RollCallController.daysTimeTravel.value--;
+                }
               },
-              child: Text('Go back 1 day'),
+              child: Text(RollCallController.getBackwardMessage()),
             ),
             FlatButton(
               onPressed: () {

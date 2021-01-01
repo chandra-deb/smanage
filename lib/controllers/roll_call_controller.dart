@@ -14,6 +14,17 @@ class RollCallController extends GetxController {
     }
   }
 
+  static getBackwardMessage() {
+    if (DateTime.now().add(Duration(days: daysTimeTravel.value - 1)).year <
+        DateTime.now().year) {
+      // daysTimeTravel.listen((data) {
+
+      return 'You reached the end';
+    } else {
+      return 'Go backward 1 day';
+    }
+  }
+
   // Todo ljl
   final date =
       DateTime.now().add(Duration(days: daysTimeTravel.value)).format('D, M j');
