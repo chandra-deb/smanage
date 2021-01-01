@@ -4,8 +4,16 @@ import 'package:get/get.dart';
 
 class RollCallController extends GetxController {
   static RxInt daysTimeTravel = 0.obs; //!For Time Travel
-  static get getDay => daysTimeTravel.value;
+  static int get getDay => daysTimeTravel.value;
   final QueryDocumentSnapshot doc;
+  static getForwardMessage() {
+    if (daysTimeTravel.value == 0) {
+      return 'You reached the end';
+    } else {
+      return 'Go forward 1 day';
+    }
+  }
+
   // Todo ljl
   final date =
       DateTime.now().add(Duration(days: daysTimeTravel.value)).format('D, M j');

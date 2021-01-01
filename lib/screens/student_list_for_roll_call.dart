@@ -99,6 +99,7 @@ class StudentListForRC extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             FlatButton(
+              onLongPress: () {},
               onPressed: () {
                 RollCallController.daysTimeTravel.value--;
                 print('I am called On the action Bar!');
@@ -107,10 +108,14 @@ class StudentListForRC extends StatelessWidget {
             ),
             FlatButton(
               onPressed: () {
-                RollCallController.daysTimeTravel.value++;
-                print('I am called On the action Bar!');
+                if (RollCallController.daysTimeTravel.value < 0) {
+                  RollCallController.daysTimeTravel.value++;
+                  print('I am called On the action Bar!');
+                } else {
+                  print('I can\'t go forward anymore');
+                }
               },
-              child: Text('Go forward 1 day'),
+              child: Text(RollCallController.getForwardMessage()),
             ),
             FlatButton(
               onPressed: () {
