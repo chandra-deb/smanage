@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:smanage/controllers/roll_call_controller.dart';
 import 'package:smanage/services/database.dart';
 import 'package:date_time_format/date_time_format.dart';
-print('No One');
 
 class StudentListForRC extends StatelessWidget {
   final _db = DB();
@@ -30,7 +29,7 @@ class StudentListForRC extends StatelessWidget {
                 final docs = snapshot.data.docs;
 
                 return ListView.builder(
-                  physics: BouncingScrollPhysics(),
+                  // physics: BouncingScrollPhysics(),
                   itemCount: docs.length,
                   itemBuilder: (context, index) {
                     return FutureBuilder(
@@ -45,7 +44,7 @@ class StudentListForRC extends StatelessWidget {
                         }
                         switch (snapshot.connectionState) {
                           case ConnectionState.waiting:
-                            return Text('');
+                            return SizedBox();
 
                           case ConnectionState.done:
                             return StreamBuilder<DocumentSnapshot>(
@@ -73,7 +72,7 @@ class StudentListForRC extends StatelessWidget {
                                               : Colors.red,
                                     );
                                   } else {
-                                    return Text('Something is wrong!');
+                                    return Text('');
                                   }
                                 });
                           case ConnectionState.none:
