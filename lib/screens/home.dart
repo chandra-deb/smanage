@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smanage/controllers/roll_call_controller.dart';
 import 'package:smanage/screens/student_list_for_detail.dart';
 import 'package:smanage/screens/student_list_for_roll_call.dart';
 // import 'package:get/get.dart';
@@ -93,10 +94,12 @@ class Home extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () {
-                Get.to(StudentListForRC(
+              onTap: () async {
+                await Get.to(StudentListForRC(
                   clsNumber: 10,
                 ));
+                await Future.delayed(Duration(seconds: 1));
+                RollCallController.daysTimeTravel.value = 0;
               },
               onLongPress: () {
                 Get.to(StudentListForDetail(

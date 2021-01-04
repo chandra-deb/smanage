@@ -54,6 +54,7 @@ class StudentListForRC extends StatelessWidget {
                                   var doc = docs[index];
                                   if (snapshot.hasData) {
                                     return FlatButton(
+                                      height: 40,
                                       onPressed: () {
                                         RollCallController(doc: doc)
                                             .changeAttendantToTrue();
@@ -97,8 +98,10 @@ class StudentListForRC extends StatelessWidget {
         floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            FlatButton(
-              onLongPress: () {},
+            ElevatedButton(
+              onLongPress: () {
+                // RollCallController.daysTimeTravel.value -= 5;
+              },
               onPressed: () {
                 if (DateTime.now()
                         .add(Duration(
@@ -110,7 +113,7 @@ class StudentListForRC extends StatelessWidget {
               },
               child: Text(RollCallController.getBackwardMessage()),
             ),
-            FlatButton(
+            ElevatedButton(
               onPressed: () {
                 if (RollCallController.daysTimeTravel.value < 0) {
                   RollCallController.daysTimeTravel.value++;
@@ -121,7 +124,7 @@ class StudentListForRC extends StatelessWidget {
               },
               child: Text(RollCallController.getForwardMessage()),
             ),
-            FlatButton(
+            ElevatedButton(
               onPressed: () {
                 RollCallController.daysTimeTravel.value = 0;
                 print('I am called On the action Bar!');

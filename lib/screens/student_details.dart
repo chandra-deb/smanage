@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:smanage/controllers/student_bill_controller.dart';
 import 'package:smanage/controllers/student_details_controller.dart';
+import 'package:smanage/widgets/student_bills.dart';
 
 class StudentDetails extends StatelessWidget {
   final QueryDocumentSnapshot doc;
@@ -11,6 +13,7 @@ class StudentDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = doc.data();
+    final billRef = doc.reference.collection('bills').orderBy('index');
     final detailController = StudentDetailsController(doc: doc);
     detailController.test();
 
@@ -36,6 +39,10 @@ class StudentDetails extends StatelessWidget {
                     }),
               ),
             ),
+            StudentBills(
+              billRef: billRef,
+            ),
+            // Text(data['bills'][DateTime.now().month - 1].toString()),
             Container(
               height: 250,
               child: FutureBuilder<QuerySnapshot>(

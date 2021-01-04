@@ -13,6 +13,7 @@ class StudentDetailsController {
     return await doc.reference
         .collection('attendance')
         .orderBy('time', descending: true)
+        // .limit(3)
         .get();
   }
 }
