@@ -45,7 +45,7 @@ class StudentBills extends StatelessWidget {
 
               return Column(
                 children: [
-                  Text('Due: $due Taka'),
+                  Text('Due: $due Taka', style: TextStyle(fontSize: 25)),
                   Container(
                     height: 300,
                     child: ListView.builder(

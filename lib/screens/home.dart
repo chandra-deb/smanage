@@ -53,7 +53,12 @@ class Home extends StatelessWidget {
               },
               child: Container(
                 padding: const EdgeInsets.all(8),
-                child: const Text("Class 6"),
+                child: Center(
+                  child: const Text(
+                    "Class 6",
+                    style: TextStyle(fontSize: 35),
+                  ),
+                ),
                 color: Colors.teal[100],
               ),
             ),
@@ -63,9 +68,21 @@ class Home extends StatelessWidget {
                   clsNumber: 7,
                 ));
               },
+              onLongPress: () {
+                Get.to(
+                  StudentListForDetail(
+                    clsNumber: 7,
+                  ),
+                );
+              },
               child: Container(
                 padding: const EdgeInsets.all(8),
-                child: const Text("Class 7"),
+                child: Center(
+                  child: const Text(
+                    "Class 7",
+                    style: TextStyle(fontSize: 35),
+                  ),
+                ),
                 color: Colors.teal[100],
               ),
             ),
@@ -75,9 +92,21 @@ class Home extends StatelessWidget {
                   clsNumber: 8,
                 ));
               },
+              onLongPress: () {
+                Get.to(
+                  StudentListForDetail(
+                    clsNumber: 8,
+                  ),
+                );
+              },
               child: Container(
                 padding: const EdgeInsets.all(8),
-                child: const Text("Class 8"),
+                child: Center(
+                  child: const Text(
+                    "Class 8",
+                    style: TextStyle(fontSize: 35),
+                  ),
+                ),
                 color: Colors.teal[100],
               ),
             ),
@@ -87,9 +116,21 @@ class Home extends StatelessWidget {
                   clsNumber: 9,
                 ));
               },
+              onLongPress: () {
+                Get.to(
+                  StudentListForDetail(
+                    clsNumber: 9,
+                  ),
+                );
+              },
               child: Container(
                 padding: const EdgeInsets.all(8),
-                child: const Text("Class 9"),
+                child: Center(
+                  child: const Text(
+                    "Class 9",
+                    style: TextStyle(fontSize: 35),
+                  ),
+                ),
                 color: Colors.teal[100],
               ),
             ),
@@ -98,8 +139,6 @@ class Home extends StatelessWidget {
                 await Get.to(StudentListForRC(
                   clsNumber: 10,
                 ));
-                await Future.delayed(Duration(seconds: 1));
-                RollCallController.daysTimeTravel.value = 0;
               },
               onLongPress: () {
                 Get.to(StudentListForDetail(
@@ -108,7 +147,12 @@ class Home extends StatelessWidget {
               },
               child: Container(
                 padding: const EdgeInsets.all(8),
-                child: const Text("Class 10"),
+                child: Center(
+                  child: const Text(
+                    "Class 10",
+                    style: TextStyle(fontSize: 35),
+                  ),
+                ),
                 color: Colors.teal[100],
               ),
             ),
@@ -118,9 +162,21 @@ class Home extends StatelessWidget {
                   clsNumber: 11,
                 ));
               },
+              onLongPress: () {
+                Get.to(
+                  StudentListForDetail(
+                    clsNumber: 11,
+                  ),
+                );
+              },
               child: Container(
                 padding: const EdgeInsets.all(8),
-                child: const Text("Class 11"),
+                child: Center(
+                  child: const Text(
+                    "Class 11",
+                    style: TextStyle(fontSize: 35),
+                  ),
+                ),
                 color: Colors.teal[100],
               ),
             ),

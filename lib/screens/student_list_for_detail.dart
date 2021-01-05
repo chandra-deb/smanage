@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smanage/screens/student_details.dart';
 import 'package:smanage/services/database.dart';
-import 'package:date_time_format/date_time_format.dart';
+// import 'package:date_time_format/date_time_format.dart';
 
 class StudentListForDetail extends StatelessWidget {
   final _db = DB();

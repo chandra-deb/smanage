@@ -42,7 +42,10 @@ class StudentDetails extends StatelessWidget {
             StudentBills(
               billRef: billRef,
             ),
-            // Text(data['bills'][DateTime.now().month - 1].toString()),
+            Text(
+              'Attendance',
+              style: TextStyle(fontSize: 20),
+            ),
             Container(
               height: 250,
               child: FutureBuilder<QuerySnapshot>(
@@ -57,11 +60,17 @@ class StudentDetails extends StatelessWidget {
                       itemCount: docs.length,
                       itemBuilder: (BuildContext context, int index) {
                         print(docs[index].data());
-                        return ListTile(
-                          leading: Text(docs[index].id),
-                          trailing:
-                              Text(docs[index].data()['attendant'].toString()),
-                        ); // It will show dates
+                        return Container(
+                          color: docs[index].data()['attendant'] == true
+                              ? Colors.green
+                              : Colors.red,
+                          child: ListTile(
+                            leading: Text(docs[index].id),
+                            trailing: Text(
+                                docs[index].data()['attendant'].toString()),
+                          ),
+                        ); //),
+                        // It will show dates
                       },
                     );
                   }
