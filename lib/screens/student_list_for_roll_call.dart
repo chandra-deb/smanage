@@ -27,9 +27,12 @@ class StudentListForRC extends StatelessWidget {
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasData) {
                 final docs = snapshot.data.docs;
-
+                if (docs.length == 0) {
+                  return Center(
+                    child: Text('No Student added in this Class'),
+                  );
+                }
                 return ListView.builder(
-                  // physics: BouncingScrollPhysics(),
                   itemCount: docs.length,
                   itemBuilder: (context, index) {
                     return FutureBuilder(
@@ -39,12 +42,21 @@ class StudentListForRC extends StatelessWidget {
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.hasError) {
                           return Center(
-                            child: Text(''),
+                            child: Text('Something Went Wrong'),
                           );
                         }
                         switch (snapshot.connectionState) {
                           case ConnectionState.waiting:
-                            return SizedBox();
+                            return Container(
+                              height: 40,
+                              child: Text(
+                                'Loading',
+                                textAlign: TextAlign.center,
+                                // strutStyle: StrutStyle(
+                                //   height: 40,
+                                // ),
+                              ),
+                            );
 
                           case ConnectionState.done:
                             return StreamBuilder<DocumentSnapshot>(
@@ -88,10 +100,11 @@ class StudentListForRC extends StatelessWidget {
                   },
                 );
               }
+
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
               }
-              return Text('What is happening!?');
+              return Center(child: Text('Something Went Wrong!'));
             },
           ),
         ),
