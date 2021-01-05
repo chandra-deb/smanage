@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:smanage/controllers/student_bill_controller.dart';
+import 'package:get/get.dart';
 import 'package:smanage/controllers/student_details_controller.dart';
 import 'package:smanage/widgets/student_bills.dart';
 
@@ -81,6 +81,15 @@ class StudentDetails extends StatelessWidget {
                 },
               ),
             ),
+            // Todo   App deletion function
+            FlatButton(
+              onPressed: () async {
+                await doc.reference.delete();
+                // Get.back();
+                Navigator.of(context).pop();
+              },
+              child: Text('Delete'),
+            )
           ],
         ),
       ),

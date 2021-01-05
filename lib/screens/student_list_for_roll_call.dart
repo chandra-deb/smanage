@@ -47,7 +47,8 @@ class StudentListForRC extends StatelessWidget {
                         }
                         switch (snapshot.connectionState) {
                           case ConnectionState.waiting:
-                            return Container(
+                            return FlatButton(
+                              onPressed: null,
                               height: 40,
                               child: Text(
                                 'Loading',
