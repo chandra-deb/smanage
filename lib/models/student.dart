@@ -10,7 +10,7 @@ class Student {
   final String schoolName;
   final int roll;
   final int classNumber;
-  final String phoneNumber;
+  final String phone;
   final String teacherUid;
 
   Student({
@@ -18,7 +18,7 @@ class Student {
     this.name,
     this.schoolName,
     this.roll,
-    this.phoneNumber,
+    this.phone,
     this.classNumber,
   });
 
@@ -30,7 +30,7 @@ class Student {
   //     'schoolName': schoolName,
   //     'roll': roll,
   //     'classNumber': classNumber,
-  //     'phone': phoneNumber,
+  //     'phone': phone,
   //   });
   //   await doc
   //       .collection('attendance')
@@ -51,7 +51,7 @@ class Student {
     //   'schoolName': schoolName,
     //   'roll': roll,
     //   'classNumber': classNumber,
-    //   'phone': phoneNumber,
+    //   'phone': phone,
     //   'joinDate': DateTime.now(),
     // });
     await doc
@@ -71,7 +71,7 @@ class Student {
       'schoolName': schoolName,
       'roll': roll,
       'classNumber': classNumber,
-      'phone': phoneNumber,
+      'phone': phone,
       'joinDate': DateTime.now(),
     });
     var a = [

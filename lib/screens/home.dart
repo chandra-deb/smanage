@@ -14,7 +14,8 @@ class Home extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          addStudent(context);
+          // addStudent(context);
+          Get.to(AddStudent());
         },
         child: Icon(Icons.add),
       ),
@@ -32,6 +33,7 @@ class Home extends StatelessWidget {
       body: Container(
         margin: EdgeInsets.all(20),
         child: GridView.count(
+          physics: BouncingScrollPhysics(),
           primary: false,
           padding: const EdgeInsets.all(20),
           crossAxisSpacing: 10,
