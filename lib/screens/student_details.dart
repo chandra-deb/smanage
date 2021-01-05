@@ -40,6 +40,7 @@ class StudentDetails extends StatelessWidget {
               ),
             ),
             StudentBills(
+              joinDate: data['joinDate'].toDate(),
               billRef: billRef,
             ),
             Text(

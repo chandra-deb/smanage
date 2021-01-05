@@ -5,10 +5,12 @@ import 'package:toast/toast.dart';
 
 class StudentBills extends StatelessWidget {
   final Query billRef;
+  final DateTime joinDate;
 
-  StudentBills({this.billRef});
+  StudentBills({this.billRef, this.joinDate});
 
   Future<String> alertWithInput(BuildContext context) async {
+    print(joinDate.month);
     return await prompt(
       context,
       title: Text('Do you confirm? It can not be undone!'),
@@ -38,6 +40,7 @@ class StudentBills extends StatelessWidget {
               int due = 0;
               for (var doc in docs) {
                 if (doc.data()['index'] <= DateTime.now().month &&
+                    doc.data()['index'] >= joinDate.month &&
                     doc.data()['paid'] == false) {
                   due += doc.data()['amount'];
                 }
@@ -57,7 +60,8 @@ class StudentBills extends StatelessWidget {
                               ? Colors.greenAccent
                               : Colors.redAccent,
                           onPressed: docs[index].data()['index'] <=
-                                  DateTime.now().month
+                                      DateTime.now().month &&
+                                  docs[index].data()['index'] >= joinDate.month
                               ? () async {
                                   if (docs[index].data()['paid'] == false) {
                                     var value = await alertWithInput(context);
