@@ -342,7 +342,8 @@ class AddStudentController extends GetxController {
     }
   }
 
-  submitData() {
+  submitData() async {
+    // !! it is the Real Implementation By that time
     // Student(
     //   name: studentName,
     //   schoolName: schoolName,
@@ -352,15 +353,45 @@ class AddStudentController extends GetxController {
     // ).create();
     // Get.back();
 
+    try {
+      final student = Student(
+        name: studentName,
+        schoolName: schoolName,
+        classNumber: cls,
+        roll: roll,
+        phoneNumbers: zippedNumbers,
+      );
+      await student.create();
+
+      Get.back();
+    } on Exception catch (e) {
+      // Todo : I have to show user the error!
+      print(e);
+    }
     print('Student Name $studentName');
     print('Father Name $fatherName');
     print('Mother Name $motherName');
     print('School Name $schoolName');
     print('Class $cls');
     print('Roll $roll');
-    print('Student Phone $studentPhone');
-    print('Father Phone $fatherPhone');
-    print('Mother Phone $motherPhone');
+    for (var n in zippedNumbers) {
+      print(n);
+    }
     print('Address $address');
+  }
+
+  List<Map<String, String>> get zippedNumbers {
+    List<Map<String, String>> phoneNumbers = [];
+    if (studentPhoneOk == true) {
+      phoneNumbers.add({'Phone': studentPhone});
+    }
+    if (fatherPhoneOk == true) {
+      phoneNumbers.add({'Father\'s Phone': fatherPhone});
+    }
+    if (motherPhoneOk == true) {
+      phoneNumbers.add({'Mother\'s Phone': motherPhone});
+    }
+
+    return phoneNumbers;
   }
 }

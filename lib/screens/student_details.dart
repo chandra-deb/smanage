@@ -30,14 +30,24 @@ class StudentDetails extends StatelessWidget {
             Text(data['schoolName']),
             Container(
               width: 300,
-              child: ListTile(
-                leading: Text(data['phone']),
-                trailing: RaisedButton(
-                    child: Icon(Icons.call),
-                    onPressed: () {
-                      _makeCall(data['phone']);
-                    }),
-              ),
+              // Todo: I have to finish up this phone calling thing!
+              child: Column(children: [
+                ...data['phoneNumbers'].map((v) => Text(v.toString()))
+              ]
+                  // children: [
+                  //   data['phoneNumbers'].map((Map<String, String> number) {
+                  //     return Text('number.toString()');
+                  //   }).toList(),
+                  // ListTile(
+                  //   leading: Text(data['phone']),
+                  //   trailing: RaisedButton(
+                  //       child: Icon(Icons.call),
+                  //       onPressed: () {
+                  //         _makeCall(data['phone']);
+                  //       }),
+                  // ),
+                  // ],
+                  ),
             ),
             StudentBills(
               joinDate: data['joinDate'].toDate(),
@@ -81,12 +91,12 @@ class StudentDetails extends StatelessWidget {
                 },
               ),
             ),
-            // Todo   App deletion function
+            // Todo   App deletion function ...Need Some functionalities Here
             FlatButton(
               onPressed: () async {
                 await doc.reference.delete();
-                // Get.back();
-                Navigator.of(context).pop();
+                Get.back();
+                // Navigator.of(context).pop();
               },
               child: Text('Delete'),
             )

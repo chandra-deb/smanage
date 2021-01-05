@@ -10,7 +10,7 @@ class Student {
   final String schoolName;
   final int roll;
   final int classNumber;
-  final String phone;
+  final List<Map<String, String>> phoneNumbers;
   final String teacherUid;
 
   Student({
@@ -18,7 +18,7 @@ class Student {
     this.name,
     this.schoolName,
     this.roll,
-    this.phone,
+    this.phoneNumbers,
     this.classNumber,
   });
 
@@ -43,7 +43,7 @@ class Student {
   //   });
   // }
 
-  void create() async {
+  Future<void> create() async {
     final doc = _db.store.collection('students').doc();
     // await doc.set({
     //   'teacherUID': _auth.teacherUID,
@@ -71,7 +71,7 @@ class Student {
       'schoolName': schoolName,
       'roll': roll,
       'classNumber': classNumber,
-      'phone': phone,
+      'phoneNumbers': phoneNumbers,
       'joinDate': DateTime.now(),
     });
     var a = [
