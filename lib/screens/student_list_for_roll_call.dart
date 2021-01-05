@@ -41,8 +41,11 @@ class StudentListForRC extends StatelessWidget {
                       // ignore: missing_return
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.hasError) {
-                          return Center(
+                          return FlatButton(
+                            // !It Shows....Other 'Something went wrong not work
+                            height: 40,
                             child: Text('Something Went Wrong'),
+                            onPressed: null,
                           );
                         }
                         switch (snapshot.connectionState) {
@@ -105,7 +108,11 @@ class StudentListForRC extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
               }
-              return Center(child: Text('Something Went Wrong!'));
+              return FlatButton(
+                height: 40,
+                child: Text('Something Went Wrong!'),
+                onPressed: null,
+              );
             },
           ),
         ),
