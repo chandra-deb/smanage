@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -106,7 +107,12 @@ class AddStudent extends StatelessWidget {
                     _.getAddressErr(value);
                   },
                 ),
-                ElevatedButton(onPressed: _.button.value, child: Text('Add'))
+                ElevatedButton(onPressed: _.button.value, child: Text('Add')),
+                _.loading.value == true
+                    ? LinearProgressIndicator()
+                    : _.addButtonErr.value != null
+                        ? Text(_.addButtonErr.value)
+                        : SizedBox()
               ],
             ),
           ),
