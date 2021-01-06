@@ -50,7 +50,7 @@ class AddStudent extends StatelessWidget {
                 TextField(
                   keyboardType: TextInputType.name,
                   decoration: InputDecoration(
-                      labelText: 'School Name',
+                      labelText: 'School/College Name',
                       errorText: _.schoolNameErr.value),
                   onChanged: (value) {
                     _.getSchoolNameErr(value);
