@@ -106,9 +106,27 @@ class StudentDetails extends StatelessWidget {
             // Todo   App deletion function ...Need Some functionalities Here
             FlatButton(
               onPressed: () async {
-                await doc.reference.delete();
+                final batch = FirebaseFirestore.instance.batch();
+
+                await doc.reference
+                    .collection('attendance')
+                    .get()
+                    .then((value) {
+                  for (var doc in value.docs) {
+                    batch.delete(doc.reference);
+                  }
+                });
+
+                await doc.reference.collection('bills').get().then((value) {
+                  for (var doc in value.docs) {
+                    batch.delete(doc.reference);
+                  }
+                });
+
+                batch.delete(doc.reference);
+
+                await batch.commit();
                 Get.back();
-                // Navigator.of(context).pop();
               },
               child: Text('Delete'),
             )
