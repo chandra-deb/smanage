@@ -6,7 +6,7 @@ import 'package:smanage/screens/student_list_for_roll_call.dart';
 // import 'package:get/get.dart';
 // import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:smanage/services/auth.dart';
-import 'package:smanage/widgets/add_student.dart';
+import '../screens/add_student.dart';
 
 class Home extends StatelessWidget {
   @override
