@@ -28,6 +28,7 @@ class StudentBills extends StatelessWidget {
         child: StreamBuilder(
           stream: billRef.snapshots(),
           builder:
+              // ignore: missing_return
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return LinearProgressIndicator();
