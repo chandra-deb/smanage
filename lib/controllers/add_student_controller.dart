@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:smanage/models/student.dart';
+import 'package:toast/toast.dart';
 
 class AddStudentController extends GetxController {
   String studentName;
@@ -338,42 +340,51 @@ class AddStudentController extends GetxController {
         studentPhoneOk &&
         addressOk) {
       button.value = () async => await submitData();
+      // if (addButtonErr.value != null) {
+      //   // ** It tells if the student added instantly or not
+      //   Toast.show(
+      //     addButtonErr.value,
+      //     context,
+      //     duration: Toast.LENGTH_LONG,
+      //     gravity: Toast.BOTTOM,
+      //   );
+      // } else {
+      //   Toast.show(
+      //     'Student Added',
+      //     context,
+      //     duration: Toast.LENGTH_LONG,
+      //     gravity: Toast.BOTTOM,
+      //   );
+      // }
+
     } else {
       button.value = null;
     }
   }
 
   Future<void> submitData() async {
-    // !! it is the Real Implementation By that time
-    // Student(
-    //   name: studentName,
-    //   schoolName: schoolName,
-    //   classNumber: cls,
-    //   roll: roll,
-    //   phone: studentPhone,
-    // ).create();
-    // Get.back();
-
-    try {
-      final student = Student(
-        name: studentName,
-        schoolName: schoolName,
-        classNumber: cls,
-        roll: roll,
-        phoneNumbers: zippedNumbers,
-      );
-      loading.value = true;
-      button.value = null;
-      await student.create();
+    final student = Student(
+      name: studentName,
+      schoolName: schoolName,
+      classNumber: cls,
+      roll: roll,
+      phoneNumbers: zippedNumbers,
+    );
+    loading.value = true;
+    button.value = null;
+    var result = await student.create();
+    // * Here "null" means student successfully created instantly
+    if (result != null) {
+      addButtonErr.value = result;
       loading.value = false;
-      addButtonErr.value = null;
-
-      Get.back();
-    } on Exception catch (e) {
-      // Todo : I have to show user the error!
-      addButtonErr.value = 'Unable To add Student!';
-      print(e);
+      // return;
     }
+
+    // * if not means the use is not connected to the internet..and create the student in phone cache.
+    addButtonErr.value = null;
+
+    Get.back();
+
     print('Student Name $studentName');
     print('Father Name $fatherName');
     print('Mother Name $motherName');
@@ -399,10 +410,5 @@ class AddStudentController extends GetxController {
     }
 
     return phoneNumbers;
-  }
-
-  void t() {
-    var i = FirebaseFirestore.instance;
-    i.clearPersistence();
   }
 }

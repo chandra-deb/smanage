@@ -43,26 +43,11 @@ class Student {
   //   });
   // }
 
-  Future<void> create() async {
+  Future create() async {
     final doc = _db.store.collection('students').doc();
-    // await doc.set({
-    //   'teacherUID': _auth.teacherUID,
-    //   'name': name,
-    //   'schoolName': schoolName,
-    //   'roll': roll,
-    //   'classNumber': classNumber,
-    //   'phone': phone,
-    //   'joinDate': DateTime.now(),
-    // });
-    await doc
-        .collection('attendance')
-        .doc(
+    final doc2 = doc.collection('attendance').doc(
           DateTime.now().format('D, M j'),
-        )
-        .set({
-      'attendant': false,
-      'time': DateTime.now(),
-    });
+        );
 
     WriteBatch batch = FirebaseFirestore.instance.batch();
     batch.set(doc, {
@@ -96,6 +81,17 @@ class Student {
         'index': a.indexOf(item) + 1,
       });
     }
-    await batch.commit();
+    batch.set(doc2, {
+      'attendant': false,
+      'time': DateTime.now(),
+    });
+    try {
+      await batch.commit().timeout(
+            Duration(seconds: 3),
+            onTimeout: () => throw Exception(),
+          );
+    } on Exception catch (_) {
+      return 'Slow Internet. If not added, it will be added later automatically';
+    }
   }
 }
