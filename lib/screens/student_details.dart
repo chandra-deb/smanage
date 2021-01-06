@@ -29,10 +29,22 @@ class StudentDetails extends StatelessWidget {
             Text(data['roll'].toString()),
             Text(data['schoolName']),
             Container(
-              width: 300,
+              // width: 300,
               // Todo: I have to finish up this phone calling thing!
               child: Column(children: [
-                ...data['phoneNumbers'].map((v) => Text(v.toString()))
+                ...data['phoneNumbers'].map((v) {
+                  // return Text(v.keys.first);
+
+                  return ListTile(
+                    title: Text(v[v.keys.first]),
+                    leading: Text(v.keys.first),
+                    trailing: RaisedButton(
+                        child: Icon(Icons.call),
+                        onPressed: () {
+                          _makeCall(v[v.keys.first]);
+                        }),
+                  );
+                })
               ]
                   // children: [
                   //   data['phoneNumbers'].map((Map<String, String> number) {
