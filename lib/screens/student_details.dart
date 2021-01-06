@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
+import 'package:smanage/controllers/student_deletion_controller.dart';
 import 'package:smanage/controllers/student_details_controller.dart';
 import 'package:smanage/widgets/student_bills.dart';
 
@@ -105,29 +106,7 @@ class StudentDetails extends StatelessWidget {
             ),
             // Todo   App deletion function ...Need Some functionalities Here
             FlatButton(
-              onPressed: () async {
-                final batch = FirebaseFirestore.instance.batch();
-
-                await doc.reference
-                    .collection('attendance')
-                    .get()
-                    .then((value) {
-                  for (var doc in value.docs) {
-                    batch.delete(doc.reference);
-                  }
-                });
-
-                await doc.reference.collection('bills').get().then((value) {
-                  for (var doc in value.docs) {
-                    batch.delete(doc.reference);
-                  }
-                });
-
-                batch.delete(doc.reference);
-
-                await batch.commit();
-                Get.back();
-              },
+              onPressed: StudentDeletionController(doc).delete,
               child: Text('Delete'),
             )
           ],
