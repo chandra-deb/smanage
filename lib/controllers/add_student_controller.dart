@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:smanage/models/student.dart';
 
@@ -17,7 +18,7 @@ class AddStudentController extends GetxController {
   RxString fatherNameErr = RxString(null);
   RxString motherNameErr = RxString(null);
   RxString addressErr = RxString(null);
-
+  RxString addButtonErr = RxString(null);
   RxString schoolNameErr = RxString(null);
   RxString studentPhoneErr = RxString(null);
   RxString fatherPhoneErr = RxString(null);
@@ -25,7 +26,7 @@ class AddStudentController extends GetxController {
 
   RxString clsErr = RxString(null);
   RxString rollErr = RxString(null);
-
+  RxBool loading = false.obs;
   bool addressOk = false;
   bool studentNameOk = false;
   bool fatherNameOk = false;
@@ -336,13 +337,13 @@ class AddStudentController extends GetxController {
         rollOk &&
         studentPhoneOk &&
         addressOk) {
-      button.value = () => submitData();
+      button.value = () async => await submitData();
     } else {
       button.value = null;
     }
   }
 
-  submitData() async {
+  Future<void> submitData() async {
     // !! it is the Real Implementation By that time
     // Student(
     //   name: studentName,
@@ -361,11 +362,16 @@ class AddStudentController extends GetxController {
         roll: roll,
         phoneNumbers: zippedNumbers,
       );
+      loading.value = true;
+      button.value = null;
       await student.create();
+      loading.value = false;
+      addButtonErr.value = null;
 
       Get.back();
     } on Exception catch (e) {
       // Todo : I have to show user the error!
+      addButtonErr.value = 'Unable To add Student!';
       print(e);
     }
     print('Student Name $studentName');
@@ -393,5 +399,10 @@ class AddStudentController extends GetxController {
     }
 
     return phoneNumbers;
+  }
+
+  void t() {
+    var i = FirebaseFirestore.instance;
+    i.clearPersistence();
   }
 }
