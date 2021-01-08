@@ -6,67 +6,63 @@ class AttendantDetailsController extends GetxController {
   AttendantDetailsController({@required this.doc});
 
   // ** Default value is 7 days!
-  RxInt daysLimit = 7.obs;
+  RxInt _daysLimit = 7.obs;
 
   final QueryDocumentSnapshot doc;
 
   Future<QuerySnapshot> getAttendance() async {
-    var t = doc.reference.collection('attendance');
-    t.get().then((value) {
-      print(value.docs[0].id);
-    });
     return await doc.reference
         .collection('attendance')
         .orderBy('time', descending: true)
-        .limit(daysLimit.value)
+        .limit(_daysLimit.value)
         .get();
   }
 
   String get studentName => doc.data()['name'];
-  void changeLimitToSevenDays() {
-    daysLimit.value = 7;
+  void _changeLimitToSevenDays() {
+    _daysLimit.value = 7;
     _changeDaysClicked();
   }
 
-  void changeLimitToThirtyDays() {
-    daysLimit.value = 30;
+  void _changeLimitToThirtyDays() {
+    _daysLimit.value = 30;
     _changeDaysClicked();
   }
 
-  void changeLimitToUnlimitedDays() {
-    daysLimit.value = 365;
+  void _changeLimitToUnlimitedDays() {
+    _daysLimit.value = 365;
     _changeDaysClicked();
   }
 
   Function get sevenDaysButton {
-    return sevenDaysClicked ? null : changeLimitToSevenDays;
+    return _sevenDaysClicked ? null : _changeLimitToSevenDays;
   }
 
   Function get thirtyDaysButton {
-    return thirtyDaysClicked ? null : changeLimitToThirtyDays;
+    return _thirtyDaysClicked ? null : _changeLimitToThirtyDays;
   }
 
   Function get unlimitedDaysButton {
-    return unlimitedDaysClicked ? null : changeLimitToUnlimitedDays;
+    return _unlimitedDaysClicked ? null : _changeLimitToUnlimitedDays;
   }
 
-  bool sevenDaysClicked = true;
-  bool thirtyDaysClicked = false;
-  bool unlimitedDaysClicked = false;
+  bool _sevenDaysClicked = true;
+  bool _thirtyDaysClicked = false;
+  bool _unlimitedDaysClicked = false;
 
   void _changeDaysClicked() {
-    if (daysLimit.value == 30) {
-      thirtyDaysClicked = true;
-      unlimitedDaysClicked = false;
-      sevenDaysClicked = false;
-    } else if (daysLimit.value == 7) {
-      sevenDaysClicked = true;
-      thirtyDaysClicked = false;
-      unlimitedDaysClicked = false;
+    if (_daysLimit.value == 30) {
+      _thirtyDaysClicked = true;
+      _unlimitedDaysClicked = false;
+      _sevenDaysClicked = false;
+    } else if (_daysLimit.value == 7) {
+      _sevenDaysClicked = true;
+      _thirtyDaysClicked = false;
+      _unlimitedDaysClicked = false;
     } else {
-      unlimitedDaysClicked = true;
-      sevenDaysClicked = false;
-      thirtyDaysClicked = false;
+      _unlimitedDaysClicked = true;
+      _sevenDaysClicked = false;
+      _thirtyDaysClicked = false;
     }
   }
 }
