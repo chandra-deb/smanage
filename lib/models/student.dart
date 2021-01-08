@@ -30,27 +30,6 @@ class Student {
   final _auth = Auth();
   final _db = DB();
 
-  // void create() async {
-  //   final doc = _db.store.collection('students').doc();
-  //   await doc.set({
-  //     'teacherUID': _auth.teacherUID,
-  //     'name': name,
-  //     'schoolName': schoolName,
-  //     'roll': roll,
-  //     'classNumber': classNumber,
-  //     'phone': phone,
-  //   });
-  //   await doc
-  //       .collection('attendance')
-  //       .doc(
-  //         DateTime.now().format('D, M j'),
-  //       )
-  //       .set({
-  //     'attendant': false,
-  //     'time': DateTime.now(),
-  //   });
-  // }
-
   Future create() async {
     final doc = _db.store.collection('students').doc();
     final doc2 = doc.collection('attendance').doc(
