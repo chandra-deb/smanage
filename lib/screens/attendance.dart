@@ -42,7 +42,7 @@ class Attendance extends StatelessWidget {
               child: Container(
                 color: Colors.black,
                 child: FutureBuilder<QuerySnapshot>(
-                  future: _.getAttendance(),
+                  future: _.getAttendance,
                   builder:
                       // ignore: missing_return
                       (BuildContext context,

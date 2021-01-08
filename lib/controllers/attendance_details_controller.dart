@@ -10,7 +10,7 @@ class AttendantDetailsController extends GetxController {
 
   final QueryDocumentSnapshot doc;
 
-  Future<QuerySnapshot> getAttendance() async {
+  Future<QuerySnapshot> get getAttendance async {
     return await doc.reference
         .collection('attendance')
         .orderBy('time', descending: true)
