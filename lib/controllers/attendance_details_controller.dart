@@ -5,10 +5,15 @@ import 'package:get/get.dart';
 class AttendantDetailsController extends GetxController {
   AttendantDetailsController({@required this.doc});
 
+  final QueryDocumentSnapshot doc;
+
   // ** Default value is 7 days!
   RxInt _daysLimit = 7.obs;
+  // RxInt _attendantDays = 0.obs;
 
-  final QueryDocumentSnapshot doc;
+  bool _sevenDaysClicked = true;
+  bool _thirtyDaysClicked = false;
+  bool _unlimitedDaysClicked = false;
 
   Future<QuerySnapshot> get getAttendance async {
     return await doc.reference
@@ -16,9 +21,34 @@ class AttendantDetailsController extends GetxController {
         .orderBy('time', descending: true)
         .limit(_daysLimit.value)
         .get();
+
+    // await doc.reference
+    //     .collection('attendance')
+    //     .orderBy('time', descending: true)
+    //     .limit(_daysLimit.value)
+    //     .where('attendant', isEqualTo: true)
+    //     .get();
+  }
+
+  Future<String> get attendantDaysNumber async {
+    int value = 0;
+    await doc.reference
+        .collection('attendance')
+        .orderBy('time', descending: true)
+        .limit(_daysLimit.value)
+        .get()
+        .then((QuerySnapshot snapshot) {
+      for (var doc in snapshot.docs) {
+        if (doc.data()['attendant'] == true) {
+          value += 1;
+        }
+      }
+    });
+    return value.toString();
   }
 
   String get studentName => doc.data()['name'];
+
   void _changeLimitToSevenDays() {
     _daysLimit.value = 7;
     _changeDaysClicked();
@@ -45,10 +75,6 @@ class AttendantDetailsController extends GetxController {
   Function get unlimitedDaysButton {
     return _unlimitedDaysClicked ? null : _changeLimitToUnlimitedDays;
   }
-
-  bool _sevenDaysClicked = true;
-  bool _thirtyDaysClicked = false;
-  bool _unlimitedDaysClicked = false;
 
   void _changeDaysClicked() {
     if (_daysLimit.value == 30) {

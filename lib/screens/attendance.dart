@@ -19,28 +19,31 @@ class Attendance extends StatelessWidget {
           children: [
             Expanded(
               child: Container(
-                child: Row(
-                  children: [
-                    FlatButton(
-                      onPressed: _.sevenDaysButton,
-                      child: Text('Last 7 days'),
-                    ),
-                    FlatButton(
-                      onPressed: _.thirtyDaysButton,
-                      child: Text('Last 30 days'),
-                    ),
-                    FlatButton(
-                      onPressed: _.unlimitedDaysButton,
-                      child: Text('All'),
-                    ),
-                  ],
+                child: FutureBuilder(
+                  future: _.attendantDaysNumber,
+                  // ignore: missing_return
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return Center(child: Text('Counting Attendance'));
+
+                      case ConnectionState.done:
+                        return Center(
+                            child: Text('Attended ${snapshot.data} days'));
+                      case ConnectionState.none:
+                        // TODO: Handle this case.
+                        break;
+                      case ConnectionState.active:
+                        // TODO: Handle this case.
+                        break;
+                    }
+                  },
                 ),
               ),
             ),
             Expanded(
-              flex: 7,
+              flex: 10,
               child: Container(
-                color: Colors.black,
                 child: FutureBuilder<QuerySnapshot>(
                   future: _.getAttendance,
                   builder:
@@ -84,6 +87,25 @@ class Attendance extends StatelessWidget {
                 ),
               ),
             ),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: _.sevenDaysButton,
+                    child: Text('Last 7 days'),
+                  ),
+                  ElevatedButton(
+                    onPressed: _.thirtyDaysButton,
+                    child: Text('Last 30 days'),
+                  ),
+                  ElevatedButton(
+                    onPressed: _.unlimitedDaysButton,
+                    child: Text('All'),
+                  ),
+                ],
+              ),
+            )
           ],
         );
       }),
