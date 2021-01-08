@@ -5,7 +5,7 @@ class AddStudentController extends GetxController {
   String studentName;
   String fatherName;
   String motherName;
-  String schoolName;
+  String institution;
   String address;
   int cls;
   int roll;
@@ -121,8 +121,8 @@ class AddStudentController extends GetxController {
   // }
 
   void getSchoolNameErr(String sn) {
-    schoolName = sn;
-    if (schoolName.length > 9) {
+    institution = sn;
+    if (institution.length > 9) {
       schoolNameErr.value = null;
       schoolNameOk = true;
     } else {
@@ -364,7 +364,7 @@ class AddStudentController extends GetxController {
       name: studentName,
       fatherName: fatherName,
       motherName: motherName,
-      schoolName: schoolName,
+      institution: institution,
       classNumber: cls,
       roll: roll,
       phoneNumbers: zippedNumbers,
@@ -388,7 +388,7 @@ class AddStudentController extends GetxController {
     print('Student Name $studentName');
     print('Father Name $fatherName');
     print('Mother Name $motherName');
-    print('School Name $schoolName');
+    print('School Name $institution');
     print('Class $cls');
     print('Roll $roll');
     for (var n in zippedNumbers) {

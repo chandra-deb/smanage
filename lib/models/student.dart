@@ -9,9 +9,8 @@ class Student {
     @required this.fatherName,
     @required this.motherName,
     @required this.address,
-    // @required this.teacherUid,
     @required this.name,
-    @required this.schoolName,
+    @required this.institution,
     @required this.roll,
     @required this.phoneNumbers,
     @required this.classNumber,
@@ -24,7 +23,7 @@ class Student {
   final String name;
   final List<Map<String, String>> phoneNumbers;
   final int roll;
-  final String schoolName;
+  final String institution;
   // final String teacherUid;
 
   final _auth = Auth();
@@ -40,9 +39,9 @@ class Student {
     batch.set(doc, {
       'teacherUID': _auth.teacherUID,
       'name': name,
-      'father\'name': fatherName,
-      'mother\'name': motherName,
-      'institution': schoolName,
+      'fatherName': fatherName,
+      'motherName': motherName,
+      'institution': institution,
       'roll': roll,
       'classNumber': classNumber,
       'phoneNumbers': phoneNumbers,
