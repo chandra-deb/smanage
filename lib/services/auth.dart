@@ -38,5 +38,5 @@ class Auth {
     return _auth.authStateChanges();
   }
 
-  get teacherUID => _auth.currentUser.uid;
+  String get teacherUID => _auth.currentUser.uid;
 }

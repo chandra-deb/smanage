@@ -1,8 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:smanage/models/student.dart';
-import 'package:toast/toast.dart';
 
 class AddStudentController extends GetxController {
   String studentName;
@@ -365,10 +362,13 @@ class AddStudentController extends GetxController {
   Future<void> submitData() async {
     final student = Student(
       name: studentName,
+      fatherName: fatherName,
+      motherName: motherName,
       schoolName: schoolName,
       classNumber: cls,
       roll: roll,
       phoneNumbers: zippedNumbers,
+      address: address,
     );
     loading.value = true;
     button.value = null;

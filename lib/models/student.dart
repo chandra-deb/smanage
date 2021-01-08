@@ -1,26 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_format/date_time_format.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:smanage/services/auth.dart';
 import 'package:smanage/services/database.dart';
 
 class Student {
-  final _db = DB();
-  final _auth = Auth();
-  final String name;
-  final String schoolName;
-  final int roll;
-  final int classNumber;
-  final List<Map<String, String>> phoneNumbers;
-  final String teacherUid;
-
   Student({
-    this.teacherUid,
-    this.name,
-    this.schoolName,
-    this.roll,
-    this.phoneNumbers,
-    this.classNumber,
+    @required this.fatherName,
+    @required this.motherName,
+    @required this.address,
+    // @required this.teacherUid,
+    @required this.name,
+    @required this.schoolName,
+    @required this.roll,
+    @required this.phoneNumbers,
+    @required this.classNumber,
   });
+
+  final String address;
+  final int classNumber;
+  final String fatherName;
+  final String motherName;
+  final String name;
+  final List<Map<String, String>> phoneNumbers;
+  final int roll;
+  final String schoolName;
+  // final String teacherUid;
+
+  final _auth = Auth();
+  final _db = DB();
 
   // void create() async {
   //   final doc = _db.store.collection('students').doc();
@@ -53,10 +61,13 @@ class Student {
     batch.set(doc, {
       'teacherUID': _auth.teacherUID,
       'name': name,
-      'schoolName': schoolName,
+      'father\'name': fatherName,
+      'mother\'name': motherName,
+      'institution': schoolName,
       'roll': roll,
       'classNumber': classNumber,
       'phoneNumbers': phoneNumbers,
+      'address': address,
       'joinDate': DateTime.now(),
     });
     var a = [
