@@ -69,7 +69,7 @@ class StudentDetails extends StatelessWidget {
               onPressed: () {
                 StudentDeletionController(doc).delete(context);
               },
-              child: Text('Delete'),
+              child: Text('Delete Student'),
             )
           ],
         ),
