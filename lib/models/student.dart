@@ -91,6 +91,7 @@ class Student {
             onTimeout: () => throw Exception(),
           );
     } on Exception catch (_) {
+      // ** It is not working
       return 'Slow Internet. If not added, it will be added later automatically';
     }
   }

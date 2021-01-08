@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
 import 'package:smanage/controllers/student_deletion_controller.dart';
-import 'package:smanage/controllers/student_details_controller.dart';
+import 'package:smanage/screens/attendance.dart';
 import 'package:smanage/widgets/student_bills.dart';
 
 class StudentDetails extends StatelessWidget {
@@ -15,12 +15,19 @@ class StudentDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = doc.data();
     final billRef = doc.reference.collection('bills').orderBy('index');
-    final detailController = StudentDetailsController(doc: doc);
-    detailController.test();
-
     return Scaffold(
       appBar: AppBar(
         title: Text(data['name']),
+        actions: [
+          FlatButton(
+            onPressed: () {
+              Get.to(Attendance(
+                doc: doc,
+              ));
+            },
+            child: Text('Get Attendance'),
+          )
+        ],
       ),
       body: Container(
         margin: EdgeInsets.all(8),
@@ -46,64 +53,17 @@ class StudentDetails extends StatelessWidget {
                         }),
                   );
                 })
-              ]
-                  // children: [
-                  //   data['phoneNumbers'].map((Map<String, String> number) {
-                  //     return Text('number.toString()');
-                  //   }).toList(),
-                  // ListTile(
-                  //   leading: Text(data['phone']),
-                  //   trailing: RaisedButton(
-                  //       child: Icon(Icons.call),
-                  //       onPressed: () {
-                  //         _makeCall(data['phone']);
-                  //       }),
-                  // ),
-                  // ],
-                  ),
+              ]),
             ),
             StudentBills(
               joinDate: data['joinDate'].toDate(),
               billRef: billRef,
             ),
-            Text(
-              'Attendance',
-              style: TextStyle(fontSize: 20),
-            ),
-            Container(
-              height: 250,
-              child: FutureBuilder<QuerySnapshot>(
-                future: detailController.test(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (snapshot.hasData) {
-                    var docs = snapshot.data.docs;
+            // Text(
+            //   'Attendance',
+            //   style: TextStyle(fontSize: 20),
+            // ),
 
-                    return ListView.builder(
-                      physics: BouncingScrollPhysics(),
-                      itemCount: docs.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        print(docs[index].data());
-                        return Container(
-                          color: docs[index].data()['attendant'] == true
-                              ? Colors.green
-                              : Colors.red,
-                          child: ListTile(
-                            leading: Text(docs[index].id),
-                            trailing: Text(
-                                docs[index].data()['attendant'].toString()),
-                          ),
-                        ); //),
-                        // It will show dates
-                      },
-                    );
-                  }
-                  return LinearProgressIndicator(
-                    backgroundColor: Colors.grey,
-                  );
-                },
-              ),
-            ),
             // Todo   App deletion function ...Need Some functionalities Here
             FlatButton(
               onPressed: () {
