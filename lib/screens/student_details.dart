@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
@@ -7,6 +8,7 @@ import 'package:smanage/models/student_details_model.dart';
 import 'package:smanage/screens/attendance.dart';
 import 'package:smanage/widgets/student_bills.dart';
 
+// !! Main Down
 class StudentDetails extends StatelessWidget {
   final QueryDocumentSnapshot doc;
 
@@ -84,134 +86,124 @@ class StudentDetails extends StatelessWidget {
   }
 }
 
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Expandable Demo',
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//       ),
-//       home: MyHomePage(),
-//     );
-//   }
-// }
+// !! Main Up
 
-// class MyHomePage extends StatefulWidget {
-//   @override
-//   State createState() {
-//     return MyHomePageState();
-//   }
-// }
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MyHomePage();
+  }
+}
 
-// class MyHomePageState extends State<MyHomePage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text("Expandable Demo"),
-//       ),
-//       body: ExpandableTheme(
-//         data: const ExpandableThemeData(
-//           iconColor: Colors.blue,
-//           useInkWell: true,
-//         ),
-//         child: ListView(
-//           physics: const BouncingScrollPhysics(),
-//           children: <Widget>[
-//             Card1(),
-//             Card2(),
+class MyHomePage extends StatefulWidget {
+  @override
+  State createState() {
+    return MyHomePageState();
+  }
+}
 
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+class MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Expandable Demo"),
+      ),
+      body: ExpandableTheme(
+        data: const ExpandableThemeData(
+          iconColor: Colors.blue,
+          useInkWell: true,
+        ),
+        child: ListView(
+          physics: const BouncingScrollPhysics(),
+          children: <Widget>[
+            Card1(),
+            Card2(),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
-// const loremIpsum =
-//     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+class Card1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ExpandableNotifier(
+        child: Padding(
+      padding: const EdgeInsets.all(10),
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          children: <Widget>[
+            Text('heres the initial data'),
+            ScrollOnExpand(
+              scrollOnExpand: true,
+              scrollOnCollapse: false,
+              child: ExpandablePanel(
+                theme: const ExpandableThemeData(
+                  headerAlignment: ExpandablePanelHeaderAlignment.center,
+                  tapBodyToCollapse: true,
+                ),
+                header: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      "Get Full Details",
+                      style: Theme.of(context).textTheme.body2,
+                    )),
+                expanded: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      child: Column(
+                        children: [
+                          Text('Hello'),
+                          Text('Gello'),
+                          Text('Hello'),
+                          Text('Gello'),
+                          Text('Hello'),
+                          Text('Gello'),
+                          Text('Hello'),
+                          Text('Gello'),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                builder: (_, collapsed, expanded) {
+                  return Padding(
+                    padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                    child: Expandable(
+                      collapsed: collapsed,
+                      expanded: expanded,
+                      theme: const ExpandableThemeData(crossFadePoint: 0),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    ));
+  }
+}
 
-// class Card1 extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return ExpandableNotifier(
-//         child: Padding(
-//       padding: const EdgeInsets.all(10),
-//       child: Card(
-//         clipBehavior: Clip.antiAlias,
-//         child: Column(
-//           children: <Widget>[
-
-//             Text('heres the initial data'),
-//             ScrollOnExpand(
-//               scrollOnExpand: true,
-//               scrollOnCollapse: false,
-//               child: ExpandablePanel(
-//                 theme: const ExpandableThemeData(
-//                   headerAlignment: ExpandablePanelHeaderAlignment.center,
-//                   tapBodyToCollapse: true,
-//                 ),
-//                 header: Padding(
-//                     padding: EdgeInsets.all(10),
-//                     child: Text(
-//                       "Get Full Details",
-//                       style: Theme.of(context).textTheme.body2,
-//                     )),
-
-//                 expanded: Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: <Widget>[
-//                     Container(
-//                       child: Column(
-//                         children: [
-//                           Text('Hello'),
-//                           Text('Gello'),
-//                           Text('Hello'),
-//                           Text('Gello'),
-//                           Text('Hello'),
-//                           Text('Gello'),
-//                           Text('Hello'),
-//                           Text('Gello'),
-//                         ],
-//                       ),
-//                     )
-//                   ],
-//                 ),
-//                 builder: (_, collapsed, expanded) {
-//                   return Padding(
-//                     padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-//                     child: Expandable(
-//                       collapsed: collapsed,
-//                       expanded: expanded,
-//                       theme: const ExpandableThemeData(crossFadePoint: 0),
-//                     ),
-//                   );
-//                 },
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     ));
-//   }
-// }
-
-// class Card2 extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return ExpandableNotifier(
-//         child: Padding(
-//       padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-//       child: ScrollOnExpand(
-//         child: Card(
-//           clipBehavior: Clip.antiAlias,
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: <Widget>[],
-//           ),
-//         ),
-//       ),
-//     ));
-//   }
-// }
+class Card2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ExpandableNotifier(
+        child: Padding(
+      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+      child: ScrollOnExpand(
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[],
+          ),
+        ),
+      ),
+    ));
+  }
+}
