@@ -63,10 +63,15 @@ class StudentDetails extends StatelessWidget {
 
             // Todo   App deletion function ...Need Some functionalities Here
             FlatButton(
+              color: Colors.red,
+              colorBrightness: Brightness.dark,
               onPressed: () {
                 StudentDeletionController(doc).delete(context);
               },
-              child: Text('Delete Student'),
+              child: Text(
+                'Delete Student',
+                style: TextStyle(),
+              ),
             )
           ],
         ),
