@@ -15,7 +15,7 @@ class StudentDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _ = StudentDetailsModel(doc);
-    final billRef = doc.reference.collection('bills').orderBy('index');
+    final data = doc.data();
     return Scaffold(
       appBar: AppBar(
         title: Text(_.name),
@@ -38,32 +38,28 @@ class StudentDetails extends StatelessWidget {
             Text(_.roll),
             Text(_.institutionName),
             Container(
-                // width: 300,
-                // Todo: I have to finish up this phone calling thing in 09 January! !
-                // child: Column(children: [
-                //   ...data['phoneNumbers'].map((v) {
-                //     // return Text(v.keys.first);
+              // width: 300,
+              // Todo: I have to finish up this phone calling thing in 09 January! !
+              child: Column(
+                children: _.phoneNumbers.map((v) {
+                  // return Text(v.keys.first);
 
-                //     return ListTile(
-                //       title: Text(v[v.keys.first]),
-                //       leading: Text(v.keys.first),
-                //       trailing: RaisedButton(
-                //           child: Icon(Icons.call),
-                //           onPressed: () {
-                //             _makeCall(v[v.keys.first]);
-                //           }),
-                //     );
-                //   })
-                // ]),
-                ),
+                  return ListTile(
+                    title: Text(v[v.keys.first]),
+                    leading: Text(v.keys.first),
+                    trailing: RaisedButton(
+                        child: Icon(Icons.call),
+                        onPressed: () {
+                          _makeCall(v[v.keys.first]);
+                        }),
+                  );
+                }).toList(),
+              ),
+            ),
             StudentBills(
               joinDate: _.joinDate,
-              billRef: billRef,
+              billRef: _.bills,
             ),
-            // Text(
-            //   'Attendance',
-            //   style: TextStyle(fontSize: 20),
-            // ),
 
             // Todo   App deletion function ...Need Some functionalities Here
             FlatButton(

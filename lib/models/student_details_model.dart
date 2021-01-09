@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 
 class StudentDetailsModel {
   final QueryDocumentSnapshot _snapshot;
@@ -17,4 +18,6 @@ class StudentDetailsModel {
   String get cls => _data['classNumber'].toString();
   String get roll => _data['roll'].toString();
   DateTime get joinDate => _data['joinDate'].toDate();
+  List get phoneNumbers => _data['phoneNumbers'];
+  Query get bills => _snapshot.reference.collection('bills').orderBy('index');
 }
