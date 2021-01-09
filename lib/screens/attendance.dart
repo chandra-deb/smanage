@@ -14,80 +14,74 @@ class Attendance extends StatelessWidget {
         title: Text('Attendance of ${_.studentName}'),
       ),
       body: Obx(() {
-        return Flex(
-          direction: Axis.vertical,
+        return Column(
           children: [
-            Expanded(
-              child: Container(
-                child: FutureBuilder(
-                  future: _.attendantDaysNumber,
-                  // ignore: missing_return
-                  builder: (context, snapshot) {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.waiting:
-                        return Center(child: Text('Counting Attendance'));
+            Container(
+              child: FutureBuilder(
+                future: _.attendantDaysNumber,
+                // ignore: missing_return
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.waiting:
+                      return Center(child: Text('Counting Attendance'));
 
-                      case ConnectionState.done:
-                        return Center(
-                            child: Text('Attended ${snapshot.data} days'));
-                      case ConnectionState.none:
-                        // TODO: Handle this case.
-                        break;
-                      case ConnectionState.active:
-                        // TODO: Handle this case.
-                        break;
-                    }
-                  },
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 10,
-              child: Container(
-                child: FutureBuilder<QuerySnapshot>(
-                  future: _.getAttendance,
-                  builder:
-                      // ignore: missing_return
-                      (BuildContext context,
-                          AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.hasData) {
-                      var docs = snapshot.data.docs;
-
-                      return ListView.builder(
-                        physics: BouncingScrollPhysics(),
-                        itemCount: docs.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            color: docs[index].data()['attendant'] == true
-                                ? Colors.green
-                                : Colors.red,
-                            child: ListTile(
-                              leading: Text(docs[index].id),
-                              trailing: Text(
-                                  docs[index].data()['attendant'].toString()),
-                            ),
-                          ); //),
-                          // It will show dates
-                        },
-                      );
-                    }
-                    if (snapshot.connectionState == ConnectionState.waiting) {
+                    case ConnectionState.done:
                       return Center(
-                        child: CircularProgressIndicator(
-                          backgroundColor: Colors.grey,
-                        ),
-                      );
-                    } else {
-                      Center(
-                        child: Text(
-                            'Something Went. Connect to the Internet and try again!'),
-                      );
-                    }
-                  },
-                ),
+                          child: Text('Attended ${snapshot.data} days'));
+                    case ConnectionState.none:
+                      // TODO: Handle this case.
+                      break;
+                    case ConnectionState.active:
+                      // TODO: Handle this case.
+                      break;
+                  }
+                },
               ),
             ),
-            Expanded(
+            Flexible(
+              child: FutureBuilder<QuerySnapshot>(
+                future: _.getAttendance,
+                builder:
+                    // ignore: missing_return
+                    (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasData) {
+                    var docs = snapshot.data.docs;
+
+                    return ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      itemCount: docs.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          color: docs[index].data()['attendant'] == true
+                              ? Colors.green
+                              : Colors.red,
+                          child: ListTile(
+                            leading: Text(docs[index].id),
+                            trailing: Text(
+                                docs[index].data()['attendant'].toString()),
+                          ),
+                        ); //),
+                        // It will show dates
+                      },
+                    );
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.grey,
+                      ),
+                    );
+                  } else {
+                    Center(
+                      child: Text(
+                          'Something Went. Connect to the Internet and try again!'),
+                    );
+                  }
+                },
+              ),
+            ),
+            Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
