@@ -32,7 +32,7 @@ class StudentListForDetail extends StatelessWidget {
                   return FlatButton(
                     child: Text(docs[index].data()['name']),
                     onPressed: () {
-                      Get.to(StudentDetails(
+                      Get.to(STDT(
                         doc: docs[index],
                       ));
                     },

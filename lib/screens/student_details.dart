@@ -9,105 +9,102 @@ import 'package:smanage/screens/attendance.dart';
 import 'package:smanage/widgets/student_bills.dart';
 
 // !! Main Down
-class StudentDetails extends StatelessWidget {
-  final QueryDocumentSnapshot doc;
+// class StudentDetails extends StatelessWidget {
+//   final QueryDocumentSnapshot doc;
 
-  const StudentDetails({this.doc});
+//   const StudentDetails({this.doc});
 
-  @override
-  Widget build(BuildContext context) {
-    final _ = StudentDetailsModel(doc);
-    final data = doc.data();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_.name),
-        actions: [
-          FlatButton(
-            onPressed: () {
-              Get.to(Attendance(
-                doc: doc,
-              ));
-            },
-            child: Text('Get Attendance'),
-          )
-        ],
-      ),
-      body: Container(
-        margin: EdgeInsets.all(8),
-        child: Column(
-          children: [
-            Text(_.name),
-            Text(_.roll),
-            Text(_.institutionName),
-            Container(
-              // width: 300,
-              // Todo: I have to finish up this phone calling thing in 09 January! !
-              child: Column(
-                children: _.phoneNumbers.map((v) {
-                  // return Text(v.keys.first);
+//   @override
+//   Widget build(BuildContext context) {
+//     final _ = StudentDetailsModel(doc);
+//     final data = doc.data();
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text(_.name),
+//         actions: [
+//           FlatButton(
+//             onPressed: () {
+//               Get.to(Attendance(
+//                 doc: doc,
+//               ));
+//             },
+//             child: Text('Get Attendance'),
+//           )
+//         ],
+//       ),
+//       body: Container(
+//         margin: EdgeInsets.all(8),
+//         child: Column(
+//           children: [
+//             Text(_.name),
+//             Text(_.roll),
+//             Text(_.institutionName),
+//             Container(
+//               // width: 300,
+//               // Todo: I have to finish up this phone calling thing in 09 January! !
+//               child: Column(
+//                 children: _.phoneNumbers.map((v) {
+//                   // return Text(v.keys.first);
 
-                  return ListTile(
-                    title: Text(v[v.keys.first]),
-                    leading: Text(v.keys.first),
-                    trailing: RaisedButton(
-                        child: Icon(Icons.call),
-                        onPressed: () {
-                          _makeCall(v[v.keys.first]);
-                        }),
-                  );
-                }).toList(),
-              ),
-            ),
-            StudentBills(
-              joinDate: _.joinDate,
-              billRef: _.bills,
-            ),
+//                   return ListTile(
+//                     title: Text(v[v.keys.first]),
+//                     leading: Text(v.keys.first),
+//                     trailing: RaisedButton(
+//                         child: Icon(Icons.call),
+//                         onPressed: () {
+//                           _makeCall(v[v.keys.first]);
+//                         }),
+//                   );
+//                 }).toList(),
+//               ),
+//             ),
+//             StudentBills(
+//               joinDate: _.joinDate,
+//               billRef: _.bills,
+//             ),
 
-            // Todo   App deletion function ...Need Some functionalities Here
-            FlatButton(
-              color: Colors.red,
-              colorBrightness: Brightness.dark,
-              onPressed: () {
-                StudentDeletionController(doc).delete(context);
-              },
-              child: Text(
-                'Delete Student',
-                style: TextStyle(),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
+//             // Todo   App deletion function ...Need Some functionalities Here
+//             FlatButton(
+//               color: Colors.red,
+//               colorBrightness: Brightness.dark,
+//               onPressed: () {
+//                 StudentDeletionController(doc).delete(context);
+//               },
+//               child: Text(
+//                 'Delete Student',
+//                 style: TextStyle(),
+//               ),
+//             )
+//           ],
+//         ),
+//       ),
+//     );
+//   }
 
-  void _makeCall(String number) async {
-    await FlutterPhoneDirectCaller.callNumber(number);
-  }
-}
+//   void _makeCall(String number) async {
+//     await FlutterPhoneDirectCaller.callNumber(number);
+//   }
+// }
 
 // !! Main Up
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MyHomePage();
-  }
-}
+class STDT extends StatefulWidget {
+  final QueryDocumentSnapshot doc;
 
-class MyHomePage extends StatefulWidget {
+  STDT({this.doc});
   @override
   State createState() {
-    return MyHomePageState();
+    return STDTState();
   }
 }
 
-class MyHomePageState extends State<MyHomePage> {
+class STDTState extends State<STDT> {
   @override
   Widget build(BuildContext context) {
+    final detail = StudentDetailsModel(widget.doc);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Expandable Demo"),
+        title: Text("Details"),
       ),
       body: ExpandableTheme(
         data: const ExpandableThemeData(
@@ -117,7 +114,9 @@ class MyHomePageState extends State<MyHomePage> {
         child: ListView(
           physics: const BouncingScrollPhysics(),
           children: <Widget>[
-            Card1(),
+            Card1(
+              detail: detail,
+            ),
             Card2(),
           ],
         ),
@@ -127,6 +126,9 @@ class MyHomePageState extends State<MyHomePage> {
 }
 
 class Card1 extends StatelessWidget {
+  final StudentDetailsModel detail;
+
+  const Card1({this.detail});
   @override
   Widget build(BuildContext context) {
     return ExpandableNotifier(
@@ -136,7 +138,11 @@ class Card1 extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         child: Column(
           children: <Widget>[
-            Text('heres the initial data'),
+            Column(
+              children: [Text(detail.name)],
+            ),
+            // !!!Seee here
+            // Text('heres the initial data'),
             ScrollOnExpand(
               scrollOnExpand: true,
               scrollOnCollapse: false,
@@ -157,14 +163,14 @@ class Card1 extends StatelessWidget {
                     Container(
                       child: Column(
                         children: [
-                          Text('Hello'),
-                          Text('Gello'),
-                          Text('Hello'),
-                          Text('Gello'),
-                          Text('Hello'),
-                          Text('Gello'),
-                          Text('Hello'),
-                          Text('Gello'),
+                          Text(detail.name),
+                          Text(detail.fatherName),
+                          Text(detail.motherName),
+                          Text(detail.address),
+                          Text(detail.cls),
+                          Text(detail.roll),
+                          Text(detail.institutionName),
+                          Text(detail.joinDate.timeZoneName),
                         ],
                       ),
                     )
