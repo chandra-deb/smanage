@@ -23,45 +23,43 @@ class StudentBills extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Container(
-        child: StreamBuilder(
-          stream: billRef.snapshots(),
-          builder:
-              // ignore: missing_return
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return LinearProgressIndicator();
+    return StreamBuilder(
+      stream: billRef.snapshots(),
+      builder:
+          // ignore: missing_return
+          (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return LinearProgressIndicator();
+        }
+        if (snapshot.hasError) {
+          return Text('Something Went Wrong...Connect to the Internet!');
+        }
+        if (snapshot.hasData) {
+          final docs = snapshot.data.docs;
+          int due = 0;
+          for (var doc in docs) {
+            if (doc.data()['index'] <= DateTime.now().month &&
+                doc.data()['index'] >= joinDate.month &&
+                doc.data()['paid'] == false) {
+              due += doc.data()['amount'];
             }
-            if (snapshot.hasError) {
-              return Text('Something Went Wrong...Connect to the Internet!');
-            }
-            if (snapshot.hasData) {
-              final docs = snapshot.data.docs;
-              int due = 0;
-              for (var doc in docs) {
-                if (doc.data()['index'] <= DateTime.now().month &&
-                    doc.data()['index'] >= joinDate.month &&
-                    doc.data()['paid'] == false) {
-                  due += doc.data()['amount'];
-                }
-              }
+          }
 
-              return Column(
-                children: [
-                  Text('Due: $due Taka', style: TextStyle(fontSize: 25)),
-                  Container(
-                    height: 300,
-                    child: ListView.builder(
-                      itemCount: docs.length,
-                      physics: BouncingScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return FlatButton(
-                          color: docs[index].data()['paid'] == true
-                              ? Colors.greenAccent
-                              : Colors.redAccent,
-                          onPressed: docs[index].data()['index'] <=
-                                      DateTime.now().month &&
+          return Column(
+            children: [
+              Text('Due: $due Taka', style: TextStyle(fontSize: 25)),
+              Container(
+                height: 600,
+                child: ListView.builder(
+                  itemCount: docs.length,
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return FlatButton(
+                      color: docs[index].data()['paid'] == true
+                          ? Colors.greenAccent
+                          : Colors.redAccent,
+                      onPressed:
+                          docs[index].data()['index'] <= DateTime.now().month &&
                                   docs[index].data()['index'] >= joinDate.month
                               ? () async {
                                   if (docs[index].data()['paid'] == false) {
@@ -88,26 +86,24 @@ class StudentBills extends StatelessWidget {
                                   }
                                 }
                               : null,
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(docs[index].id),
-                                Text(
-                                  docs[index].data()['paid'] == true
-                                      ? 'Paid'
-                                      : 'Unpaid',
-                                ),
-                              ]),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              );
-            }
-          },
-        ),
-      ),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(docs[index].id),
+                            Text(
+                              docs[index].data()['paid'] == true
+                                  ? 'Paid'
+                                  : 'Unpaid',
+                            ),
+                          ]),
+                    );
+                  },
+                ),
+              ),
+            ],
+          );
+        }
+      },
     );
   }
 }

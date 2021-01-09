@@ -117,7 +117,9 @@ class STDTState extends State<STDT> {
             Card1(
               detail: detail,
             ),
-            Card2(),
+            Card2(
+              detail: detail,
+            ),
           ],
         ),
       ),
@@ -171,6 +173,46 @@ class Card1 extends StatelessWidget {
                           Text(detail.roll),
                           Text(detail.institutionName),
                           Text(detail.joinDate.timeZoneName),
+                          Text(detail.name),
+                          Text(detail.fatherName),
+                          Text(detail.motherName),
+                          Text(detail.address),
+                          Text(detail.cls),
+                          Text(detail.roll),
+                          Text(detail.institutionName),
+                          Text(detail.joinDate.timeZoneName),
+                          Text(detail.name),
+                          Text(detail.fatherName),
+                          Text(detail.motherName),
+                          Text(detail.address),
+                          Text(detail.cls),
+                          Text(detail.roll),
+                          Text(detail.institutionName),
+                          Text(detail.joinDate.timeZoneName),
+                          Text(detail.name),
+                          Text(detail.fatherName),
+                          Text(detail.motherName),
+                          Text(detail.address),
+                          Text(detail.cls),
+                          Text(detail.roll),
+                          Text(detail.institutionName),
+                          Text(detail.joinDate.timeZoneName),
+                          Text(detail.name),
+                          Text(detail.fatherName),
+                          Text(detail.motherName),
+                          Text(detail.address),
+                          Text(detail.cls),
+                          Text(detail.roll),
+                          Text(detail.institutionName),
+                          Text(detail.joinDate.timeZoneName),
+                          Text(detail.name),
+                          Text(detail.fatherName),
+                          Text(detail.motherName),
+                          Text(detail.address),
+                          Text(detail.cls),
+                          Text(detail.roll),
+                          Text(detail.institutionName),
+                          Text(detail.joinDate.timeZoneName),
                         ],
                       ),
                     )
@@ -196,18 +238,17 @@ class Card1 extends StatelessWidget {
 }
 
 class Card2 extends StatelessWidget {
+  final StudentDetailsModel detail;
+  Card2({@required this.detail});
   @override
   Widget build(BuildContext context) {
     return ExpandableNotifier(
         child: Padding(
       padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
       child: ScrollOnExpand(
-        child: Card(
-          clipBehavior: Clip.antiAlias,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[],
-          ),
+        child: StudentBills(
+          billRef: detail.bills,
+          joinDate: detail.joinDate,
         ),
       ),
     ));
