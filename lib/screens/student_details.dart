@@ -137,7 +137,7 @@ class STDTState extends State<STDT> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(detail.name,
                       style: TextStyle(
-                        fontSize: 40,
+                        fontSize: 30,
                         color: Colors.black54,
                       )),
                 ),
@@ -146,7 +146,7 @@ class STDTState extends State<STDT> {
                   child: Text(
                     'Class ${detail.cls}',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 20,
                       color: Colors.black54,
                     ),
                   ),
@@ -238,11 +238,12 @@ class DetailsPart extends StatelessWidget {
                   tapBodyToCollapse: true,
                 ),
                 header: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      "Get Full Details",
-                      style: kTextStyle.copyWith(color: Colors.black54),
-                    )),
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    "Get Full Details",
+                    style: TextStyle(fontSize: 20, color: Colors.black54),
+                  ),
+                ),
                 expanded: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
