@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:smanage/controllers/student_deletion_controller.dart';
 import 'package:smanage/models/student_details_model.dart';
 import 'package:smanage/screens/attendance.dart';
+import 'package:smanage/utils/constants.dart';
 import 'package:smanage/widgets/student_bills.dart';
 
 // !! Main Down
@@ -126,31 +127,73 @@ class STDTState extends State<STDT> {
           ),
         ],
       ),
-      body: ExpandableTheme(
-        data: const ExpandableThemeData(
-          iconColor: Colors.blue,
-          useInkWell: true,
-        ),
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: <Widget>[
-            Card1(
-              detail: detail,
+      body: ListView(
+        physics: const BouncingScrollPhysics(),
+        children: <Widget>[
+          Container(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(detail.name,
+                      style: TextStyle(
+                        fontSize: 40,
+                        color: Colors.black54,
+                      )),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Class ${detail.cls}',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.black54,
+                    ),
+                  ),
+                ),
+                ...detail.phoneNumbers.map((v) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(v.keys.first),
+                      Row(
+                        children: [Text(v[v.keys.first])],
+                      )
+                    ],
+                  );
+                  // return ListTile(
+                  //   title: Text(v[v.keys.first]),
+                  //   leading: Text(v.keys.first),
+                  //   trailing: RaisedButton(
+                  //       child: Icon(Icons.call),
+                  //       onPressed: () {
+                  //         _makeCall(v[v.keys.first]);
+                  //       }),
+                  // );
+                }).toList(),
+              ],
             ),
-            Card2(
-              detail: detail,
-            ),
-          ],
-        ),
+          ),
+          DetailsPart(
+            detail: detail,
+          ),
+          BillsPart(
+            detail: detail,
+          ),
+        ],
       ),
     );
   }
+
+  void _makeCall(String number) async {
+    await FlutterPhoneDirectCaller.callNumber(number);
+  }
 }
 
-class Card1 extends StatelessWidget {
+class DetailsPart extends StatelessWidget {
   final StudentDetailsModel detail;
 
-  const Card1({this.detail});
+  const DetailsPart({this.detail});
   @override
   Widget build(BuildContext context) {
     return ExpandableNotifier(
@@ -160,9 +203,9 @@ class Card1 extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         child: Column(
           children: <Widget>[
-            Column(
-              children: [Text(detail.name)],
-            ),
+            // Column(
+            //   children: [Text(detail.name)],
+            // ),
             // !!!Seee here
             // Text('heres the initial data'),
             ScrollOnExpand(
@@ -185,46 +228,6 @@ class Card1 extends StatelessWidget {
                     Container(
                       child: Column(
                         children: [
-                          Text(detail.name),
-                          Text(detail.fatherName),
-                          Text(detail.motherName),
-                          Text(detail.address),
-                          Text(detail.cls),
-                          Text(detail.roll),
-                          Text(detail.institutionName),
-                          Text(detail.joinDate.timeZoneName),
-                          Text(detail.name),
-                          Text(detail.fatherName),
-                          Text(detail.motherName),
-                          Text(detail.address),
-                          Text(detail.cls),
-                          Text(detail.roll),
-                          Text(detail.institutionName),
-                          Text(detail.joinDate.timeZoneName),
-                          Text(detail.name),
-                          Text(detail.fatherName),
-                          Text(detail.motherName),
-                          Text(detail.address),
-                          Text(detail.cls),
-                          Text(detail.roll),
-                          Text(detail.institutionName),
-                          Text(detail.joinDate.timeZoneName),
-                          Text(detail.name),
-                          Text(detail.fatherName),
-                          Text(detail.motherName),
-                          Text(detail.address),
-                          Text(detail.cls),
-                          Text(detail.roll),
-                          Text(detail.institutionName),
-                          Text(detail.joinDate.timeZoneName),
-                          Text(detail.name),
-                          Text(detail.fatherName),
-                          Text(detail.motherName),
-                          Text(detail.address),
-                          Text(detail.cls),
-                          Text(detail.roll),
-                          Text(detail.institutionName),
-                          Text(detail.joinDate.timeZoneName),
                           Text(detail.name),
                           Text(detail.fatherName),
                           Text(detail.motherName),
@@ -257,9 +260,9 @@ class Card1 extends StatelessWidget {
   }
 }
 
-class Card2 extends StatelessWidget {
+class BillsPart extends StatelessWidget {
   final StudentDetailsModel detail;
-  Card2({@required this.detail});
+  BillsPart({@required this.detail});
   @override
   Widget build(BuildContext context) {
     return ExpandableNotifier(
