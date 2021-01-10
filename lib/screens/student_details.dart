@@ -103,8 +103,28 @@ class STDTState extends State<STDT> {
   Widget build(BuildContext context) {
     final detail = StudentDetailsModel(widget.doc);
     return Scaffold(
+      floatingActionButton: FlatButton(
+        color: Colors.red,
+        colorBrightness: Brightness.dark,
+        onPressed: () {
+          StudentDeletionController(widget.doc).delete(context);
+        },
+        child: Text(
+          'Delete Student',
+        ),
+      ),
       appBar: AppBar(
         title: Text("Details"),
+        actions: [
+          FlatButton(
+            onPressed: () {
+              Get.to(Attendance(
+                doc: widget.doc,
+              ));
+            },
+            child: Text('Get Attendance'),
+          ),
+        ],
       ),
       body: ExpandableTheme(
         data: const ExpandableThemeData(
@@ -243,14 +263,15 @@ class Card2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpandableNotifier(
-        child: Padding(
-      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-      child: ScrollOnExpand(
-        child: StudentBills(
-          billRef: detail.bills,
-          joinDate: detail.joinDate,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+        child: ScrollOnExpand(
+          child: StudentBills(
+            billRef: detail.bills,
+            joinDate: detail.joinDate,
+          ),
         ),
       ),
-    ));
+    );
   }
 }
