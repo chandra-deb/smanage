@@ -153,8 +153,8 @@ class STDTState extends State<STDT> {
                 ),
                 ...detail.phoneNumbers.map((v) {
                   return Container(
-                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                    margin: EdgeInsets.symmetric(vertical: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 2),
+                    margin: EdgeInsets.symmetric(vertical: 2),
                     color: kDoneColor,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
