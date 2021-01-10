@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:smanage/controllers/roll_call_controller.dart';
 import 'package:smanage/services/database.dart';
 import 'package:date_time_format/date_time_format.dart';
+import 'package:smanage/utils/constants.dart';
 
 class StudentListForRC extends StatelessWidget {
   final _db = DB();
@@ -15,7 +16,7 @@ class StudentListForRC extends StatelessWidget {
     return Obx(() {
       return Scaffold(
         appBar: AppBar(
-          title: Text('RC of $clsNumber (${DateTime.now().add(
+          title: Text('Roll Call of Class $clsNumber (${DateTime.now().add(
                 Duration(days: RollCallController.getDay),
               ).format('D, M j')})'),
           centerTitle: true,
@@ -50,15 +51,17 @@ class StudentListForRC extends StatelessWidget {
                         }
                         switch (snapshot.connectionState) {
                           case ConnectionState.waiting:
-                            return FlatButton(
-                              onPressed: null,
-                              height: 40,
-                              child: Text(
-                                'Loading',
-                                textAlign: TextAlign.center,
-                                // strutStyle: StrutStyle(
-                                //   height: 40,
-                                // ),
+                            return Container(
+                              margin: EdgeInsets.symmetric(vertical: 5),
+                              child: FlatButton(
+                                onPressed: null,
+                                height: 50,
+                                child: Text(
+                                  'Loading',
+                                  textAlign: TextAlign.center,
+                                  style: kTextStyle.copyWith(
+                                      color: Colors.black26),
+                                ),
                               ),
                             );
 
@@ -69,24 +72,62 @@ class StudentListForRC extends StatelessWidget {
                                 builder: (context, snapshot) {
                                   var doc = docs[index];
                                   if (snapshot.hasData) {
-                                    return FlatButton(
-                                      height: 40,
-                                      onPressed: () {
-                                        RollCallController(doc: doc)
-                                            .changeAttendantToTrue();
-                                      },
-                                      onLongPress: () {
-                                        RollCallController(doc: doc)
-                                            .changeAttendantToFalse();
-                                      },
-                                      child: Text(
-                                        doc.data()['name'] +
-                                            doc.data()['roll'].toString(),
+                                    return Container(
+                                      margin: EdgeInsets.symmetric(vertical: 5),
+                                      child: FlatButton(
+                                        height: 50,
+                                        onPressed: () {
+                                          RollCallController(doc: doc)
+                                              .changeAttendantToTrue();
+                                        },
+                                        onLongPress: () {
+                                          RollCallController(doc: doc)
+                                              .changeAttendantToFalse();
+                                        },
+                                        child: Row(children: [
+                                          Expanded(
+                                            flex: 1,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                left: 15,
+                                                // right: 21,
+                                              ),
+                                              child: Text(
+                                                doc.data()['roll'].toString(),
+                                                style: kTextStyle,
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 5,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                left: 15,
+                                              ),
+                                              child: Text(
+                                                doc.data()['name'],
+                                                overflow: TextOverflow.ellipsis,
+                                                style: kTextStyle,
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Icon(
+                                              snapshot.data.get('attendant') ==
+                                                      true
+                                                  ? Icons.check
+                                                  : Icons.close_rounded,
+                                              color: Colors.white,
+                                              size: 40,
+                                            ),
+                                          ),
+                                        ]),
+                                        color: snapshot.data.get('attendant') ==
+                                                true
+                                            ? kDoneColor
+                                            : kUndoneColor,
                                       ),
-                                      color:
-                                          snapshot.data.get('attendant') == true
-                                              ? Colors.green
-                                              : Colors.red,
                                     );
                                   } else {
                                     return Text('');
