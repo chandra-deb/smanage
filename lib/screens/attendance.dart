@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smanage/controllers/attendance_details_controller.dart';
+import 'package:smanage/utils/constants.dart';
 
 class Attendance extends StatelessWidget {
   final QueryDocumentSnapshot doc;
@@ -53,13 +54,26 @@ class Attendance extends StatelessWidget {
                       itemCount: docs.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
+                          margin: EdgeInsets.symmetric(vertical: 5),
                           color: docs[index].data()['attendant'] == true
-                              ? Colors.green
-                              : Colors.red,
+                              ? kDoneColor
+                              : kUndoneColor,
                           child: ListTile(
-                            leading: Text(docs[index].id),
-                            trailing: Text(
-                                docs[index].data()['attendant'].toString()),
+                            leading: Text(
+                              docs[index].id,
+                              style: kTextStyle,
+                            ),
+                            // trailing: Text(
+                            //   docs[index].data()['attendant'].toString(),
+                            //   style: kTextStyle,
+                            // ),
+                            trailing: Icon(
+                              docs[index].data()['attendant'] == true
+                                  ? Icons.check
+                                  : Icons.close_rounded,
+                              color: Colors.white,
+                              size: 40,
+                            ),
                           ),
                         ); //),
                         // It will show dates
