@@ -8,9 +8,9 @@ class RollCallController extends GetxController {
   final QueryDocumentSnapshot doc;
   static getForwardMessage() {
     if (daysTimeTravel.value == 0) {
-      return 'You reached the end';
+      return '!';
     } else {
-      return 'Go forward 1 day';
+      return '>';
     }
   }
 
@@ -19,9 +19,9 @@ class RollCallController extends GetxController {
         DateTime.now().year) {
       // daysTimeTravel.listen((data) {
 
-      return 'You reached the end';
+      return '!';
     } else {
-      return 'Go backward 1 day';
+      return '<';
     }
   }
 
