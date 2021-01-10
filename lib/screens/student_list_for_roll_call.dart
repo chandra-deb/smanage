@@ -42,11 +42,18 @@ class StudentListForRC extends StatelessWidget {
                       // ignore: missing_return
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.hasError) {
-                          return FlatButton(
-                            // !It Shows....Other 'Something went wrong not work
-                            height: 40,
-                            child: Text('Something Went Wrong'),
-                            onPressed: null,
+                          return Container(
+                            margin: EdgeInsets.symmetric(vertical: 5),
+                            child: FlatButton(
+                              // !It Shows....Other 'Something went wrong not work
+                              height: 50,
+                              child: Text(
+                                'Something Went Wrong',
+                                style:
+                                    kTextStyle.copyWith(color: Colors.black26),
+                              ),
+                              onPressed: null,
+                            ),
                           );
                         }
                         switch (snapshot.connectionState) {
