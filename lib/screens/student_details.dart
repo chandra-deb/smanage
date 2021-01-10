@@ -152,24 +152,45 @@ class STDTState extends State<STDT> {
                   ),
                 ),
                 ...detail.phoneNumbers.map((v) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(v.keys.first),
-                      Row(
-                        children: [Text(v[v.keys.first])],
-                      )
-                    ],
+                  return Container(
+                    padding: EdgeInsets.symmetric(horizontal: 25),
+                    margin: EdgeInsets.symmetric(vertical: 5),
+                    color: Colors.green.shade300,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              v.keys.first,
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.black54,
+                              ),
+                            ),
+                            Text(
+                              v[v.keys.first],
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black54,
+                              ),
+                            ), // Row(
+                          ],
+                        ),
+                        FlatButton(
+                            // color: kFlatButtonColor,
+                            child: Icon(
+                              Icons.call,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                            onPressed: () {
+                              _makeCall(v[v.keys.first]);
+                            }),
+                      ],
+                    ),
                   );
-                  // return ListTile(
-                  //   title: Text(v[v.keys.first]),
-                  //   leading: Text(v.keys.first),
-                  //   trailing: RaisedButton(
-                  //       child: Icon(Icons.call),
-                  //       onPressed: () {
-                  //         _makeCall(v[v.keys.first]);
-                  //       }),
-                  // );
                 }).toList(),
               ],
             ),
