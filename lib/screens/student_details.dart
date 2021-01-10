@@ -153,9 +153,9 @@ class STDTState extends State<STDT> {
                 ),
                 ...detail.phoneNumbers.map((v) {
                   return Container(
-                    padding: EdgeInsets.symmetric(horizontal: 25),
+                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                     margin: EdgeInsets.symmetric(vertical: 5),
-                    color: Colors.green.shade300,
+                    color: kDoneColor,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -166,14 +166,14 @@ class STDTState extends State<STDT> {
                               v.keys.first,
                               style: TextStyle(
                                 fontSize: 18,
-                                color: Colors.black54,
+                                color: Colors.white,
                               ),
                             ),
                             Text(
                               v[v.keys.first],
                               style: TextStyle(
                                 fontSize: 16,
-                                color: Colors.black54,
+                                color: Colors.white,
                               ),
                             ), // Row(
                           ],
@@ -241,7 +241,7 @@ class DetailsPart extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     child: Text(
                       "Get Full Details",
-                      style: Theme.of(context).textTheme.body2,
+                      style: kTextStyle.copyWith(color: Colors.black54),
                     )),
                 expanded: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -249,14 +249,214 @@ class DetailsPart extends StatelessWidget {
                     Container(
                       child: Column(
                         children: [
-                          Text(detail.name),
-                          Text(detail.fatherName),
-                          Text(detail.motherName),
-                          Text(detail.address),
-                          Text(detail.cls),
-                          Text(detail.roll),
-                          Text(detail.institutionName),
-                          Text(detail.joinDate.timeZoneName),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 15,
+                            ),
+                            margin: EdgeInsets.symmetric(
+                              vertical: 5,
+                              // horizontal: 15,
+                            ),
+                            color: kDoneColor,
+                            child: Row(
+                              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Name :',
+                                    style: kTextStyle,
+                                  ),
+                                ),
+                                Text(
+                                  detail.name,
+                                  style: kTextStyle,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 15,
+                            ),
+                            margin: EdgeInsets.symmetric(
+                              vertical: 5,
+                              // horizontal: 15,
+                            ),
+                            color: kDoneColor,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Father\'s Name :',
+                                    style: kTextStyle,
+                                  ),
+                                ),
+                                Text(
+                                  detail.fatherName,
+                                  style: kTextStyle,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 15,
+                            ),
+                            margin: EdgeInsets.symmetric(
+                              vertical: 5,
+                              // horizontal: 15,
+                            ),
+                            color: kDoneColor,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Mother\'s Name :',
+                                    style: kTextStyle,
+                                  ),
+                                ),
+                                Text(
+                                  detail.motherName,
+                                  style: kTextStyle,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 15,
+                            ),
+                            margin: EdgeInsets.symmetric(
+                              vertical: 5,
+                              // horizontal: 15,
+                            ),
+                            color: kDoneColor,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Institution\'s Name :',
+                                    style: kTextStyle,
+                                  ),
+                                ),
+                                Text(
+                                  detail.institutionName,
+                                  style: kTextStyle,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 15,
+                            ),
+                            margin: EdgeInsets.symmetric(
+                              vertical: 5,
+                              // horizontal: 15,
+                            ),
+                            color: kDoneColor,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Class :',
+                                    style: kTextStyle,
+                                  ),
+                                ),
+                                Text(
+                                  detail.cls,
+                                  style: kTextStyle,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 15,
+                            ),
+                            margin: EdgeInsets.symmetric(
+                              vertical: 5,
+                              // horizontal: 15,
+                            ),
+                            color: kDoneColor,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Roll Number:',
+                                    style: kTextStyle,
+                                  ),
+                                ),
+                                Text(
+                                  detail.roll,
+                                  style: kTextStyle,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 15,
+                            ),
+                            margin: EdgeInsets.symmetric(
+                              vertical: 5,
+                              // horizontal: 15,
+                            ),
+                            color: kDoneColor,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Address :',
+                                    style: kTextStyle,
+                                  ),
+                                ),
+                                Text(
+                                  detail.address,
+                                  style: kTextStyle,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 15,
+                            ),
+                            margin: EdgeInsets.symmetric(
+                              vertical: 5,
+                              // horizontal: 15,
+                            ),
+                            color: kDoneColor,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Start Date :',
+                                    style: kTextStyle,
+                                  ),
+                                ),
+                                Text(
+                                  detail.joinDate.toString(),
+                                  style: kTextStyle,
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     )
