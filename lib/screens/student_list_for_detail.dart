@@ -26,7 +26,14 @@ class StudentListForDetail extends StatelessWidget {
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
               final docs = snapshot.data.docs;
-
+              if (docs.length == 0) {
+                return Center(
+                  child: Text(
+                    'No Student Added',
+                    style: kTextStyle.copyWith(color: Colors.black54),
+                  ),
+                );
+              }
               return ListView.builder(
                 physics: BouncingScrollPhysics(),
                 itemCount: docs.length,
@@ -62,9 +69,13 @@ class StudentListForDetail extends StatelessWidget {
               );
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
             }
-            return Text('What is happening!?');
+            if (snapshot.connectionState == ConnectionState.none) {
+              return Center(
+                child: Text('Something Went Wrong!'),
+              );
+            }
           },
         ),
       ),
