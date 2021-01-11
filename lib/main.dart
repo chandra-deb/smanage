@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      defaultTransition: Transition.cupertino,
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: Color(0xfff6f6f6),
         accentColor: Colors.green.shade500,
