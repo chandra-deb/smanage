@@ -53,7 +53,7 @@ class StudentListForRC extends StatelessWidget {
                                   margin: EdgeInsets.symmetric(vertical: 5),
                                   child: FlatButton(
                                     // !It Shows....Other 'Something went wrong not work
-                                    height: 50,
+                                    height: kFlatButtonHeight,
                                     child: Text(
                                       'Something Went Wrong',
                                       style: kTextStyle.copyWith(
@@ -69,10 +69,10 @@ class StudentListForRC extends StatelessWidget {
                                     margin: EdgeInsets.symmetric(vertical: 5),
                                     child: FlatButton(
                                       onPressed: null,
-                                      height: 50,
+                                      height: kFlatButtonHeight,
                                       child: Text(
                                         'Loading',
-                                        textAlign: TextAlign.center,
+                                        // textAlign: TextAlign.center,
                                         style: kTextStyle.copyWith(
                                             color: Colors.black26),
                                       ),
@@ -91,7 +91,7 @@ class StudentListForRC extends StatelessWidget {
                                             margin: EdgeInsets.symmetric(
                                                 vertical: 5),
                                             child: FlatButton(
-                                              height: 50,
+                                              height: kFlatButtonHeight,
                                               onPressed: () {
                                                 RollCallController(doc: doc)
                                                     .changeAttendantToTrue();
@@ -188,7 +188,7 @@ class StudentListForRC extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   FlatButton(
-                    height: kFlatButtonHeight,
+                    // height: kFlatButtonHeight,
                     color: kFlatButtonColor,
                     colorBrightness: Brightness.dark,
                     onLongPress: () {
@@ -211,7 +211,7 @@ class StudentListForRC extends StatelessWidget {
                     ),
                   ),
                   FlatButton(
-                    height: kFlatButtonHeight,
+                    // height: kFlatButtonHeight,
                     color: kFlatButtonColor,
                     colorBrightness: Brightness.dark,
                     onPressed: () {
@@ -228,7 +228,7 @@ class StudentListForRC extends StatelessWidget {
                     ),
                   ),
                   FlatButton(
-                    height: kFlatButtonHeight,
+                    // height: kFlatButtonHeight,
                     color: kFlatButtonColor,
                     colorBrightness: Brightness.dark,
                     onPressed: () {
