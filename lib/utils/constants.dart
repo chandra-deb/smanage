@@ -7,7 +7,7 @@ final TextStyle kTextStyle = TextStyle(
   color: Colors.white,
 );
 
-final kFlatButtonColor = Colors.indigo;
+final kFlatButtonColor = Colors.blueGrey.shade400;
 
 final kFlatButtonHeight = 50.0;
 final kFlatButtonTextStyle = TextStyle(fontSize: 40);

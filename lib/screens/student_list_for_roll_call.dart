@@ -182,7 +182,8 @@ class StudentListForRC extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
+              color: Colors.blueGrey.shade200,
+              margin: EdgeInsets.only(top: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -206,7 +207,7 @@ class StudentListForRC extends StatelessWidget {
                     },
                     child: Text(
                       RollCallController.getBackwardMessage(),
-                      style: kFlatButtonTextStyle,
+                      style: TextStyle(fontSize: 30),
                     ),
                   ),
                   FlatButton(
@@ -223,7 +224,7 @@ class StudentListForRC extends StatelessWidget {
                     },
                     child: Text(
                       RollCallController.getForwardMessage(),
-                      style: kFlatButtonTextStyle,
+                      style: TextStyle(fontSize: 30),
                     ),
                   ),
                   FlatButton(
