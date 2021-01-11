@@ -16,14 +16,33 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
+  PageController _pageController;
+
   List<Widget> _widgetOptions = <Widget>[
     RollCallOf(),
     StudentDetailsOf(),
     AddStudent()
   ];
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   void _onItemTap(int index) {
     setState(() {
       _selectedIndex = index;
+      _pageController.animateToPage(
+        index,
+        duration: Duration(milliseconds: 250),
+        curve: Curves.fastOutSlowIn,
+      );
     });
   }
 
@@ -50,7 +69,15 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
-      body: _widgetOptions[_selectedIndex],
+      body: SizedBox.expand(
+        child: PageView(
+          controller: _pageController,
+          onPageChanged: (index) {
+            setState(() => _selectedIndex = index);
+          },
+          children: _widgetOptions,
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
