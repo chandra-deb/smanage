@@ -38,6 +38,13 @@ class StudentListForDetail extends StatelessWidget {
                       height: kFlatButtonHeight,
                       child: Row(
                         children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15, right: 20),
+                            child: Text(
+                              docs[index].data()['roll'].toString(),
+                              style: kTextStyle,
+                            ),
+                          ),
                           Text(
                             docs[index].data()['name'],
                             style: kTextStyle,
