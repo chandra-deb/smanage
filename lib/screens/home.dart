@@ -6,6 +6,7 @@ import 'package:smanage/screens/student_list_for_roll_call.dart';
 // import 'package:get/get.dart';
 // import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:smanage/services/auth.dart';
+import 'package:smanage/utils/constants.dart';
 import '../screens/add_student.dart';
 
 class Home extends StatefulWidget {
@@ -15,7 +16,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
-  List<Widget> _widgetOptions = <Widget>[RC(), RC(), AddStudent()];
+  List<Widget> _widgetOptions = <Widget>[
+    RollCallOf(),
+    StudentDetailsOf(),
+    AddStudent()
+  ];
   void _onItemTap(int index) {
     setState(() {
       _selectedIndex = index;
@@ -39,9 +44,9 @@ class _HomeState extends State<Home> {
         actions: [
           FlatButton(
             onPressed: () {
-              Auth().signOut();
+              Get.to(AddStudent());
             },
-            child: Icon(Icons.logout),
+            child: Icon(Icons.add_box_outlined),
           )
         ],
       ),
@@ -62,7 +67,7 @@ class _HomeState extends State<Home> {
   }
 }
 
-class RC extends StatelessWidget {
+class RollCallOf extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -91,12 +96,13 @@ class RC extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(8),
               child: Center(
-                child: const Text(
-                  "Class 6",
-                  style: TextStyle(fontSize: 35),
+                child: Text(
+                  "Roll Call of Class 6",
+                  style: kTextStyle.copyWith(fontSize: 30),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              color: Colors.teal[100],
+              color: kDoneColor,
             ),
           ),
           GestureDetector(
@@ -115,12 +121,13 @@ class RC extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(8),
               child: Center(
-                child: const Text(
-                  "Class 7",
-                  style: TextStyle(fontSize: 35),
+                child: Text(
+                  "Roll Call of Class 7",
+                  style: kTextStyle.copyWith(fontSize: 30),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              color: Colors.teal[100],
+              color: kDoneColor,
             ),
           ),
           GestureDetector(
@@ -139,12 +146,13 @@ class RC extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(8),
               child: Center(
-                child: const Text(
-                  "Class 8",
-                  style: TextStyle(fontSize: 35),
+                child: Text(
+                  "Roll Call of Class 8",
+                  style: kTextStyle.copyWith(fontSize: 30),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              color: Colors.teal[100],
+              color: kDoneColor,
             ),
           ),
           GestureDetector(
@@ -163,12 +171,13 @@ class RC extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(8),
               child: Center(
-                child: const Text(
-                  "Class 9",
-                  style: TextStyle(fontSize: 35),
+                child: Text(
+                  "Roll Call of Class 9",
+                  style: kTextStyle.copyWith(fontSize: 30),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              color: Colors.teal[100],
+              color: kDoneColor,
             ),
           ),
           GestureDetector(
@@ -185,12 +194,13 @@ class RC extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(8),
               child: Center(
-                child: const Text(
-                  "Class 10",
-                  style: TextStyle(fontSize: 35),
+                child: Text(
+                  "Roll Call of Class 10",
+                  style: kTextStyle.copyWith(fontSize: 30),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              color: Colors.teal[100],
+              color: kDoneColor,
             ),
           ),
           GestureDetector(
@@ -209,12 +219,150 @@ class RC extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(8),
               child: Center(
-                child: const Text(
-                  "Class 11",
-                  style: TextStyle(fontSize: 35),
+                child: Text(
+                  "Roll Call of Class 11",
+                  style: kTextStyle.copyWith(fontSize: 30),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              color: Colors.teal[100],
+              color: kDoneColor,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class StudentDetailsOf extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(20),
+      child: GridView.count(
+        physics: BouncingScrollPhysics(),
+        primary: false,
+        padding: const EdgeInsets.all(20),
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        crossAxisCount: 2,
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {
+              Get.to(
+                StudentListForDetail(
+                  clsNumber: 6,
+                ),
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              child: Center(
+                child: Text(
+                  "Student Details of Class 6",
+                  style: kTextStyle.copyWith(fontSize: 30),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              color: kDoneColor,
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Get.to(
+                StudentListForDetail(
+                  clsNumber: 7,
+                ),
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              child: Center(
+                child: Text(
+                  "Student Details of Class 7",
+                  style: kTextStyle.copyWith(fontSize: 30),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              color: kDoneColor,
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Get.to(
+                StudentListForDetail(
+                  clsNumber: 8,
+                ),
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              child: Center(
+                child: Text(
+                  "Student Details of Class 8",
+                  style: kTextStyle.copyWith(fontSize: 30),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              color: kDoneColor,
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Get.to(
+                StudentListForDetail(
+                  clsNumber: 9,
+                ),
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              child: Center(
+                child: Text(
+                  "Student Details of Class 9",
+                  style: kTextStyle.copyWith(fontSize: 30),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              color: kDoneColor,
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Get.to(StudentListForDetail(
+                clsNumber: 10,
+              ));
+            },
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              child: Center(
+                child: Text(
+                  "Student Details of Class 10",
+                  style: kTextStyle.copyWith(fontSize: 30),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              color: kDoneColor,
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Get.to(
+                StudentListForDetail(
+                  clsNumber: 11,
+                ),
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              child: Center(
+                child: Text(
+                  "Student Details of Class 11",
+                  style: kTextStyle.copyWith(fontSize: 30),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              color: kDoneColor,
             ),
           ),
         ],
