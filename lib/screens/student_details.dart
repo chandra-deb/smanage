@@ -104,16 +104,16 @@ class STDTState extends State<STDT> {
   Widget build(BuildContext context) {
     final detail = StudentDetailsModel(widget.doc);
     return Scaffold(
-      floatingActionButton: FlatButton(
-        color: Colors.red,
-        colorBrightness: Brightness.dark,
-        onPressed: () {
-          StudentDeletionController(widget.doc).delete(context);
-        },
-        child: Text(
-          'Delete Student',
-        ),
-      ),
+      // floatingActionButton: FlatButton(
+      //   color: Colors.red,
+      //   colorBrightness: Brightness.dark,
+      //   onPressed: () {
+      //     StudentDeletionController(widget.doc).delete(context);
+      //   },
+      //   child: Text(
+      //     'Delete Student',
+      //   ),
+      // ),
       appBar: AppBar(
         title: Text("Details"),
         actions: [
@@ -200,6 +200,19 @@ class STDTState extends State<STDT> {
           ),
           BillsPart(
             detail: detail,
+          ),
+          SizedBox(
+            height: 50,
+            child: FlatButton(
+              color: Colors.red,
+              colorBrightness: Brightness.dark,
+              onPressed: () {
+                StudentDeletionController(widget.doc).delete(context);
+              },
+              child: Text(
+                'Delete Student',
+              ),
+            ),
           ),
         ],
       ),
