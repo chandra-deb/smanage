@@ -55,7 +55,10 @@ class _HomeState extends State<Home> {
             onPressed: () {
               Get.to(AddStudent());
             },
-            child: Icon(Icons.add_box_outlined),
+            child: Icon(
+              Icons.add_box_outlined,
+              color: Colors.white,
+            ),
           )
         ],
       ),
@@ -71,11 +74,11 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(Icons.bookmark_outline), label: 'Home'),
+              icon: Icon(Icons.bookmark_outline), label: 'Roll Call'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.class__rounded), label: 'Show'),
+              icon: Icon(Icons.class__rounded), label: 'Student Details'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.add_box_outlined), label: 'Add Student'),
+              icon: Icon(Icons.add_box_outlined), label: 'Account'),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTap,
