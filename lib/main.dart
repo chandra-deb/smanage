@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           color: Colors.green.shade600,
         ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData()
+            .copyWith(backgroundColor: Colors.red),
       ),
       title: 'Student Manager',
       home: Root(),
