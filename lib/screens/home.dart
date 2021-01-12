@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smanage/screens/account.dart';
 import 'package:smanage/screens/student_list_for_detail.dart';
 import 'package:smanage/screens/student_list_for_roll_call.dart';
 
@@ -18,7 +19,7 @@ class _HomeState extends State<Home> {
   List<Widget> _widgetOptions = <Widget>[
     RollCallOf(),
     StudentDetailsOf(),
-    AddStudent()
+    Account(),
   ];
   @override
   void initState() {
@@ -43,7 +44,7 @@ class _HomeState extends State<Home> {
     });
   }
 
-  List<String> _titles = ['Roll Call', 'Student Details', 'Add Student Form'];
+  List<String> _titles = ['Roll Call', 'Student Details', 'Account'];
 
   @override
   Widget build(BuildContext context) {
@@ -76,9 +77,9 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
               icon: Icon(Icons.bookmark_outline), label: 'Roll Call'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.class__rounded), label: 'Student Details'),
+              icon: Icon(Icons.class__outlined), label: 'Student Details'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.add_box_outlined), label: 'Account'),
+              icon: Icon(Icons.account_box_outlined), label: 'Account'),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTap,
