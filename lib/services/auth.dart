@@ -21,10 +21,17 @@ class Auth {
     }
   }
 
-  Future createUser({String email, String password}) async {
+  Future<dynamic> createUser({
+    String name,
+    String email,
+    String password,
+  }) async {
     try {
-      return await _auth.createUserWithEmailAndPassword(
+      UserCredential credential = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+
+      await credential.user.updateProfile(displayName: name);
+      return credential;
     } on Exception catch (e) {
       return e;
     }
@@ -39,4 +46,5 @@ class Auth {
   }
 
   String get teacherUID => _auth.currentUser.uid;
+  String get name => _auth.currentUser.displayName;
 }
