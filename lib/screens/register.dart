@@ -12,7 +12,7 @@ class Register extends StatelessWidget {
         actions: [
           FlatButton(
             onPressed: () {
-              Get.to(Login());
+              Get.off(Login());
             },
             child: Icon(Icons.login),
           )

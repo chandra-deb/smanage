@@ -14,7 +14,7 @@ class Login extends StatelessWidget {
         actions: [
           FlatButton(
             onPressed: () {
-              Get.to(Register());
+              Get.off(Register());
             },
             child: Icon(Icons.app_registration),
           )
