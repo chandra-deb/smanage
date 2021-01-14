@@ -20,36 +20,38 @@ class Login extends StatelessWidget {
           )
         ],
       ),
-      body: Container(
-        margin: EdgeInsets.all(30),
-        child: Obx(
-          () => Column(
-            children: [
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  errorText: _.emailErr.value,
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.all(30),
+          child: Obx(
+            () => Column(
+              children: [
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    errorText: _.emailErr.value,
+                  ),
+                  onChanged: (value) {
+                    _.getEmailErr(value);
+                  },
                 ),
-                onChanged: (value) {
-                  _.getEmailErr(value);
-                },
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  errorText: _.passwordErr.value,
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    errorText: _.passwordErr.value,
+                  ),
+                  onChanged: (value) {
+                    _.getPasswordErr(value);
+                  },
                 ),
-                onChanged: (value) {
-                  _.getPasswordErr(value);
-                },
-              ),
-              ElevatedButton(
-                onPressed: _.button.value,
-                child: Text('login'),
-              ),
-              _.showLoading(),
-              _.showLoginErr(),
-            ],
+                ElevatedButton(
+                  onPressed: _.button.value,
+                  child: Text('login'),
+                ),
+                _.showLoading(),
+                _.showLoginErr(),
+              ],
+            ),
           ),
         ),
       ),
