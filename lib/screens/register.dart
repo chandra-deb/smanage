@@ -6,6 +6,9 @@ import 'login.dart';
 
 class Register extends StatelessWidget {
   final RegisterController _ = RegisterController();
+  final Function toggleView;
+
+  Register({this.toggleView});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +17,7 @@ class Register extends StatelessWidget {
         title: Text('Register'),
         actions: [
           FlatButton(
-            onPressed: () {
-              Get.off(Login());
-            },
+            onPressed: toggleView,
             child: Icon(Icons.login),
           )
         ],
