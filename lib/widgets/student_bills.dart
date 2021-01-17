@@ -44,7 +44,8 @@ class StudentBills extends StatelessWidget {
               Text('Dues: $dues Taka',
                   style: kTextStyle.copyWith(color: Colors.black54)),
               Container(
-                height: 600,
+                margin: EdgeInsets.only(top: 10),
+                height: 300,
                 child: ListView.builder(
                   itemCount: docs.length,
                   physics: BouncingScrollPhysics(),
