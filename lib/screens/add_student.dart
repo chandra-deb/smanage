@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:smanage/controllers/add_student_controller.dart';
-import 'package:toast/toast.dart';
 
 class AddStudent extends StatelessWidget {
   final AddStudentController _ = AddStudentController();

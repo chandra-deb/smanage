@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:smanage/controllers/authenticate_controller.dart';
 import 'package:smanage/screens/home.dart';
-import 'package:smanage/screens/login.dart';
 import 'package:smanage/services/auth.dart';
 
 class Root extends StatelessWidget {

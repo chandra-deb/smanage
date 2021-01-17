@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:smanage/screens/account.dart';
 import 'package:smanage/screens/student_list_for_detail.dart';
 import 'package:smanage/screens/student_list_for_roll_call.dart';
+import 'package:smanage/services/auth.dart';
 
 import 'package:smanage/utils/constants.dart';
 import '../screens/add_student.dart';
@@ -52,6 +53,15 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text(_titles[_selectedIndex]),
         actions: [
+          FlatButton(
+            onPressed: () {
+              Auth().signOut();
+            },
+            child: Icon(
+              Icons.login_outlined,
+              color: Colors.white,
+            ),
+          ),
           FlatButton(
             onPressed: () {
               Get.to(AddStudent());

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smanage/controllers/login_controller.dart';
-import 'package:smanage/screens/register.dart';
 
 class Login extends StatelessWidget {
   final LoginController _ = LoginController();
