@@ -37,18 +37,11 @@ class StudentBills extends StatelessWidget {
         }
         if (snapshot.hasData) {
           final docs = snapshot.data.docs;
-          int due = 0;
-          for (var doc in docs) {
-            if (doc.data()['index'] <= DateTime.now().month &&
-                doc.data()['index'] >= joinDate.month &&
-                doc.data()['paid'] == false) {
-              due += doc.data()['amount'];
-            }
-          }
+          int dues = duesCounter(docs);
 
           return Column(
             children: [
-              Text('Due: $due Taka',
+              Text('Dues: $dues Taka',
                   style: kTextStyle.copyWith(color: Colors.black54)),
               Container(
                 height: 600,
@@ -65,31 +58,14 @@ class StudentBills extends StatelessWidget {
                             : kUndoneColor,
                         disabledColor: Colors.red.shade100,
                         onPressed: docs[index].data()['index'] <=
-                                    DateTime.now().month &&
+                                    (DateTime.now().year == joinDate.year
+                                        ? DateTime.now().month
+                                        : DateTime.now().year < joinDate.year
+                                            ? 0
+                                            : 12) &&
                                 docs[index].data()['index'] >= joinDate.month
-                            ? () async {
-                                if (docs[index].data()['paid'] == false) {
-                                  var value = await alertWithInput(context);
-                                  if (value == docs[index].id) {
-                                    await docs[index]
-                                        .reference
-                                        .update({'paid': true});
-                                    Toast.show(
-                                      'Done!',
-                                      context,
-                                      duration: Toast.LENGTH_LONG,
-                                      gravity: Toast.BOTTOM,
-                                    );
-                                  } else {
-                                    print('You are Wrong');
-                                    Toast.show(
-                                      'You are Wrong! Try Again!',
-                                      context,
-                                      duration: Toast.LENGTH_LONG,
-                                      gravity: Toast.BOTTOM,
-                                    );
-                                  }
-                                }
+                            ? () {
+                                payBill(docs, index, context);
                               }
                             : null,
                         child: Row(
@@ -117,5 +93,50 @@ class StudentBills extends StatelessWidget {
         }
       },
     );
+  }
+
+  Future payBill(
+      List<QueryDocumentSnapshot> docs, int index, BuildContext context) async {
+    {
+      if (docs[index].data()['paid'] == false) {
+        var value = await alertWithInput(context);
+        if (value == docs[index].id) {
+          await docs[index].reference.update({'paid': true});
+          Toast.show(
+            'Done!',
+            context,
+            duration: Toast.LENGTH_LONG,
+            gravity: Toast.BOTTOM,
+          );
+        } else {
+          print('You are Wrong');
+          Toast.show(
+            'You are Wrong! Try Again!',
+            context,
+            duration: Toast.LENGTH_LONG,
+            gravity: Toast.BOTTOM,
+          );
+        }
+      }
+    }
+  }
+
+  int duesCounter(List<QueryDocumentSnapshot> docs) {
+    int dues = 0;
+    for (var doc in docs) {
+      int month = DateTime.now().year == joinDate.year
+          ? DateTime.now().month
+          : DateTime.now().year < joinDate.year
+              ? 0
+              : 12;
+      if (doc.data()['index'] //* represents month index
+              <=
+              month &&
+          doc.data()['index'] >= joinDate.month &&
+          doc.data()['paid'] == false) {
+        dues += doc.data()['amount'];
+      }
+    }
+    return dues;
   }
 }
