@@ -100,145 +100,6 @@ class _HomeState extends State<Home> {
   }
 }
 
-class RollCallOf extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(20),
-      child: GridView.count(
-        physics: BouncingScrollPhysics(),
-        primary: false,
-        padding: const EdgeInsets.all(20),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        crossAxisCount: 2,
-        children: <Widget>[
-          GestureDetector(
-            onTap: () {
-              Get.to(StudentListForRC(
-                clsNumber: 6,
-              ));
-            },
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              child: Center(
-                child: Text(
-                  "Roll Call of Class 6",
-                  style: kTextStyle.copyWith(fontSize: 30),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              color: kDoneColor,
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Get.to(StudentListForRC(
-                clsNumber: 7,
-              ));
-            },
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              child: Center(
-                child: Text(
-                  "Roll Call of Class 7",
-                  style: kTextStyle.copyWith(fontSize: 30),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              color: kDoneColor,
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Get.to(StudentListForRC(
-                clsNumber: 8,
-              ));
-            },
-            onLongPress: () {
-              Get.to(
-                StudentListForDetail(
-                  clsNumber: 8,
-                ),
-              );
-            },
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              child: Center(
-                child: Text(
-                  "Roll Call of Class 8",
-                  style: kTextStyle.copyWith(fontSize: 30),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              color: kDoneColor,
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Get.to(StudentListForRC(
-                clsNumber: 9,
-              ));
-            },
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              child: Center(
-                child: Text(
-                  "Roll Call of Class 9",
-                  style: kTextStyle.copyWith(fontSize: 30),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              color: kDoneColor,
-            ),
-          ),
-          GestureDetector(
-            onTap: () async {
-              await Get.to(StudentListForRC(
-                clsNumber: 10,
-              ));
-            },
-            onLongPress: () {
-              Get.to(StudentListForDetail(
-                clsNumber: 10,
-              ));
-            },
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              child: Center(
-                child: Text(
-                  "Roll Call of Class 10",
-                  style: kTextStyle.copyWith(fontSize: 30),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              color: kDoneColor,
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Get.to(StudentListForRC(
-                clsNumber: 11,
-              ));
-            },
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              child: Center(
-                child: Text(
-                  "Roll Call of Class 11",
-                  style: kTextStyle.copyWith(fontSize: 30),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              color: kDoneColor,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class StudentDetailsOf extends StatelessWidget {
   final DocumentReference teacherData =
       DB().store.collection('teachers').doc(Auth().teacherUID);
@@ -276,6 +137,68 @@ class StudentDetailsOf extends StatelessWidget {
                     child: Center(
                       child: Text(
                         "Details of Class $cls",
+                        style: kTextStyle.copyWith(fontSize: 30),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    color: kDoneColor,
+                  ),
+                ),
+              );
+            });
+            return GridView.count(
+              physics: BouncingScrollPhysics(),
+              primary: false,
+              padding: const EdgeInsets.all(20),
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              crossAxisCount: 2,
+              children: clsList,
+            );
+          }
+        },
+      ),
+    );
+  }
+}
+
+class RollCallOf extends StatelessWidget {
+  final DocumentReference teacherData =
+      DB().store.collection('teachers').doc(Auth().teacherUID);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(20),
+      child: StreamBuilder(
+        stream: teacherData.snapshots(),
+        builder:
+            // ignore: missing_return
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.data['classes'].length == 0) {
+            return Text('No class Added');
+          } else if (snapshot.hasData) {
+            List clses = snapshot.data['classes'];
+            List<Widget> clsList = [];
+            clses.forEach((cls) {
+              clsList.add(
+                GestureDetector(
+                  onTap: () {
+                    Get.to(
+                      StudentListForRC(
+                        clsNumber: cls,
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    child: Center(
+                      child: Text(
+                        "Roll Call of Class $cls",
                         style: kTextStyle.copyWith(fontSize: 30),
                         textAlign: TextAlign.center,
                       ),
