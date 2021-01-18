@@ -4,6 +4,7 @@ import 'package:prompt_dialog/prompt_dialog.dart';
 import 'package:smanage/models/teacher.dart';
 import 'package:smanage/services/auth.dart';
 import 'package:smanage/services/database.dart';
+import 'package:smanage/utils/constants.dart';
 import 'package:toast/toast.dart';
 
 class Account extends StatelessWidget {
@@ -29,7 +30,10 @@ class Account extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text('Classes you have:'),
+                          Text(
+                            'Classes you have : ',
+                            style: kTextStyle.copyWith(color: Colors.black54),
+                          ),
                           ...snapshot.data['classes'].map((t) => Container(
                               padding: EdgeInsets.all(5),
                               child: Text(t.toString() + ',')))
@@ -71,16 +75,8 @@ class Account extends StatelessWidget {
                                 var updatedData = data.removeAt(index);
                                 print(data);
                                 print(updatedData);
-                                try {
-                                  await teacherData.update({'classes': data});
-                                } on Exception catch (e) {
-                                  Toast.show(
-                                    'Something Went Wrong!',
-                                    context,
-                                    duration: Toast.LENGTH_LONG,
-                                    gravity: Toast.BOTTOM,
-                                  );
-                                }
+
+                                await teacherData.update({'classes': data});
                               }
                             },
                           ),
