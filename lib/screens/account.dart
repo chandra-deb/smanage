@@ -50,7 +50,29 @@ class Account extends StatelessWidget {
                         children: [
                           FlatButton(
                             child: Text('Add Class'),
-                            onPressed: () {},
+                            onPressed: () async {
+                              String result = await alertWithInput(context);
+                              if (int.tryParse(result) != null) {
+                                int i = int.tryParse(result);
+                                if (snapshot.data['classes'].contains(i)) {
+                                  return;
+                                } else {
+                                  List data = snapshot.data['classes'] as List;
+                                  data.add(i);
+                                  try {
+                                    await teacherData.update({'classes': data});
+                                  } on Exception catch (e) {
+                                    Toast.show(
+                                      'Something Went Wrong!',
+                                      context,
+                                      duration: Toast.LENGTH_LONG,
+                                      gravity: Toast.BOTTOM,
+                                    );
+                                  }
+                                }
+                              } else
+                                return;
+                            },
                           ),
                           FlatButton(
                             child: Text('Delete Class'),
