@@ -23,6 +23,7 @@ class StudentListForDetail extends StatelessWidget {
           stream: _db.getStudentOfClass(clsNumber),
           // initialData: initialData,
           builder:
+              // ignore: missing_return
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
               final docs = snapshot.data.docs;

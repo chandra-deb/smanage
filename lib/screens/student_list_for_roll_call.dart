@@ -47,6 +47,7 @@ class StudentListForRC extends StatelessWidget {
                                 .attendenceFuture,
                             // ignore: missing_return
                             builder:
+                                // ignore: missing_return
                                 (BuildContext context, AsyncSnapshot snapshot) {
                               if (snapshot.hasError) {
                                 return Container(
