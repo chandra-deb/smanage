@@ -118,7 +118,12 @@ class StudentDetailsOf extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.data['classes'].length == 0) {
-            return Text('No class Added');
+            return Center(
+                child: Text(
+              'No class Added. Add a class to get started',
+              textAlign: TextAlign.center,
+              style: kTextStyle.copyWith(color: Colors.black54),
+            ));
           } else if (snapshot.hasData) {
             List clses = snapshot.data['classes'];
             List<Widget> clsList = [];
@@ -180,7 +185,12 @@ class RollCallOf extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.data['classes'].length == 0) {
-            return Text('No class Added');
+            return Center(
+                child: Text(
+              'No class Added. Add a class to get started',
+              textAlign: TextAlign.center,
+              style: kTextStyle.copyWith(color: Colors.black54),
+            ));
           } else if (snapshot.hasData) {
             List clses = snapshot.data['classes'];
             List<Widget> clsList = [];
