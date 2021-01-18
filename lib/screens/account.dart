@@ -59,16 +59,9 @@ class Account extends StatelessWidget {
                                 } else {
                                   List data = snapshot.data['classes'] as List;
                                   data.add(i);
-                                  try {
-                                    await teacherData.update({'classes': data});
-                                  } on Exception catch (e) {
-                                    Toast.show(
-                                      'Something Went Wrong!',
-                                      context,
-                                      duration: Toast.LENGTH_LONG,
-                                      gravity: Toast.BOTTOM,
-                                    );
-                                  }
+                                  data.sort();
+
+                                  await teacherData.update({'classes': data});
                                 }
                               } else
                                 return;
