@@ -37,6 +37,12 @@ class StudentBills extends StatelessWidget {
         }
         if (snapshot.hasData) {
           final docs = snapshot.data.docs;
+          if (docs.length == 0) {
+            return Text(
+              'Something Went Wrong...Connect to the Internet to get bill details',
+              style: kTextStyle.copyWith(color: kUndoneColor),
+            );
+          }
           int dues = duesCounter(docs);
 
           return Column(
