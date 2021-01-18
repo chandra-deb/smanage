@@ -202,7 +202,7 @@ class STDTState extends State<STDT> {
             detail: detail,
           ),
           SizedBox(
-            height: 50,
+            height: 30,
             child: FlatButton(
               color: Colors.red,
               colorBrightness: Brightness.dark,
