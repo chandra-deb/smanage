@@ -46,37 +46,31 @@ class Account extends StatelessWidget {
                             onPressed: () async {
                               String result = await alertWithInput(context);
                               if (int.tryParse(result) != null) {
-                                int i = int.tryParse(result);
-                                if (snapshot.data['classes'].contains(i)) {
-                                  return;
-                                } else {
+                                int i = int.parse(result);
+                                if (!snapshot.data['classes'].contains(i)) {
                                   List data = snapshot.data['classes'] as List;
                                   data.add(i);
                                   data.sort();
 
                                   await teacherData.update({'classes': data});
                                 }
-                              } else
-                                return;
+                              }
                             },
                           ),
                           FlatButton(
                             child: Text('Delete Class'),
                             onPressed: () async {
                               String result = await alertWithInput(context);
-                              // print(teacherData.path);
-                              print(snapshot.data['classes']
-                                  .contains(int.tryParse(result)));
-                              if (snapshot.data['classes']
-                                      .contains(int.tryParse(result)) ==
-                                  true) {
-                                List data = snapshot.data['classes'] as List;
-                                int index = data.indexOf(int.parse(result));
-                                var updatedData = data.removeAt(index);
-                                print(data);
-                                print(updatedData);
+                              if (int.tryParse(result) != null) {
+                                int i = int.parse(result);
+                                if (snapshot.data['classes'].contains(i) ==
+                                    true) {
+                                  List data = snapshot.data['classes'] as List;
+                                  int index = data.indexOf(i);
+                                  data.removeAt(index);
 
-                                await teacherData.update({'classes': data});
+                                  await teacherData.update({'classes': data});
+                                }
                               }
                             },
                           ),
