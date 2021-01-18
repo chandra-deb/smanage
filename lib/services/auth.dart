@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:smanage/models/teacher.dart';
 
 class Auth {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -30,6 +31,7 @@ class Auth {
           email: email, password: password);
 
       await credential.user.updateProfile(displayName: name);
+      await Teacher().create(uid: credential.user.uid);
       return credential;
     } on Exception catch (e) {
       return e;
