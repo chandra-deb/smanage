@@ -22,17 +22,6 @@ class Account extends StatelessWidget {
             stream: teacherData.snapshots(),
             // ignore: missing_return
             builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-              // switch (snapshot.connectionState) {
-              //   case ConnectionState.done:
-              //     return Text('${snapshot.data['classes']}');
-              //   case ConnectionState.waiting:
-              //     return CircularProgressIndicator();
-              //   case ConnectionState.none:
-              //     return Text('Something went wrong!');
-              //   case ConnectionState.active:
-              //   // TODO: Handle this case.
-              // }
-
               if (snapshot.hasData) {
                 return Container(
                   color: Colors.green.shade100,
