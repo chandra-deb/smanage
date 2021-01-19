@@ -14,102 +14,130 @@ class Account extends StatelessWidget {
     final DocumentReference teacherData =
         DB().store.collection('teachers').doc(_auth.teacherUID);
     print(_auth.name);
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('${_auth.name.toString()}'),
-          StreamBuilder(
-            stream: teacherData.snapshots(),
-            // ignore: missing_return
-            builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-              if (snapshot.hasData) {
-                // Map monthlyBill = snapshot.data['monthlyBillOfClass'];
+    return SingleChildScrollView(
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('${_auth.name.toString()}'),
+            StreamBuilder(
+              stream: teacherData.snapshots(),
+              // ignore: missing_return
+              builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                if (snapshot.hasData) {
+                  // Map monthlyBill = snapshot.data['monthlyBillOfClass'];
 
-                return Container(
-                  color: Colors.green.shade100,
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            'Classes you have : ',
-                            style: kTextStyle.copyWith(color: Colors.black54),
-                          ),
-                          ...snapshot.data['classes'].map((t) => Container(
-                              padding: EdgeInsets.all(5),
-                              child: Text(t.toString() + ',')))
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          FlatButton(
-                            child: Text('Add Class'),
-                            onPressed: () async {
-                              String result = await alertWithInput(context);
-                              if (int.tryParse(result) != null) {
-                                int i = int.parse(result);
-                                if (!snapshot.data['classes'].contains(i)) {
-                                  List data = snapshot.data['classes'] as List;
-                                  data.add(i);
-                                  data.sort();
-
-                                  await teacherData.update({'classes': data});
-                                  await teacherData.update({'$i': 0});
-                                }
-                              }
-                            },
-                          ),
-                          FlatButton(
-                            child: Text('Delete Class'),
-                            onPressed: () async {
-                              String result = await alertWithInput(context);
-                              if (int.tryParse(result) != null) {
-                                int i = int.parse(result);
-                                if (snapshot.data['classes'].contains(i) ==
-                                    true) {
-                                  List data = snapshot.data['classes'] as List;
-                                  int index = data.indexOf(i);
-                                  data.removeAt(index);
-
-                                  await teacherData.update({'classes': data});
-                                  await teacherData
-                                      .update({'$i': FieldValue.delete()});
-                                }
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-                      Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                  return Container(
+                    color: Colors.green.shade100,
+                    child: Column(
+                      children: [
+                        Row(
                           children: [
-                            Text('Set monthly bill of class'),
-                            // Text(
-                            //   (snapshot.data['monthlyBillOfClass'] as Map)
-                            //       .keys
-                            //       .toString(),
-                            // ),
-                            // Text('${monthlyBill.map((k, v) => k)}')
-                            // monthlyBill.forEach((key, value) {
-                            //   return (Text(key));
-                            // })
+                            Text(
+                              'Classes you have : ',
+                              style: kTextStyle.copyWith(color: Colors.black54),
+                            ),
+                            ...snapshot.data['classes'].map(
+                              (t) => Container(
+                                padding: EdgeInsets.all(5),
+                                child: Text(
+                                  t.toString() + ',',
+                                  style: kTextStyle.copyWith(
+                                      color: Colors.black54),
+                                ),
+                              ),
+                            )
                           ],
                         ),
-                      )
-                    ],
-                  ),
-                );
-              }
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            },
-          )
-        ],
+                        Row(
+                          children: [
+                            FlatButton(
+                              child: Text('Add Class'),
+                              onPressed: () async {
+                                String result = await alertWithInput(context);
+                                if (int.tryParse(result) != null) {
+                                  int i = int.parse(result);
+                                  if (!snapshot.data['classes'].contains(i)) {
+                                    List data =
+                                        snapshot.data['classes'] as List;
+                                    data.add(i);
+                                    data.sort();
+
+                                    await teacherData.update({'classes': data});
+                                    await teacherData.update({'$i': 0});
+                                  }
+                                }
+                              },
+                            ),
+                            FlatButton(
+                              child: Text('Delete Class'),
+                              onPressed: () async {
+                                String result = await alertWithInput(context);
+                                if (int.tryParse(result) != null) {
+                                  int i = int.parse(result);
+                                  if (snapshot.data['classes'].contains(i) ==
+                                      true) {
+                                    List data =
+                                        snapshot.data['classes'] as List;
+                                    int index = data.indexOf(i);
+                                    data.removeAt(index);
+
+                                    await teacherData.update({'classes': data});
+                                    await teacherData
+                                        .update({'$i': FieldValue.delete()});
+                                  }
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ...snapshot.data['classes'].map(
+                                (t) => Container(
+                                    padding: EdgeInsets.all(5),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          t.toString(),
+                                          style: kTextStyle.copyWith(
+                                              color: Colors.black54),
+                                        ),
+                                        FlatButton(
+                                          child: Text(
+                                            'Amount is ${snapshot.data[t.toString()]}',
+                                          ),
+                                          onPressed: () async {
+                                            String result =
+                                                await alertWithInput(context);
+                                            if (int.tryParse(result) != null) {
+                                              teacherData.update({
+                                                t.toString(): int.parse(result)
+                                              });
+                                            }
+                                          },
+                                        )
+                                      ],
+                                    )),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            )
+          ],
+        ),
       ),
     );
   }
