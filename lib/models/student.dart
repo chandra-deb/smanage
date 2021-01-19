@@ -65,7 +65,6 @@ class Student {
     for (var item in a) {
       var d = doc.collection('bills').doc(item);
       batch.set(d, {
-        'amount': 500,
         'paid': false,
         'index': a.indexOf(item) + 1,
       });

@@ -140,12 +140,12 @@ class AddStudentController extends GetxController {
       clsOk = false;
     } else {
       cls = convertedClsNumber;
-      if (cls < 12) {
+      if (cls <= 12) {
         clsErr.value = null;
         clsOk = true;
       } else {
         clsOk = false;
-        clsErr.value = 'Class should not extend 11!';
+        clsErr.value = 'Class should not exceed 12!';
       }
     }
 
@@ -255,65 +255,6 @@ class AddStudentController extends GetxController {
     enableButton();
   }
 
-  // void getStudentPhoneErr(String sPhone) {
-  //   getPhoneNumberErr(
-  //       inputNumber: sPhone,
-  //       phone: studentPhone,
-  //       phoneErr: studentPhoneErr,
-  //       phoneOk: studentPhoneOk);
-  // }
-
-  // void getFatherPhoneErr(String fPhone) {
-  //   getPhoneNumberErr(
-  //     inputNumber: fPhone,
-  //     phone: fatherPhone,
-  //     phoneErr: fatherPhoneErr,
-  //     phoneOk: fatherPhoneOk,
-  //   );
-  // }
-
-  // void getMotherPhoneErr(String mPhone) {
-  //   getPhoneNumberErr(
-  //     inputNumber: mPhone,
-  //     phone: motherPhone,
-  //     phoneErr: motherPhoneErr,
-  //     phoneOk: motherPhoneOk,
-  //   );
-  // }
-
-  // void getPhoneNumberErr({
-  //   String inputNumber,
-  //   String phone,
-  //   RxString phoneErr,
-  //   bool phoneOk,
-  // }) {
-  //   var convertedPhoneNumber = int.tryParse(inputNumber);
-  //   if (convertedPhoneNumber == null) {
-  //     phoneErr.value = 'Phone number should not contain letters';
-  //     phoneOk = false;
-  //   } else {
-  //     phone = inputNumber;
-  //     if (phone.startsWith('017') ||
-  //         phone.startsWith('013') ||
-  //         phone.startsWith('014') ||
-  //         phone.startsWith('019') ||
-  //         phone.startsWith('016') ||
-  //         phone.startsWith('015')) {
-  //       if (phone.length == 11) {
-  //         phoneErr.value = null;
-  //         phoneOk = true;
-  //       } else {
-  //         phoneOk = false;
-  //         phoneErr.value = 'Phone number must be 11 characters long!';
-  //       }
-  //     } else {
-  //       phoneOk = false;
-  //       phoneErr.value = 'This phone number is wrong!';
-  //     }
-  //   }
-  //   enableButton();
-  // }
-
   void getAddressErr(String addre) {
     address = addre;
     if (address.length > 9) {
@@ -337,23 +278,6 @@ class AddStudentController extends GetxController {
         studentPhoneOk &&
         addressOk) {
       button.value = () async => await submitData();
-      // if (addButtonErr.value != null) {
-      //   // ** It tells if the student added instantly or not
-      //   Toast.show(
-      //     addButtonErr.value,
-      //     context,
-      //     duration: Toast.LENGTH_LONG,
-      //     gravity: Toast.BOTTOM,
-      //   );
-      // } else {
-      //   Toast.show(
-      //     'Student Added',
-      //     context,
-      //     duration: Toast.LENGTH_LONG,
-      //     gravity: Toast.BOTTOM,
-      //   );
-      // }
-
     } else {
       button.value = null;
     }

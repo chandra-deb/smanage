@@ -6,20 +6,13 @@ class Teacher {
   FirebaseFirestore store = DB().store;
 
   Future create({String uid}) async {
-    List<int> clses = [5, 6, 7, 8];
-    Map monthlyBillOfClass = {
-      '5': 500,
-      '6': 500,
-      '7': 500,
-      '8': 500,
-    };
+    List<int> clses = [];
+
     DocumentReference currentTeacher = store.collection('teachers').doc(uid);
     await currentTeacher.set(
       {
         'classes': clses,
-        'monthlyBillOfClass': monthlyBillOfClass,
       },
     );
-    // .set({'a': 'b'});
   }
 }
