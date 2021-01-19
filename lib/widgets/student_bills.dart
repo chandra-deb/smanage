@@ -1,14 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:prompt_dialog/prompt_dialog.dart';
+import 'package:smanage/services/auth.dart';
+import 'package:smanage/services/database.dart';
 import 'package:smanage/utils/constants.dart';
 import 'package:toast/toast.dart';
 
 class StudentBills extends StatelessWidget {
   final Query billRef;
   final DateTime joinDate;
+  final clsNumber;
 
-  StudentBills({this.billRef, this.joinDate});
+  final DocumentReference teacherData =
+      DB().store.collection('teachers').doc(Auth().teacherUID);
+
+  StudentBills(
+      {@required this.billRef,
+      @required this.joinDate,
+      @required this.clsNumber});
 
   Future<String> alertWithInput(BuildContext context) async {
     print(joinDate.month);
@@ -43,60 +52,82 @@ class StudentBills extends StatelessWidget {
               style: kTextStyle.copyWith(color: kUndoneColor),
             );
           }
-          int dues = duesCounter(docs);
+          // int dues = duesCounter(docs);
 
-          return Column(
-            children: [
-              Text('Dues: $dues Taka',
-                  style: kTextStyle.copyWith(color: Colors.black54)),
-              Container(
-                margin: EdgeInsets.only(top: 10),
-                height: 300,
-                child: ListView.builder(
-                  itemCount: docs.length,
-                  physics: BouncingScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: EdgeInsets.symmetric(vertical: 5),
-                      child: FlatButton(
-                        height: kFlatButtonHeight,
-                        color: docs[index].data()['paid'] == true
-                            ? kDoneColor
-                            : kUndoneColor,
-                        disabledColor: Colors.red.shade100,
-                        onPressed: docs[index].data()['index'] <=
-                                    (DateTime.now().year == joinDate.year
-                                        ? DateTime.now().month
-                                        : DateTime.now().year < joinDate.year
-                                            ? 0
-                                            : 12) &&
-                                docs[index].data()['index'] >= joinDate.month
-                            ? () {
-                                payBill(docs, index, context);
-                              }
-                            : null,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              docs[index].id,
-                              style: kTextStyle,
-                            ),
-                            Text(
-                              docs[index].data()['paid'] == true
-                                  ? 'Paid'
-                                  : 'Unpaid',
-                              style: kTextStyle,
-                            ),
-                          ],
+          return StreamBuilder<DocumentSnapshot>(
+              stream: teacherData.snapshots(),
+              // ignore: missing_return
+              builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                if (snapshot.hasData) {
+                  int amount = snapshot.data[clsNumber.toString()];
+                  int dues = duesCounter(
+                    docs,
+                    amount,
+                  );
+
+                  return Column(
+                    children: [
+                      Text('Dues: $dues Taka',
+                          style: kTextStyle.copyWith(color: Colors.black54)),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        height: 300,
+                        child: ListView.builder(
+                          itemCount: docs.length,
+                          physics: BouncingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: EdgeInsets.symmetric(vertical: 5),
+                              child: FlatButton(
+                                height: kFlatButtonHeight,
+                                color: docs[index].data()['paid'] == true
+                                    ? kDoneColor
+                                    : kUndoneColor,
+                                disabledColor: Colors.red.shade100,
+                                onPressed: docs[index].data()['index'] <=
+                                            (DateTime.now().year ==
+                                                    joinDate.year
+                                                ? DateTime.now().month
+                                                : DateTime.now().year <
+                                                        joinDate.year
+                                                    ? 0
+                                                    : 12) &&
+                                        docs[index].data()['index'] >=
+                                            joinDate.month
+                                    ? () {
+                                        payBill(docs, index, context);
+                                      }
+                                    : null,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      docs[index].id,
+                                      style: kTextStyle,
+                                    ),
+                                    Text(
+                                      docs[index].data()['paid'] == true
+                                          ? 'Paid'
+                                          : 'Unpaid',
+                                      style: kTextStyle,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          );
+                    ],
+                  );
+                } else if (snapshot.connectionState ==
+                    ConnectionState.waiting) {
+                  return Center(
+                    child: SizedBox(),
+                  );
+                }
+              });
         }
       },
     );
@@ -128,7 +159,7 @@ class StudentBills extends StatelessWidget {
     }
   }
 
-  int duesCounter(List<QueryDocumentSnapshot> docs) {
+  int duesCounter(List<QueryDocumentSnapshot> docs, int monthlyAmount) {
     int dues = 0;
     for (var doc in docs) {
       int month = DateTime.now().year == joinDate.year
@@ -141,7 +172,8 @@ class StudentBills extends StatelessWidget {
               month &&
           doc.data()['index'] >= joinDate.month &&
           doc.data()['paid'] == false) {
-        dues += doc.data()['amount'];
+        dues += monthlyAmount;
+        print(doc.data());
       }
     }
     return dues;

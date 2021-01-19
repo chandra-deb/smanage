@@ -507,6 +507,7 @@ class BillsPart extends StatelessWidget {
           child: StudentBills(
             billRef: detail.bills,
             joinDate: detail.joinDate,
+            clsNumber: detail.cls,
           ),
         ),
       ),
