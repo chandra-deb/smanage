@@ -62,9 +62,12 @@ class Account extends StatelessWidget {
                                         snapshot.data['classes'] as List;
                                     data.add(i);
                                     data.sort();
-
-                                    await teacherData.update({'classes': data});
-                                    await teacherData.update({'$i': 0});
+                                    final batch =
+                                        FirebaseFirestore.instance.batch();
+                                    batch
+                                        .update(teacherData, {'classes': data});
+                                    batch.update(teacherData, {'$i': 0});
+                                    await batch.commit();
                                   }
                                 }
                               },
