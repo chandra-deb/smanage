@@ -24,6 +24,8 @@ class Account extends StatelessWidget {
             // ignore: missing_return
             builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
               if (snapshot.hasData) {
+                // Map monthlyBill = snapshot.data['monthlyBillOfClass'];
+
                 return Container(
                   color: Colors.green.shade100,
                   child: Column(
@@ -53,6 +55,7 @@ class Account extends StatelessWidget {
                                   data.sort();
 
                                   await teacherData.update({'classes': data});
+                                  await teacherData.update({'$i': 0});
                                 }
                               }
                             },
@@ -70,11 +73,30 @@ class Account extends StatelessWidget {
                                   data.removeAt(index);
 
                                   await teacherData.update({'classes': data});
+                                  await teacherData
+                                      .update({'$i': FieldValue.delete()});
                                 }
                               }
                             },
                           ),
                         ],
+                      ),
+                      Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Set monthly bill of class'),
+                            // Text(
+                            //   (snapshot.data['monthlyBillOfClass'] as Map)
+                            //       .keys
+                            //       .toString(),
+                            // ),
+                            // Text('${monthlyBill.map((k, v) => k)}')
+                            // monthlyBill.forEach((key, value) {
+                            //   return (Text(key));
+                            // })
+                          ],
+                        ),
                       )
                     ],
                   ),
