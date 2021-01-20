@@ -15,9 +15,9 @@ class Account extends StatelessWidget {
         DB().store.collection('teachers').doc(_auth.teacherUID);
     print(_auth.name);
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       child: Container(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('${_auth.name.toString()}'),
             StreamBuilder(
@@ -186,7 +186,7 @@ class Account extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
