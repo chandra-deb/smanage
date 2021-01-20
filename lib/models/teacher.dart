@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:smanage/services/auth.dart';
 import 'package:smanage/services/database.dart';
 
 class Teacher {
