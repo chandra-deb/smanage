@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smanage/controllers/attendance_details_controller.dart';
@@ -58,19 +59,30 @@ class Attendance extends StatelessWidget {
                           AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.hasData) {
                       var docs = snapshot.data.docs;
+                      // DateTime t =
+                      //     (docs[index].data()['time'] as Timestamp).toDate();
+                      List<QueryDocumentSnapshot> filteredDocs = [];
+                      for (QueryDocumentSnapshot doc in docs) {
+                        DateTime date = doc.data()['time'].toDate();
+                        // !* "DateTime.friday + 3" it means Friday!
+                        if (date.format('D') != 'Fri') {
+                          filteredDocs.add(doc);
+                        }
+                      }
 
                       return ListView.builder(
                         physics: BouncingScrollPhysics(),
-                        itemCount: docs.length,
+                        itemCount: filteredDocs.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Container(
                             margin: EdgeInsets.symmetric(vertical: 5),
-                            color: docs[index].data()['attendant'] == true
-                                ? kDoneColor
-                                : kUndoneColor,
+                            color:
+                                filteredDocs[index].data()['attendant'] == true
+                                    ? kDoneColor
+                                    : kUndoneColor,
                             child: ListTile(
                               leading: Text(
-                                docs[index].id,
+                                filteredDocs[index].id,
                                 style: kTextStyle,
                               ),
                               // trailing: Text(
@@ -78,7 +90,7 @@ class Attendance extends StatelessWidget {
                               //   style: kTextStyle,
                               // ),
                               trailing: Icon(
-                                docs[index].data()['attendant'] == true
+                                filteredDocs[index].data()['attendant'] == true
                                     ? Icons.check
                                     : Icons.close_rounded,
                                 color: Colors.white,

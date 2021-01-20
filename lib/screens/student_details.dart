@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_time_format/date_time_format.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
@@ -378,7 +379,9 @@ class DetailsPart extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  detail.joinDate.toString(),
+                                  detail.joinDate
+                                      .format(DateTimeFormats.american)
+                                      .toString(),
                                   style: kTextStyle,
                                 ),
                               ],
