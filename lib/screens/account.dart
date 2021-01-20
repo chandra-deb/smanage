@@ -34,28 +34,34 @@ class Account extends StatelessWidget {
                         SingleChildScrollView(
                           physics: BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              Text(
-                                'Classes you have : ',
-                                style:
-                                    kTextStyle.copyWith(color: Colors.black54),
-                              ),
-                              ...snapshot.data['classes'].map(
-                                (t) => Container(
-                                  color: Colors.green,
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 5, horizontal: 10),
-                                  margin: EdgeInsets.all(5),
-                                  child: Text(
-                                    t.toString(),
-                                    style: kTextStyle.copyWith(
-                                        color: Colors.black54),
-                                  ),
+                          child: snapshot.data['classes'].length == 0
+                              ? Text(
+                                  'You have not added any class yet',
+                                  style: kTextStyle.copyWith(
+                                      color: Colors.black54),
+                                )
+                              : Row(
+                                  children: [
+                                    Text(
+                                      'Classes you have : ',
+                                      style: kTextStyle.copyWith(
+                                          color: Colors.black54),
+                                    ),
+                                    ...snapshot.data['classes'].map(
+                                      (t) => Container(
+                                        color: Colors.green,
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 5, horizontal: 10),
+                                        margin: EdgeInsets.all(5),
+                                        child: Text(
+                                          t.toString(),
+                                          style: kTextStyle.copyWith(
+                                              color: Colors.black54),
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              )
-                            ],
-                          ),
                         ),
                         Row(
                           children: [
