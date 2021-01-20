@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:prompt_dialog/prompt_dialog.dart';
 import 'package:smanage/services/auth.dart';
 import 'package:smanage/services/database.dart';
+import 'package:smanage/shared/alert_with_input.dart';
 import 'package:smanage/utils/constants.dart';
 import 'package:toast/toast.dart';
 
@@ -18,18 +18,6 @@ class StudentBills extends StatelessWidget {
       {@required this.billRef,
       @required this.joinDate,
       @required this.clsNumber});
-
-  Future<String> alertWithInput(BuildContext context) async {
-    print(joinDate.month);
-    return await prompt(
-      context,
-      title: Text('Do you confirm? It can not be undone!'),
-      hintText: 'Month Name',
-      textOK: Text(
-        'Confirm',
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +125,15 @@ class StudentBills extends StatelessWidget {
       List<QueryDocumentSnapshot> docs, int index, BuildContext context) async {
     {
       if (docs[index].data()['paid'] == false) {
-        var value = await alertWithInput(context);
+        var value = await alertWithInput(
+          context,
+          cancelButtonColor: kDoneColor,
+          hintText: 'Month Name',
+          okButtonColor: kDoneColor,
+          textCancel: 'Cancel',
+          textOk: 'Confirm',
+          title: 'Have you taken the bill?',
+        );
         if (value == docs[index].id) {
           await docs[index].reference.update({'paid': true});
           Toast.show(

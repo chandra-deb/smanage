@@ -9,86 +9,6 @@ import 'package:smanage/screens/attendance.dart';
 import 'package:smanage/utils/constants.dart';
 import 'package:smanage/widgets/student_bills.dart';
 
-// !! Main Down
-// class StudentDetails extends StatelessWidget {
-//   final QueryDocumentSnapshot doc;
-
-//   const StudentDetails({this.doc});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final _ = StudentDetailsModel(doc);
-//     final data = doc.data();
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(_.name),
-//         actions: [
-//           FlatButton(
-//             onPressed: () {
-//               Get.to(Attendance(
-//                 doc: doc,
-//               ));
-//             },
-//             child: Text('Get Attendance'),
-//           )
-//         ],
-//       ),
-//       body: Container(
-//         margin: EdgeInsets.all(8),
-//         child: Column(
-//           children: [
-//             Text(_.name),
-//             Text(_.roll),
-//             Text(_.institutionName),
-//             Container(
-//               // width: 300,
-//               // Todo: I have to finish up this phone calling thing in 09 January! !
-//               child: Column(
-//                 children: _.phoneNumbers.map((v) {
-//                   // return Text(v.keys.first);
-
-//                   return ListTile(
-//                     title: Text(v[v.keys.first]),
-//                     leading: Text(v.keys.first),
-//                     trailing: RaisedButton(
-//                         child: Icon(Icons.call),
-//                         onPressed: () {
-//                           _makeCall(v[v.keys.first]);
-//                         }),
-//                   );
-//                 }).toList(),
-//               ),
-//             ),
-//             StudentBills(
-//               joinDate: _.joinDate,
-//               billRef: _.bills,
-//             ),
-
-//             // Todo   App deletion function ...Need Some functionalities Here
-//             FlatButton(
-//               color: Colors.red,
-//               colorBrightness: Brightness.dark,
-//               onPressed: () {
-//                 StudentDeletionController(doc).delete(context);
-//               },
-//               child: Text(
-//                 'Delete Student',
-//                 style: TextStyle(),
-//               ),
-//             )
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-
-//   void _makeCall(String number) async {
-//     await FlutterPhoneDirectCaller.callNumber(number);
-//   }
-// }
-
-// !! Main Up
-
 class STDT extends StatefulWidget {
   final QueryDocumentSnapshot doc;
 
@@ -104,16 +24,6 @@ class STDTState extends State<STDT> {
   Widget build(BuildContext context) {
     final detail = StudentDetailsModel(widget.doc);
     return Scaffold(
-      // floatingActionButton: FlatButton(
-      //   color: Colors.red,
-      //   colorBrightness: Brightness.dark,
-      //   onPressed: () {
-      //     StudentDeletionController(widget.doc).delete(context);
-      //   },
-      //   child: Text(
-      //     'Delete Student',
-      //   ),
-      // ),
       appBar: AppBar(
         title: Text("Details"),
         actions: [
@@ -123,7 +33,10 @@ class STDTState extends State<STDT> {
                 doc: widget.doc,
               ));
             },
-            child: Text('Get Attendance'),
+            child: Text(
+              'Get Attendance',
+              style: kTextStyle,
+            ),
           ),
         ],
       ),

@@ -207,7 +207,7 @@ class Account extends StatelessWidget {
                                                               kDoneColor,
                                                           hintText:
                                                               'Enter amount',
-                                                          textOk: 'Delete',
+                                                          textOk: 'Set',
                                                           title:
                                                               'Set monthly bill of class $t');
                                                   if (result != null) {
