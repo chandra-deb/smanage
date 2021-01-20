@@ -30,6 +30,7 @@ class Account extends StatelessWidget {
                   return Container(
                     color: Colors.green.shade100,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SingleChildScrollView(
                           physics: BouncingScrollPhysics(),
@@ -66,7 +67,14 @@ class Account extends StatelessWidget {
                         Row(
                           children: [
                             FlatButton(
-                              child: Text('Add Class'),
+                              color: kDoneColor,
+                              child: Text(
+                                'Add Class',
+                                style: kTextStyle.copyWith(
+                                  fontSize: 16,
+                                  color: Colors.black54,
+                                ),
+                              ),
                               onPressed: () async {
                                 String result = await alertWithInput(context);
                                 if (result != null) {
@@ -88,8 +96,17 @@ class Account extends StatelessWidget {
                                 }
                               },
                             ),
+                            SizedBox(
+                              width: 15,
+                            ),
                             FlatButton(
-                              child: Text('Delete Class'),
+                              color: kUndoneColor,
+                              child: Text(
+                                'Delete Class',
+                                style: kTextStyle.copyWith(
+                                  fontSize: 16,
+                                ),
+                              ),
                               onPressed: () async {
                                 String result = await alertWithInput(context);
                                 if (result != null) {
@@ -132,7 +149,7 @@ class Account extends StatelessWidget {
                                             //     CrossAxisAlignment.center,
                                             children: [
                                               Text(
-                                                t.toString() + ' is',
+                                                t.toString() + '  is',
                                                 style: kTextStyle.copyWith(
                                                   color: Colors.black54,
                                                 ),
@@ -140,7 +157,6 @@ class Account extends StatelessWidget {
                                               Container(
                                                 margin:
                                                     EdgeInsets.only(left: 10),
-                                                width: 70,
                                                 height: 30,
                                                 child: FlatButton(
                                                   color: kDoneColor,
