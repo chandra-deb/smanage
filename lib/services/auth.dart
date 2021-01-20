@@ -31,7 +31,7 @@ class Auth {
           email: email, password: password);
 
       await credential.user.updateProfile(displayName: name);
-      await Teacher().create(uid: credential.user.uid);
+      await Teacher().create(uid: credential.user.uid, name: name);
       return credential;
     } on Exception catch (e) {
       return e;

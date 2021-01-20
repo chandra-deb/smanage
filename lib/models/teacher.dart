@@ -5,7 +5,7 @@ import 'package:smanage/services/database.dart';
 class Teacher {
   FirebaseFirestore store = DB().store;
 
-  Future create({String uid}) async {
+  Future create({String uid, String name}) async {
     List<int> clses = [];
 
     DocumentReference currentTeacher = store.collection('teachers').doc(uid);
