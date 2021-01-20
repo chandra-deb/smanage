@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:prompt_dialog/prompt_dialog.dart';
 import 'package:smanage/services/auth.dart';
 import 'package:smanage/services/database.dart';
+import 'package:smanage/shared/alert_with_input.dart';
 import 'package:smanage/utils/constants.dart';
 
 class Account extends StatelessWidget {
@@ -87,7 +88,13 @@ class Account extends StatelessWidget {
                                   ),
                                 ),
                                 onPressed: () async {
-                                  String result = await alertWithInput(context);
+                                  String result = await alertWithInput(context,
+                                      cancelButtonColor: kDoneColor,
+                                      okButtonColor: kDoneColor,
+                                      hintText: 'Enter Class number',
+                                      textOk: 'Add',
+                                      textCancel: 'Cancel',
+                                      title: 'Do you want to add a new class?');
                                   if (result != null) {
                                     if (int.tryParse(result) != null) {
                                       int i = int.parse(result);
@@ -121,6 +128,7 @@ class Account extends StatelessWidget {
                                 ),
                                 onPressed: () async {
                                   String result = await alertWithInput(context,
+                                      textCancel: 'Cancel',
                                       cancelButtonColor: kDoneColor,
                                       okButtonColor: Colors.red,
                                       hintText: 'Enter class number',
@@ -191,7 +199,17 @@ class Account extends StatelessWidget {
                                                 onPressed: () async {
                                                   String result =
                                                       await alertWithInput(
-                                                          context);
+                                                          context,
+                                                          textCancel: 'Cancel',
+                                                          cancelButtonColor:
+                                                              kDoneColor,
+                                                          okButtonColor:
+                                                              kDoneColor,
+                                                          hintText:
+                                                              'Enter amount',
+                                                          textOk: 'Delete',
+                                                          title:
+                                                              'Set monthly bill of class $t');
                                                   if (result != null) {
                                                     if (int.tryParse(result) !=
                                                         null) {
@@ -226,29 +244,6 @@ class Account extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Future<String> alertWithInput(
-    BuildContext context, {
-    @required String title,
-    @required String hintText,
-    @required String textOk,
-    @required Color okButtonColor,
-    @required Color cancelButtonColor,
-  }) async {
-    return await prompt(
-      context,
-      title: Text(
-        title,
-        style: TextStyle(color: Colors.black54),
-      ),
-      hintText: hintText,
-      okButtonColor: okButtonColor,
-      cancelButtonColor: cancelButtonColor,
-      textOK: Text(
-        textOk,
       ),
     );
   }
