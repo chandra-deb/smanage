@@ -49,7 +49,7 @@ class Account extends StatelessWidget {
                                     ),
                                     ...snapshot.data['classes'].map(
                                       (t) => Container(
-                                        color: Colors.green,
+                                        color: Colors.green.shade200,
                                         padding: EdgeInsets.symmetric(
                                             vertical: 5, horizontal: 10),
                                         margin: EdgeInsets.all(5),
@@ -113,44 +113,66 @@ class Account extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ...snapshot.data['classes'].map(
-                                (t) => Container(
-                                    padding: EdgeInsets.all(5),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          t.toString(),
-                                          style: kTextStyle.copyWith(
-                                              color: Colors.black54),
-                                        ),
-                                        FlatButton(
-                                          child: Text(
-                                            'Amount is ${snapshot.data[t.toString()]}',
-                                          ),
-                                          onPressed: () async {
-                                            String result =
-                                                await alertWithInput(context);
-                                            if (result != null) {
-                                              if (int.tryParse(result) !=
-                                                  null) {
-                                                teacherData.update({
-                                                  t.toString():
-                                                      int.parse(result)
-                                                });
-                                              }
-                                            }
-                                          },
-                                        )
-                                      ],
-                                    )),
+                        snapshot.data['classes'].length == 0
+                            ? SizedBox()
+                            : Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Set monthly bill of class',
+                                      style: kTextStyle.copyWith(
+                                          color: Colors.black54),
+                                    ),
+                                    ...snapshot.data['classes'].map(
+                                      (t) => Container(
+                                          padding: EdgeInsets.all(5),
+                                          child: Row(
+                                            // crossAxisAlignment:
+                                            //     CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                t.toString() + ' is',
+                                                style: kTextStyle.copyWith(
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 10),
+                                                width: 70,
+                                                height: 30,
+                                                child: FlatButton(
+                                                  color: kDoneColor,
+                                                  child: Text(
+                                                    '${snapshot.data[t.toString()]}',
+                                                    style: kTextStyle.copyWith(
+                                                      color: Colors.black54,
+                                                    ),
+                                                  ),
+                                                  onPressed: () async {
+                                                    String result =
+                                                        await alertWithInput(
+                                                            context);
+                                                    if (result != null) {
+                                                      if (int.tryParse(
+                                                              result) !=
+                                                          null) {
+                                                        teacherData.update({
+                                                          t.toString():
+                                                              int.parse(result)
+                                                        });
+                                                      }
+                                                    }
+                                                  },
+                                                ),
+                                              )
+                                            ],
+                                          )),
+                                    )
+                                  ],
+                                ),
                               )
-                            ],
-                          ),
-                        )
                       ],
                     ),
                   );
