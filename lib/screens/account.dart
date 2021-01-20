@@ -115,10 +115,14 @@ class Account extends StatelessWidget {
                                           onPressed: () async {
                                             String result =
                                                 await alertWithInput(context);
-                                            if (int.tryParse(result) != null) {
-                                              teacherData.update({
-                                                t.toString(): int.parse(result)
-                                              });
+                                            if (result != null) {
+                                              if (int.tryParse(result) !=
+                                                  null) {
+                                                teacherData.update({
+                                                  t.toString():
+                                                      int.parse(result)
+                                                });
+                                              }
                                             }
                                           },
                                         )
