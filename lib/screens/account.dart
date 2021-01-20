@@ -63,19 +63,21 @@ class Account extends StatelessWidget {
                               child: Text('Add Class'),
                               onPressed: () async {
                                 String result = await alertWithInput(context);
-                                if (int.tryParse(result) != null) {
-                                  int i = int.parse(result);
-                                  if (!snapshot.data['classes'].contains(i)) {
-                                    List data =
-                                        snapshot.data['classes'] as List;
-                                    data.add(i);
-                                    data.sort();
-                                    final batch =
-                                        FirebaseFirestore.instance.batch();
-                                    batch
-                                        .update(teacherData, {'classes': data});
-                                    batch.update(teacherData, {'$i': 0});
-                                    await batch.commit();
+                                if (result != null) {
+                                  if (int.tryParse(result) != null) {
+                                    int i = int.parse(result);
+                                    if (!snapshot.data['classes'].contains(i)) {
+                                      List data =
+                                          snapshot.data['classes'] as List;
+                                      data.add(i);
+                                      data.sort();
+                                      final batch =
+                                          FirebaseFirestore.instance.batch();
+                                      batch.update(
+                                          teacherData, {'classes': data});
+                                      batch.update(teacherData, {'$i': 0});
+                                      await batch.commit();
+                                    }
                                   }
                                 }
                               },
@@ -84,18 +86,21 @@ class Account extends StatelessWidget {
                               child: Text('Delete Class'),
                               onPressed: () async {
                                 String result = await alertWithInput(context);
-                                if (int.tryParse(result) != null) {
-                                  int i = int.parse(result);
-                                  if (snapshot.data['classes'].contains(i) ==
-                                      true) {
-                                    List data =
-                                        snapshot.data['classes'] as List;
-                                    int index = data.indexOf(i);
-                                    data.removeAt(index);
+                                if (result != null) {
+                                  if (int.tryParse(result) != null) {
+                                    int i = int.parse(result);
+                                    if (snapshot.data['classes'].contains(i) ==
+                                        true) {
+                                      List data =
+                                          snapshot.data['classes'] as List;
+                                      int index = data.indexOf(i);
+                                      data.removeAt(index);
 
-                                    await teacherData.update({'classes': data});
-                                    await teacherData
-                                        .update({'$i': FieldValue.delete()});
+                                      await teacherData
+                                          .update({'classes': data});
+                                      await teacherData
+                                          .update({'$i': FieldValue.delete()});
+                                    }
                                   }
                                 }
                               },
