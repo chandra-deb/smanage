@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:prompt_dialog/prompt_dialog.dart';
-import 'package:smanage/models/teacher.dart';
 import 'package:smanage/services/auth.dart';
 import 'package:smanage/services/database.dart';
 import 'package:smanage/utils/constants.dart';
-import 'package:toast/toast.dart';
 
 class Account extends StatelessWidget {
   @override
