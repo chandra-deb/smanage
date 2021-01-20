@@ -143,52 +143,53 @@ class Account extends StatelessWidget {
                                     ),
                                     ...snapshot.data['classes'].map(
                                       (t) => Container(
-                                          padding: EdgeInsets.all(5),
-                                          child: Row(
-                                            // crossAxisAlignment:
-                                            //     CrossAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                t.toString() + '  is',
-                                                style: kTextStyle.copyWith(
-                                                  color: Colors.black54,
-                                                ),
+                                        padding: EdgeInsets.all(5),
+                                        child: Row(
+                                          // crossAxisAlignment:
+                                          //     CrossAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              t.toString() + '  is',
+                                              style: kTextStyle.copyWith(
+                                                color: Colors.black54,
                                               ),
-                                              Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 10),
-                                                height: 30,
-                                                child: FlatButton(
-                                                  color: kDoneColor,
-                                                  child: Text(
-                                                    '${snapshot.data[t.toString()]}',
-                                                    style: kTextStyle.copyWith(
-                                                      color: Colors.black54,
-                                                    ),
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.only(left: 10),
+                                              height: 30,
+                                              child: FlatButton(
+                                                color: kDoneColor,
+                                                child: Text(
+                                                  '${snapshot.data[t.toString()]}',
+                                                  style: kTextStyle.copyWith(
+                                                    color: Colors.black54,
                                                   ),
-                                                  onPressed: () async {
-                                                    String result =
-                                                        await alertWithInput(
-                                                            context);
-                                                    if (result != null) {
-                                                      if (int.tryParse(
-                                                              result) !=
-                                                          null) {
-                                                        teacherData.update({
+                                                ),
+                                                onPressed: () async {
+                                                  String result =
+                                                      await alertWithInput(
+                                                          context);
+                                                  if (result != null) {
+                                                    if (int.tryParse(result) !=
+                                                        null) {
+                                                      teacherData.update(
+                                                        {
                                                           t.toString():
                                                               int.parse(result)
-                                                        });
-                                                      }
+                                                        },
+                                                      );
                                                     }
-                                                  },
-                                                ),
-                                              )
-                                            ],
-                                          )),
+                                                  }
+                                                },
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
                                     )
                                   ],
                                 ),
-                              )
+                              ),
                       ],
                     ),
                   );
@@ -199,7 +200,7 @@ class Account extends StatelessWidget {
                   );
                 }
               },
-            )
+            ),
           ],
         ),
       ),
