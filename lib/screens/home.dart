@@ -55,24 +55,25 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text(_titles[_selectedIndex]),
         actions: [
-          FlatButton(
-            onPressed: () {
-              Auth().signOut();
-            },
-            child: Icon(
-              Icons.login_outlined,
-              color: Colors.white,
-            ),
-          ),
-          FlatButton(
-            onPressed: () {
-              Get.to(AddStudent());
-            },
-            child: Icon(
-              Icons.add_box_outlined,
-              color: Colors.white,
-            ),
-          )
+          _selectedIndex == _titles.length - 1
+              ? FlatButton(
+                  onPressed: () {
+                    Auth().signOut();
+                  },
+                  child: Text(
+                    'Logout',
+                    style: kTextStyle,
+                  ),
+                )
+              : FlatButton(
+                  onPressed: () {
+                    Get.to(AddStudent());
+                  },
+                  child: Icon(
+                    Icons.add_box_outlined,
+                    color: Colors.white,
+                  ),
+                )
         ],
       ),
       body: SizedBox.expand(
