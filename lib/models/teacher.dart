@@ -11,6 +11,7 @@ class Teacher {
     DocumentReference currentTeacher = store.collection('teachers').doc(uid);
     await currentTeacher.set(
       {
+        'name': name,
         'classes': clses,
       },
     );
