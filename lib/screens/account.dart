@@ -120,7 +120,13 @@ class Account extends StatelessWidget {
                                   ),
                                 ),
                                 onPressed: () async {
-                                  String result = await alertWithInput(context);
+                                  String result = await alertWithInput(context,
+                                      cancelButtonColor: kDoneColor,
+                                      okButtonColor: Colors.red,
+                                      hintText: 'Enter class number',
+                                      textOk: 'Delete',
+                                      title:
+                                          'Do you want to delete this class?');
                                   if (result != null) {
                                     if (int.tryParse(result) != null) {
                                       int i = int.parse(result);
@@ -224,13 +230,25 @@ class Account extends StatelessWidget {
     );
   }
 
-  Future<String> alertWithInput(BuildContext context) async {
+  Future<String> alertWithInput(
+    BuildContext context, {
+    @required String title,
+    @required String hintText,
+    @required String textOk,
+    @required Color okButtonColor,
+    @required Color cancelButtonColor,
+  }) async {
     return await prompt(
       context,
-      title: Text('Do you confirm?'),
-      hintText: 'Class',
+      title: Text(
+        title,
+        style: TextStyle(color: Colors.black54),
+      ),
+      hintText: hintText,
+      okButtonColor: okButtonColor,
+      cancelButtonColor: cancelButtonColor,
       textOK: Text(
-        'Confirm',
+        textOk,
       ),
     );
   }
