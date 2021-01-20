@@ -31,23 +31,31 @@ class Account extends StatelessWidget {
                     color: Colors.green.shade100,
                     child: Column(
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              'Classes you have : ',
-                              style: kTextStyle.copyWith(color: Colors.black54),
-                            ),
-                            ...snapshot.data['classes'].map(
-                              (t) => Container(
-                                padding: EdgeInsets.all(5),
-                                child: Text(
-                                  t.toString() + ',',
-                                  style: kTextStyle.copyWith(
-                                      color: Colors.black54),
-                                ),
+                        SingleChildScrollView(
+                          physics: BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              Text(
+                                'Classes you have : ',
+                                style:
+                                    kTextStyle.copyWith(color: Colors.black54),
                               ),
-                            )
-                          ],
+                              ...snapshot.data['classes'].map(
+                                (t) => Container(
+                                  color: Colors.green,
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 10),
+                                  margin: EdgeInsets.all(5),
+                                  child: Text(
+                                    t.toString(),
+                                    style: kTextStyle.copyWith(
+                                        color: Colors.black54),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                         Row(
                           children: [
