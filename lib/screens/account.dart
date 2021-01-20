@@ -23,8 +23,9 @@ class Account extends StatelessWidget {
               margin: EdgeInsets.all(20),
               child: Text(
                 '${_auth.name.toString()}',
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 25,
                   color: Colors.black54,
                 ),
               ),
