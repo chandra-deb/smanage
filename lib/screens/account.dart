@@ -19,7 +19,16 @@ class Account extends StatelessWidget {
       child: Container(
         child: Column(
           children: [
-            Text('${_auth.name.toString()}'),
+            Container(
+              margin: EdgeInsets.all(20),
+              child: Text(
+                '${_auth.name.toString()}',
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.black54,
+                ),
+              ),
+            ),
             StreamBuilder(
               stream: teacherData.snapshots(),
               // ignore: missing_return
@@ -29,6 +38,7 @@ class Account extends StatelessWidget {
 
                   return Container(
                     color: Colors.green.shade100,
+                    padding: EdgeInsets.all(20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -64,71 +74,76 @@ class Account extends StatelessWidget {
                                   ],
                                 ),
                         ),
-                        Row(
-                          children: [
-                            FlatButton(
-                              color: kDoneColor,
-                              child: Text(
-                                'Add Class',
-                                style: kTextStyle.copyWith(
-                                  fontSize: 16,
-                                  color: Colors.black54,
+                        Container(
+                          margin: EdgeInsets.only(top: 2, bottom: 20),
+                          child: Row(
+                            children: [
+                              FlatButton(
+                                color: kDoneColor,
+                                child: Text(
+                                  'Add Class',
+                                  style: kTextStyle.copyWith(
+                                    fontSize: 16,
+                                    color: Colors.black54,
+                                  ),
                                 ),
-                              ),
-                              onPressed: () async {
-                                String result = await alertWithInput(context);
-                                if (result != null) {
-                                  if (int.tryParse(result) != null) {
-                                    int i = int.parse(result);
-                                    if (!snapshot.data['classes'].contains(i)) {
-                                      List data =
-                                          snapshot.data['classes'] as List;
-                                      data.add(i);
-                                      data.sort();
-                                      final batch =
-                                          FirebaseFirestore.instance.batch();
-                                      batch.update(
-                                          teacherData, {'classes': data});
-                                      batch.update(teacherData, {'$i': 0});
-                                      await batch.commit();
+                                onPressed: () async {
+                                  String result = await alertWithInput(context);
+                                  if (result != null) {
+                                    if (int.tryParse(result) != null) {
+                                      int i = int.parse(result);
+                                      if (!snapshot.data['classes']
+                                          .contains(i)) {
+                                        List data =
+                                            snapshot.data['classes'] as List;
+                                        data.add(i);
+                                        data.sort();
+                                        final batch =
+                                            FirebaseFirestore.instance.batch();
+                                        batch.update(
+                                            teacherData, {'classes': data});
+                                        batch.update(teacherData, {'$i': 0});
+                                        await batch.commit();
+                                      }
                                     }
                                   }
-                                }
-                              },
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            FlatButton(
-                              color: kUndoneColor,
-                              child: Text(
-                                'Delete Class',
-                                style: kTextStyle.copyWith(
-                                  fontSize: 16,
-                                ),
+                                },
                               ),
-                              onPressed: () async {
-                                String result = await alertWithInput(context);
-                                if (result != null) {
-                                  if (int.tryParse(result) != null) {
-                                    int i = int.parse(result);
-                                    if (snapshot.data['classes'].contains(i) ==
-                                        true) {
-                                      List data =
-                                          snapshot.data['classes'] as List;
-                                      int index = data.indexOf(i);
-                                      data.removeAt(index);
+                              SizedBox(
+                                width: 15,
+                              ),
+                              FlatButton(
+                                color: kUndoneColor,
+                                child: Text(
+                                  'Delete Class',
+                                  style: kTextStyle.copyWith(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                onPressed: () async {
+                                  String result = await alertWithInput(context);
+                                  if (result != null) {
+                                    if (int.tryParse(result) != null) {
+                                      int i = int.parse(result);
+                                      if (snapshot.data['classes']
+                                              .contains(i) ==
+                                          true) {
+                                        List data =
+                                            snapshot.data['classes'] as List;
+                                        int index = data.indexOf(i);
+                                        data.removeAt(index);
 
-                                      await teacherData
-                                          .update({'classes': data});
-                                      await teacherData
-                                          .update({'$i': FieldValue.delete()});
+                                        await teacherData
+                                            .update({'classes': data});
+                                        await teacherData.update(
+                                            {'$i': FieldValue.delete()});
+                                      }
                                     }
                                   }
-                                }
-                              },
-                            ),
-                          ],
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                         snapshot.data['classes'].length == 0
                             ? SizedBox()
@@ -136,10 +151,13 @@ class Account extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      'Set monthly bill of class',
-                                      style: kTextStyle.copyWith(
-                                          color: Colors.black54),
+                                    Container(
+                                      margin: EdgeInsets.only(bottom: 10),
+                                      child: Text(
+                                        'Monthly bill of class',
+                                        style: kTextStyle.copyWith(
+                                            color: Colors.black54),
+                                      ),
                                     ),
                                     ...snapshot.data['classes'].map(
                                       (t) => Container(
