@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smanage/controllers/login_controller.dart';
+import 'package:smanage/utils/constants.dart';
 
 class Login extends StatelessWidget {
   final LoginController _ = LoginController();
@@ -17,7 +18,10 @@ class Login extends StatelessWidget {
         actions: [
           FlatButton(
             onPressed: toggleView,
-            child: Icon(Icons.app_registration),
+            child: Icon(
+              Icons.app_registration,
+              color: Colors.white,
+            ),
           )
         ],
       ),
@@ -45,9 +49,13 @@ class Login extends StatelessWidget {
                     _.getPasswordErr(value);
                   },
                 ),
-                ElevatedButton(
+                FlatButton(
+                  color: kDoneColor,
+                  disabledColor: Colors.green.shade100,
                   onPressed: _.button.value,
-                  child: Text('login'),
+                  child: Text(
+                    'login',
+                  ),
                 ),
                 _.showLoading(),
                 _.showLoginErr(),

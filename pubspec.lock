@@ -233,7 +233,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "3992fb32e922756a20e77b9f520b14f92571802f"
+      resolved-ref: d1340803c28b35a19aa4650d7ce84b733223d9e5
       url: "https://github.com/chandra-deb/prompt_dialog.git"
     source: git
     version: "0.1.3"

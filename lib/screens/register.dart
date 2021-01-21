@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smanage/controllers/register_controller.dart';
+import 'package:smanage/utils/constants.dart';
 
 class Register extends StatelessWidget {
   final RegisterController _ = RegisterController();
@@ -16,7 +17,10 @@ class Register extends StatelessWidget {
         actions: [
           FlatButton(
             onPressed: toggleView,
-            child: Icon(Icons.login),
+            child: Icon(
+              Icons.login,
+              color: Colors.white,
+            ),
           )
         ],
       ),
@@ -63,7 +67,9 @@ class Register extends StatelessWidget {
                     _.getConfirmPasswordErr(value);
                   },
                 ),
-                ElevatedButton(
+                FlatButton(
+                  color: kDoneColor,
+                  disabledColor: Colors.green.shade100,
                   onPressed: _.button.value,
                   child: Text('Register'),
                 ),

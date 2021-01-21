@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         textSelectionColor: Colors.green.shade100,
         textSelectionHandleColor: kDoneColor,
       ),
-      title: 'Student Manager',
+      title: 'Medha Bikash CC',
       home: Root(),
     );
   }
