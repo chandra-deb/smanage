@@ -54,6 +54,7 @@ class Register extends StatelessWidget {
                     labelText: 'Password',
                     errorText: _.passwordErr.value,
                   ),
+                  obscureText: true,
                   onChanged: (value) {
                     _.getPasswordErr(value);
                   },
@@ -63,6 +64,7 @@ class Register extends StatelessWidget {
                     labelText: 'Confirm Password',
                     errorText: _.confirmPasswordErr.value,
                   ),
+                  obscureText: true,
                   onChanged: (value) {
                     _.getConfirmPasswordErr(value);
                   },

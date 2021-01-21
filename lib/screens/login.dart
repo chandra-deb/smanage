@@ -45,6 +45,7 @@ class Login extends StatelessWidget {
                     labelText: 'Password',
                     errorText: _.passwordErr.value,
                   ),
+                  obscureText: true,
                   onChanged: (value) {
                     _.getPasswordErr(value);
                   },
