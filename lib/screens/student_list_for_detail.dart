@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smanage/controllers/search_details_list_controller.dart';
+import 'package:smanage/models/student_details_model.dart';
 import 'package:smanage/screens/student_details.dart';
 import 'package:smanage/services/database.dart';
 import 'package:smanage/utils/constants.dart';
@@ -9,13 +11,12 @@ import 'package:smanage/utils/constants.dart';
 class StudentListForDetail extends StatelessWidget {
   final _db = DB();
   final int clsNumber;
-
   StudentListForDetail({this.clsNumber});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Student Details of Class $clsNumber'),
+        title: Text('Details list of Class $clsNumber'),
         centerTitle: true,
       ),
       body: Container(
@@ -35,38 +36,67 @@ class StudentListForDetail extends StatelessWidget {
                   ),
                 );
               }
-              return ListView.builder(
-                physics: BouncingScrollPhysics(),
-                itemCount: docs.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    child: FlatButton(
-                      color: kDoneColor,
-                      height: kFlatButtonHeight,
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, right: 20),
-                            child: Text(
-                              docs[index].data()['roll'].toString(),
-                              style: kTextStyle,
-                            ),
-                          ),
-                          Text(
-                            docs[index].data()['name'],
-                            style: kTextStyle,
-                          ),
-                        ],
+              final searchStudent = SearchDetailsListController(students: docs);
+
+              return Container(
+                height: double.infinity,
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                      height: 40,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Search student',
+                        ),
+                        onChanged: searchStudent.getSearchInput,
                       ),
-                      onPressed: () {
-                        Get.to(STDT(
-                          doc: docs[index],
-                        ));
-                      },
                     ),
-                  );
-                },
+                    Obx(
+                      () => Flexible(
+                        child: ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          itemCount:
+                              searchStudent.getFilteredStudentList.length,
+                          itemBuilder: (context, index) {
+                            List<QueryDocumentSnapshot> filteredStudents =
+                                searchStudent.getFilteredStudentList;
+                            var studentDetail =
+                                StudentDetailsModel(filteredStudents[index]);
+                            return Container(
+                              margin: EdgeInsets.symmetric(vertical: 5),
+                              child: FlatButton(
+                                color: kDoneColor,
+                                height: kFlatButtonHeight,
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 15, right: 20),
+                                      child: Text(
+                                        studentDetail.roll,
+                                        style: kTextStyle,
+                                      ),
+                                    ),
+                                    Text(
+                                      studentDetail.name,
+                                      style: kTextStyle,
+                                    ),
+                                  ],
+                                ),
+                                onPressed: () {
+                                  Get.to(STDT(
+                                    doc: filteredStudents[index],
+                                  ));
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               );
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
