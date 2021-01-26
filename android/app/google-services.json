@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "957035924701",
-    "project_id": "studentmanagement-f2fda",
-    "storage_bucket": "studentmanagement-f2fda.appspot.com"
+    "project_number": "903413125879",
+    "project_id": "studentmanagementdev",
+    "storage_bucket": "studentmanagementdev.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:957035924701:android:1b7e9a302ca1466aee9f34",
+        "mobilesdk_app_id": "1:903413125879:android:b0d737729163cd70b939f2",
         "android_client_info": {
           "package_name": "com.Manage.StudentManager"
         }
       },
       "oauth_client": [
         {
-          "client_id": "957035924701-d2ti6gvd51a7hvkp6ur1dr2lqupj59vc.apps.googleusercontent.com",
+          "client_id": "903413125879-fr9ced42ij4059df4bofggnah20qhd4g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDiMJhNZcTi2QJDQG6ggF5tpf_hYWgijik"
+          "current_key": "AIzaSyBDY5UbMUL0fmL3w_F9ysSbl_oQOi_xaGo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "957035924701-d2ti6gvd51a7hvkp6ur1dr2lqupj59vc.apps.googleusercontent.com",
+              "client_id": "903413125879-fr9ced42ij4059df4bofggnah20qhd4g.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
