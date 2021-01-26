@@ -16,7 +16,7 @@ class StudentListForRC extends StatelessWidget {
     return Obx(() {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Roll Call of Class $clsNumber (${DateTime.now().add(
+          title: Text('Class $clsNumber (${DateTime.now().add(
                 Duration(days: RollCallController.getDay),
               ).format('D, M j')})'),
           centerTitle: true,
