@@ -37,7 +37,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.Manage.StudentManager"
+        applicationId "com.studentmanage.dev"
         minSdkVersion 22
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
