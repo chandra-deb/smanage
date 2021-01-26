@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/material.dart';
 import 'package:smanage/services/auth.dart';
 import 'package:smanage/services/database.dart';
@@ -68,7 +69,7 @@ class StudentBills extends StatelessWidget {
                               margin: EdgeInsets.symmetric(vertical: 5),
                               child: FlatButton(
                                 height: kFlatButtonHeight,
-                                color: docs[index].data()['paid'] == true
+                                color: docs[index].data()['paidOn'] != null
                                     ? kDoneColor
                                     : kUndoneColor,
                                 disabledColor: Colors.red.shade100,
@@ -95,9 +96,9 @@ class StudentBills extends StatelessWidget {
                                       style: kTextStyle,
                                     ),
                                     Text(
-                                      docs[index].data()['paid'] == true
-                                          ? 'Paid'
-                                          : 'Unpaid',
+                                      docs[index].data()['paidOn'] != null
+                                          ? 'Paid on ${docs[index].data()['paidOn']}'
+                                          : 'Upaid',
                                       style: kTextStyle,
                                     ),
                                   ],
@@ -124,7 +125,7 @@ class StudentBills extends StatelessWidget {
   Future payBill(
       List<QueryDocumentSnapshot> docs, int index, BuildContext context) async {
     {
-      if (docs[index].data()['paid'] == false) {
+      if (docs[index].data()['paidOn'] == null) {
         var value = await alertWithInput(
           context,
           cancelButtonColor: kDoneColor,
@@ -135,17 +136,25 @@ class StudentBills extends StatelessWidget {
           title: 'Have you taken the bill?',
         );
         if (value == docs[index].id) {
-          await docs[index].reference.update({'paid': true});
+          String payDay =
+              DateTimeFormat.format(DateTime.now(), format: 'D, M j');
+          await docs[index].reference.update({'paidOn': payDay});
           Toast.show(
             'Done!',
             context,
             duration: Toast.LENGTH_LONG,
             gravity: Toast.BOTTOM,
           );
-        } else {
-          print('You are Wrong');
+        } else if (value == null) {
           Toast.show(
-            'You are Wrong! Try Again!',
+            'Cancelled',
+            context,
+            duration: Toast.LENGTH_LONG,
+            gravity: Toast.BOTTOM,
+          );
+        } else {
+          Toast.show(
+            'You are wrong! Try Again!',
             context,
             duration: Toast.LENGTH_LONG,
             gravity: Toast.BOTTOM,
@@ -167,7 +176,7 @@ class StudentBills extends StatelessWidget {
               <=
               month &&
           doc.data()['index'] >= joinDate.month &&
-          doc.data()['paid'] == false) {
+          doc.data()['paidOn'] == null) {
         dues += monthlyAmount;
         print(doc.data());
       }
