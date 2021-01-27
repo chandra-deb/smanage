@@ -1,5 +1,6 @@
 HOLD:
 [√] show datetime on the bill bar when pays bill
-[!] add student search functionalities on student details list
+[√] add student search functionalities on student details list
 [!] make the add student form as it can add any classNumber
 [!] make the student details editable
+[!] add another field called 'present address' on add student form
