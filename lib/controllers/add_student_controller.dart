@@ -7,6 +7,7 @@ class AddStudentController extends GetxController {
   String motherName;
   String institution;
   String address;
+  String presentAddress;
   int cls;
   int roll;
   String studentPhone;
@@ -17,6 +18,7 @@ class AddStudentController extends GetxController {
   RxString fatherNameErr = RxString(null);
   RxString motherNameErr = RxString(null);
   RxString addressErr = RxString(null);
+  RxString presentAddressErr = RxString(null);
   RxString addButtonErr = RxString(null);
   RxString schoolNameErr = RxString(null);
   RxString studentPhoneErr = RxString(null);
@@ -27,6 +29,7 @@ class AddStudentController extends GetxController {
   RxString rollErr = RxString(null);
   RxBool loading = false.obs;
   bool addressOk = false;
+  bool presentAddressOk = false;
   bool studentNameOk = false;
   bool fatherNameOk = false;
   bool motherNameOk = false;
@@ -268,6 +271,17 @@ class AddStudentController extends GetxController {
     enableButton();
   }
 
+  void getPresentAddressErr(String addre) {
+    presentAddress = addre;
+    if (presentAddress.length > 9) {
+      presentAddressErr.value = null;
+      presentAddressOk = true;
+    } else {
+      presentAddressOk = false;
+      presentAddressErr.value = 'Address must be 10 or more characters long!';
+    }
+  }
+
   void enableButton() {
     if (studentNameOk &&
         fatherNameOk &&
@@ -293,6 +307,7 @@ class AddStudentController extends GetxController {
       roll: roll,
       phoneNumbers: zippedNumbers,
       address: address,
+      presentAddress: getPresentAddress,
     );
     loading.value = true;
     button.value = null;
@@ -319,6 +334,14 @@ class AddStudentController extends GetxController {
       print(n);
     }
     print('Address $address');
+  }
+
+  String get getPresentAddress {
+    if (presentAddressOk) {
+      return presentAddress;
+    } else {
+      return null;
+    }
   }
 
   List<Map<String, String>> get zippedNumbers {

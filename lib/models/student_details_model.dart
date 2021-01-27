@@ -13,6 +13,7 @@ class StudentDetailsModel {
   String get fatherName => _data['fatherName'];
   String get motherName => _data['motherName'];
   String get address => _data['address'];
+  String get presentAddress => _data['presentAddress'] ?? 'Same';
   String get institutionName => _data['institution'];
   String get cls => _data['classNumber'].toString();
   String get roll => _data['roll'].toString();

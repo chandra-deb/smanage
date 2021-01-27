@@ -322,7 +322,7 @@ class DetailsPart extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    'Roll Number:',
+                                    'Roll Number :',
                                     style: kTextStyle,
                                   ),
                                 ),
@@ -348,12 +348,38 @@ class DetailsPart extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    'Address :',
+                                    'P.Address :',
                                     style: kTextStyle,
                                   ),
                                 ),
                                 Text(
                                   detail.address,
+                                  style: kTextStyle,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 15,
+                            ),
+                            margin: EdgeInsets.symmetric(
+                              vertical: 5,
+                              // horizontal: 15,
+                            ),
+                            color: kDoneColor,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'C.Address :',
+                                    style: kTextStyle,
+                                  ),
+                                ),
+                                Text(
+                                  detail.presentAddress,
                                   style: kTextStyle,
                                 ),
                               ],

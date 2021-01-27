@@ -102,9 +102,19 @@ class AddStudent extends StatelessWidget {
                   TextField(
                     keyboardType: TextInputType.name,
                     decoration: InputDecoration(
-                        labelText: 'Address', errorText: _.addressErr.value),
+                        labelText: 'Permanent Address',
+                        errorText: _.addressErr.value),
                     onChanged: (value) {
                       _.getAddressErr(value);
+                    },
+                  ),
+                  TextField(
+                    keyboardType: TextInputType.name,
+                    decoration: InputDecoration(
+                        labelText: 'Present Address*',
+                        errorText: _.presentAddressErr.value),
+                    onChanged: (value) {
+                      _.getPresentAddressErr(value);
                     },
                   ),
                   ElevatedButton(onPressed: _.button.value, child: Text('Add')),

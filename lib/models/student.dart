@@ -9,6 +9,7 @@ class Student {
     @required this.fatherName,
     @required this.motherName,
     @required this.address,
+    @required this.presentAddress,
     @required this.name,
     @required this.institution,
     @required this.roll,
@@ -17,6 +18,7 @@ class Student {
   });
 
   final String address;
+  final String presentAddress;
   final int classNumber;
   final String fatherName;
   final String motherName;
@@ -46,6 +48,7 @@ class Student {
       'classNumber': classNumber,
       'phoneNumbers': phoneNumbers,
       'address': address,
+      'presentAddress': presentAddress,
       'joinDate': DateTime.now(),
     });
     var a = [
