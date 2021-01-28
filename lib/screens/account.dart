@@ -128,23 +128,22 @@ class Account extends StatelessWidget {
                                           'Do you want to delete this class?');
                                   if (result != null) {
                                     print('Delete Called');
-                                    if (int.tryParse(result) != null) {
-                                      print('parsed');
 
-                                      if (snapshot.data['classes']
-                                              .contains(result) ==
-                                          true) {
-                                        print('contains');
-                                        List data =
-                                            snapshot.data['classes'] as List;
-                                        int index = data.indexOf(result);
-                                        data.removeAt(index);
+                                    print('parsed');
 
-                                        await teacherData
-                                            .update({'classes': data});
-                                        await teacherData.update(
-                                            {'$result': FieldValue.delete()});
-                                      }
+                                    if (snapshot.data['classes']
+                                            .contains(result) ==
+                                        true) {
+                                      print('contains');
+                                      List data =
+                                          snapshot.data['classes'] as List;
+                                      int index = data.indexOf(result);
+                                      data.removeAt(index);
+
+                                      await teacherData
+                                          .update({'classes': data});
+                                      await teacherData.update(
+                                          {'$result': FieldValue.delete()});
                                     }
                                   }
                                 },

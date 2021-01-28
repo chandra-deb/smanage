@@ -19,7 +19,7 @@ class Student {
 
   final String address;
   final String presentAddress;
-  final int classNumber;
+  final String classNumber;
   final String fatherName;
   final String motherName;
   final String name;
