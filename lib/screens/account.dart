@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:smanage/controllers/account_controller.dart';
 import 'package:smanage/services/auth.dart';
 import 'package:smanage/services/database.dart';
 import 'package:smanage/shared/alert_with_input.dart';
 import 'package:smanage/utils/constants.dart';
 
 class Account extends StatelessWidget {
+  final AccountController _accountController = AccountController();
   @override
   Widget build(BuildContext context) {
     final Auth _auth = Auth();
@@ -87,31 +89,21 @@ class Account extends StatelessWidget {
                                   ),
                                 ),
                                 onPressed: () async {
-                                  String result = await alertWithInput(context,
-                                      cancelButtonColor: kDoneColor,
-                                      okButtonColor: kDoneColor,
-                                      hintText: 'Enter Class number',
-                                      textOk: 'Add',
-                                      textCancel: 'Cancel',
-                                      title: 'Do you want to add a new class?');
-                                  if (result != null) {
-                                    if (int.tryParse(result) != null) {
-                                      int i = int.parse(result);
-                                      if (!snapshot.data['classes']
-                                          .contains(i)) {
-                                        List data =
-                                            snapshot.data['classes'] as List;
-                                        data.add(i);
-                                        data.sort();
-                                        final batch =
-                                            FirebaseFirestore.instance.batch();
-                                        batch.update(
-                                            teacherData, {'classes': data});
-                                        batch.update(teacherData, {'$i': 0});
-                                        await batch.commit();
-                                      }
-                                    }
-                                  }
+                                  String result = await alertWithInput(
+                                    context,
+                                    cancelButtonColor: kDoneColor,
+                                    okButtonColor: kDoneColor,
+                                    hintText: 'Enter Class number',
+                                    textOk: 'Add',
+                                    textCancel: 'Cancel',
+                                    title: 'Do you want to add a new class?',
+                                  );
+                                  _accountController.addClass(
+                                    context: context,
+                                    result: result,
+                                    snapshot: snapshot,
+                                    teacherData: teacherData,
+                                  );
                                 },
                               ),
                               SizedBox(
@@ -135,20 +127,23 @@ class Account extends StatelessWidget {
                                       title:
                                           'Do you want to delete this class?');
                                   if (result != null) {
+                                    print('Delete Called');
                                     if (int.tryParse(result) != null) {
-                                      int i = int.parse(result);
+                                      print('parsed');
+
                                       if (snapshot.data['classes']
-                                              .contains(i) ==
+                                              .contains(result) ==
                                           true) {
+                                        print('contains');
                                         List data =
                                             snapshot.data['classes'] as List;
-                                        int index = data.indexOf(i);
+                                        int index = data.indexOf(result);
                                         data.removeAt(index);
 
                                         await teacherData
                                             .update({'classes': data});
                                         await teacherData.update(
-                                            {'$i': FieldValue.delete()});
+                                            {'$result': FieldValue.delete()});
                                       }
                                     }
                                   }
