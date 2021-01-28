@@ -8,7 +8,7 @@ class AddStudentController extends GetxController {
   String institution;
   String address;
   String presentAddress;
-  int cls;
+  String cls;
   int roll;
   String studentPhone;
   String fatherPhone;
@@ -136,19 +136,69 @@ class AddStudentController extends GetxController {
     enableButton();
   }
 
-  void getClassErr(String clsNumber) {
-    var convertedClsNumber = int.tryParse(clsNumber);
-    if (convertedClsNumber == null) {
-      clsErr.value = 'Please add numbers only';
+  void getClassErr(String cNum) {
+    var splitedNumData = cNum.split("-");
+    // print(splitedNumData);
+
+    if (splitedNumData.length > 2) {
       clsOk = false;
+      clsErr.value = 'You used more than one "-" to add section!';
     } else {
-      cls = convertedClsNumber;
-      if (cls <= 12) {
-        clsErr.value = null;
-        clsOk = true;
-      } else {
+      var clsNumber = splitedNumData[0];
+      String clsSection;
+      try {
+        clsSection = splitedNumData[1].toUpperCase();
+      } catch (e) {
+        clsSection = null;
+        // print('Class Section is $clsSection');
+      }
+      // splitedCNum[1][0] represents first letter of Section
+      // var clsSection = splitedCNum[1][0].toUpperCase();
+      var convertedClsNumber = int.tryParse(clsNumber);
+      // print(convertedClsNumber);
+      if (convertedClsNumber == null) {
+        clsErr.value = 'Please add numbers only';
         clsOk = false;
-        clsErr.value = 'Class should not exceed 12!';
+      } else {
+        if (convertedClsNumber <= 11) {
+          clsErr.value = null;
+          clsOk = true;
+          var n = clsNumber;
+          var s = clsSection != null ? "-$clsSection" : "";
+          // print(clsSection);
+          // print(s);
+          if (s != '-') {
+            cls = n + s;
+            // print(clsSection);
+            // print(clsSection.runtimeType);
+            // ** Some weired things here...
+            // ** even clsSection is null it can be compared with number??
+            if (s.length > 2) {
+              // print(clsSection);
+              // print(s);
+              // print(s.length);
+              clsOk = false;
+              clsErr.value = 'Wrong section! It must be 1 letter only.';
+            } else {
+              // print(cls);
+              // if(s.split)
+              var section =
+                  s[1]; //**It just return the section Letter not the '-'
+              if (section.isAlphabetOnly) {
+                clsErr.value = null;
+                clsOk = true;
+              } else {
+                clsErr.value = 'Section can only be a letter!';
+              }
+            }
+          } else {
+            clsOk = false;
+            clsErr.value = 'Add section.';
+          }
+        } else {
+          clsOk = false;
+          clsErr.value = 'Class should not exceed 11!';
+        }
       }
     }
 
