@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:smanage/services/auth.dart';
 import 'package:smanage/services/database.dart';
 import 'package:smanage/shared/alert_with_input.dart';
+import 'package:smanage/shared/showToast.dart';
 import 'package:smanage/utils/constants.dart';
-import 'package:toast/toast.dart';
 
 class StudentBills extends StatelessWidget {
   final Query billRef;
@@ -139,25 +139,13 @@ class StudentBills extends StatelessWidget {
           String payDay =
               DateTimeFormat.format(DateTime.now(), format: 'D, M j');
           await docs[index].reference.update({'paidOn': payDay});
-          Toast.show(
-            'Done!',
-            context,
-            duration: Toast.LENGTH_LONG,
-            gravity: Toast.BOTTOM,
-          );
+          showToast(msg: 'Done!', context: context);
         } else if (value == null) {
-          Toast.show(
-            'Cancelled',
-            context,
-            duration: Toast.LENGTH_LONG,
-            gravity: Toast.BOTTOM,
-          );
+          showToast(msg: 'Cancelled', context: context);
         } else {
-          Toast.show(
-            'You are wrong! Try Again!',
-            context,
-            duration: Toast.LENGTH_LONG,
-            gravity: Toast.BOTTOM,
+          showToast(
+            msg: 'Not paid. Try to correct the month name.',
+            context: context,
           );
         }
       }
