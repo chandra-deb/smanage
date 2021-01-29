@@ -50,9 +50,22 @@ class AccountController extends GetxController {
                 List data = snapshot.data['classes'] as List;
                 result = result.toUpperCase();
                 data.add(result);
-                data.sort();
+                List finalData = [];
+                List dataWithSec = [];
+                List dataWithoutSec = [];
+                for (var item in data) {
+                  if (item.contains('-')) {
+                    dataWithSec.add(item);
+                  } else {
+                    dataWithoutSec.add(item);
+                  }
+                }
+                dataWithoutSec.sort();
+                dataWithSec.sort();
+                finalData = dataWithoutSec + dataWithSec;
+
                 final batch = FirebaseFirestore.instance.batch();
-                batch.update(teacherData, {'classes': data});
+                batch.update(teacherData, {'classes': finalData});
                 batch.update(teacherData, {'$result': 0});
                 await batch.commit();
               }
