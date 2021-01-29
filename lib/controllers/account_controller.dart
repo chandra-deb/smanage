@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:smanage/shared/showToast.dart';
-import 'package:toast/toast.dart';
 
 class AccountController extends GetxController {
   void addClass({
@@ -69,6 +68,36 @@ class AccountController extends GetxController {
       }
     } else {
       showToast(msg: 'No class added!', context: context);
+    }
+  }
+
+  void deleteClass({
+    AsyncSnapshot<DocumentSnapshot> snapshot,
+    String result,
+    DocumentReference teacherData,
+    BuildContext context,
+  }) async {
+    if (result != null) {
+      if (snapshot.data['classes'].contains(result) == true) {
+        print('contains');
+        List data = snapshot.data['classes'] as List;
+        int index = data.indexOf(result);
+        data.removeAt(index);
+
+        await teacherData.update({'classes': data});
+        await teacherData.update({'$result': FieldValue.delete()});
+        showToast(
+          msg: 'Deleted class $result!',
+          context: context,
+        );
+      } else {
+        showToast(
+          msg: 'Not deleted! Class $result does note exists!',
+          context: context,
+        );
+      }
+    } else {
+      showToast(msg: 'Nothing to delete!', context: context);
     }
   }
 }
