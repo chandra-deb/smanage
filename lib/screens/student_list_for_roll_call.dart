@@ -8,7 +8,7 @@ import 'package:smanage/utils/constants.dart';
 
 class StudentListForRC extends StatelessWidget {
   final _db = DB();
-  final int clsNumber;
+  final String clsNumber;
 
   StudentListForRC({this.clsNumber});
   @override

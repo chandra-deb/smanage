@@ -10,7 +10,7 @@ import 'package:smanage/utils/constants.dart';
 
 class StudentListForDetail extends StatelessWidget {
   final _db = DB();
-  final int clsNumber;
+  final String clsNumber;
   StudentListForDetail({this.clsNumber});
   @override
   Widget build(BuildContext context) {

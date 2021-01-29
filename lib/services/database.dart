@@ -5,7 +5,7 @@ class DB {
   final currentUser = FirebaseAuth.instance.currentUser;
   final store = FirebaseFirestore.instance;
 
-  Stream<QuerySnapshot> getStudentOfClass(int n) {
+  Stream<QuerySnapshot> getStudentOfClass(String n) {
     return store
         .collection('students')
         .orderBy('roll')
