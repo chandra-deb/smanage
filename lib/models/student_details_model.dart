@@ -20,4 +20,34 @@ class StudentDetailsModel {
   DateTime get joinDate => _data['joinDate'].toDate();
   List get phoneNumbers => _data['phoneNumbers'];
   Query get bills => _snapshot.reference.collection('bills').orderBy('index');
+  String get phone {
+    return _data['phoneNumbers'][0]['Phone'];
+  }
+
+  String get fatherPhone {
+    try {
+      var n = _data['phoneNumbers'][1];
+      String num = n['Father\'s Phone'];
+      return num;
+    } catch (_) {
+      // print(e);
+      return null;
+    }
+  }
+
+  String get motherPhone {
+    try {
+      var n = _data['phoneNumbers'][1];
+      String num = n['Mother\'s Phone'];
+      print('I am from MotherPhone with $num');
+      if (num == null) {
+        var n = _data['phoneNumbers'][2];
+        num = n['Mother\'s Phone'];
+        return num;
+      } else
+        return num;
+    } catch (_) {
+      return null;
+    }
+  }
 }
