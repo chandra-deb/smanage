@@ -38,10 +38,9 @@ class AccountController extends GetxController {
           if (convertedClsNumber <= 11) {
             // var n = clsNumber;
             // if (clsSection.length <= 1 && ) {
-            if ((clsSection.length == 1) ||
+            if ((clsSection.length == 1 && clsSection.isAlphabetOnly) ||
                 (clsSection.length == 0 && !result.contains('-'))) {
-              print(snapshot.data['classes']);
-
+              print(clsSection);
               if (snapshot.data['classes'].contains(result)) {
                 showToast(
                   msg: 'Class $result already exists!',
@@ -49,6 +48,7 @@ class AccountController extends GetxController {
                 );
               } else {
                 List data = snapshot.data['classes'] as List;
+                result = result.toUpperCase();
                 data.add(result);
                 data.sort();
                 final batch = FirebaseFirestore.instance.batch();
