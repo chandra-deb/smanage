@@ -152,14 +152,14 @@ class Account extends StatelessWidget {
                                       ),
                                     ),
                                     ...snapshot.data['classes'].map(
-                                      (t) => Container(
+                                      (cls) => Container(
                                         padding: EdgeInsets.all(5),
                                         child: Row(
                                           // crossAxisAlignment:
                                           //     CrossAxisAlignment.center,
                                           children: [
                                             Text(
-                                              t.toString() + '  is',
+                                              cls.toString() + '  is',
                                               style: kTextStyle.copyWith(
                                                 color: Colors.black54,
                                               ),
@@ -170,7 +170,7 @@ class Account extends StatelessWidget {
                                               child: FlatButton(
                                                 color: kDoneColor,
                                                 child: Text(
-                                                  '${snapshot.data[t.toString()]}',
+                                                  '${snapshot.data[cls.toString()]}',
                                                   style: kTextStyle.copyWith(
                                                     color: Colors.black54,
                                                   ),
@@ -178,28 +178,23 @@ class Account extends StatelessWidget {
                                                 onPressed: () async {
                                                   String result =
                                                       await alertWithInput(
-                                                          context,
-                                                          textCancel: 'Cancel',
-                                                          cancelButtonColor:
-                                                              kDoneColor,
-                                                          okButtonColor:
-                                                              kDoneColor,
-                                                          hintText:
-                                                              'Enter amount',
-                                                          textOk: 'Set',
-                                                          title:
-                                                              'Set monthly bill of class $t');
-                                                  if (result != null) {
-                                                    if (int.tryParse(result) !=
-                                                        null) {
-                                                      teacherData.update(
-                                                        {
-                                                          t.toString():
-                                                              int.parse(result)
-                                                        },
-                                                      );
-                                                    }
-                                                  }
+                                                    context,
+                                                    textCancel: 'Cancel',
+                                                    cancelButtonColor:
+                                                        kDoneColor,
+                                                    okButtonColor: kDoneColor,
+                                                    hintText: 'Enter amount',
+                                                    textOk: 'Set',
+                                                    title:
+                                                        'Set monthly bill of class $cls',
+                                                  );
+                                                  _accountController
+                                                      .setMonthlyBill(
+                                                    cls: cls,
+                                                    result: result,
+                                                    teacherData: teacherData,
+                                                    context: context,
+                                                  );
                                                 },
                                               ),
                                             )

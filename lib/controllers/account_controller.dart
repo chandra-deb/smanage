@@ -100,4 +100,33 @@ class AccountController extends GetxController {
       showToast(msg: 'Nothing to delete!', context: context);
     }
   }
+
+  void setMonthlyBill({
+    DocumentReference teacherData,
+    var cls,
+    var result,
+    BuildContext context,
+  }) {
+    if (result != null) {
+      if (int.tryParse(result) != null) {
+        teacherData.update(
+          {cls.toString(): int.parse(result)},
+        );
+        showToast(
+            msg: 'Bill amount for class $cls is set to $result',
+            context: context);
+      } else {
+        showToast(
+          msg:
+              'Bill amount not added! You must only use numbers for bill amount!',
+          context: context,
+        );
+      }
+    } else {
+      showToast(
+        msg: 'You have not updated bill amount for class $cls',
+        context: context,
+      );
+    }
+  }
 }
