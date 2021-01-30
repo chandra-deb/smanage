@@ -3,16 +3,29 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:smanage/controllers/add_student_controller.dart';
+import 'package:smanage/controllers/update_student_controller.dart';
 import 'package:smanage/models/student_details_model.dart';
 
 class UpdateStudentDetails extends StatelessWidget {
-  final AddStudentController _ = AddStudentController();
   final StudentDetailsModel currentDetail;
 
   UpdateStudentDetails({this.currentDetail});
 
   @override
   Widget build(BuildContext context) {
+    final UpdateStudentController _ = UpdateStudentController(
+      studentName: currentDetail.name,
+      fatherName: currentDetail.fatherName,
+      motherName: currentDetail.motherName,
+      institution: currentDetail.institutionName,
+      cls: currentDetail.cls,
+      roll: int.parse(currentDetail.roll),
+      studentPhone: currentDetail.phone,
+      fatherPhone: currentDetail.fatherPhone,
+      motherPhone: currentDetail.motherName,
+      address: currentDetail.address,
+      presentAddress: currentDetail.presentAddress,
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text('Update student details'),
@@ -136,7 +149,10 @@ class UpdateStudentDetails extends StatelessWidget {
                     },
                   ),
                   ElevatedButton(
-                      onPressed: _.button.value, child: Text('Update')),
+                    onPressed: _.button.value,
+                    // onPressed: () {},
+                    child: Text('Update'),
+                  ),
                   _.loading.value == true
                       ? LinearProgressIndicator()
                       : SizedBox()
