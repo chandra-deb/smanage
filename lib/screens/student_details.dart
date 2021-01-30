@@ -6,10 +6,9 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
 import 'package:smanage/controllers/student_deletion_controller.dart';
 import 'package:smanage/models/student_details_model.dart';
-import 'package:smanage/screens/add_student.dart';
 import 'package:smanage/screens/attendance.dart';
-import 'package:smanage/screens/home.dart';
 import 'package:smanage/screens/update_student_details.dart';
+import 'package:smanage/shared/showToast.dart';
 import 'package:smanage/utils/constants.dart';
 import 'package:smanage/widgets/student_bills.dart';
 
@@ -412,12 +411,19 @@ class DetailsPart extends StatelessWidget {
                             ),
                           ),
                           TextButton(
-                            child: Text('Edit details'),
-                            onPressed: () {
+                            child: Text(
+                              'Edit details',
+                              style: kTextStyle.copyWith(color: Colors.black54),
+                            ),
+                            onPressed: () async {
                               // print(Get.offAll(Home()));
-                              Get.to(UpdateStudentDetails(
+                              var result = await Get.to(UpdateStudentDetails(
                                 currentDetail: detail,
                               ));
+                              if (result == null) {
+                                showToast(
+                                    msg: 'Nothing updated!', context: context);
+                              }
                             },
                           ),
                         ],
