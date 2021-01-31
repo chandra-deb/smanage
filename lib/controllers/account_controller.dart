@@ -68,6 +68,7 @@ class AccountController extends GetxController {
                 batch.update(teacherData, {'classes': finalData});
                 batch.update(teacherData, {'$result': 0});
                 await batch.commit();
+                showToast(msg: 'Added Class $result', context: context);
               }
             } else {
               showToast(
