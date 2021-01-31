@@ -8,7 +8,8 @@ class StudentDetailsModel {
   ) {
     _data = _snapshot.data();
   }
-
+  QueryDocumentSnapshot get getFullSnapshot => _snapshot;
+  DocumentReference get ref => _snapshot.reference;
   String get name => _data['name'];
   String get fatherName => _data['fatherName'];
   String get motherName => _data['motherName'];
