@@ -86,4 +86,20 @@ class Student {
       return 'Slow Internet. If not added, it will be added later automatically';
     }
   }
+
+  Future update({
+    @required DocumentReference studentDoc,
+  }) async {
+    await studentDoc.update({
+      'name': name,
+      'fatherName': fatherName,
+      'motherName': motherName,
+      'institution': institution,
+      'roll': roll,
+      'classNumber': classNumber,
+      'phoneNumbers': phoneNumbers,
+      'address': address,
+      'presentAddress': presentAddress,
+    });
+  }
 }
