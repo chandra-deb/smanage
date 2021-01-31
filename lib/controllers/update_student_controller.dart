@@ -473,10 +473,10 @@ class UpdateStudentController extends GetxController {
     if (studentPhoneOk == true) {
       phoneNumbers.add({'Phone': studentPhone});
     }
-    if (fatherPhoneOk == true) {
+    if (fatherPhoneOk == true && fatherPhone != null) {
       phoneNumbers.add({'Father\'s Phone': fatherPhone});
     }
-    if (motherPhoneOk == true) {
+    if (motherPhoneOk == true && motherPhone != null) {
       phoneNumbers.add({'Mother\'s Phone': motherPhone});
       print(phoneNumbers);
     }
