@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:smanage/models/student.dart';
+import 'package:smanage/screens/student_details.dart';
 
 class UpdateStudentController extends GetxController {
+  DocumentReference ref;
   String studentName;
   String fatherName;
   String motherName;
@@ -16,7 +19,8 @@ class UpdateStudentController extends GetxController {
   String motherPhone;
 
   UpdateStudentController({
-    @required final this.studentName,
+    @required this.ref,
+    @required this.studentName,
     @required this.fatherName,
     @required this.motherName,
     @required this.institution,
@@ -396,7 +400,20 @@ class UpdateStudentController extends GetxController {
         rollOk &&
         studentPhoneOk &&
         addressOk) {
-      button.value = () async => await submitData();
+      button.value = () async {
+        await submitData();
+        Get.back(result: {
+          'name': studentName,
+          'fatherName': fatherName,
+          'motherName': motherName,
+          'institution': institution,
+          'cls': cls,
+          'roll': roll.toString(),
+          'pAddress': address,
+          'cAddress': presentAddress,
+          'phoneNumbers': zippedNumbers,
+        });
+      };
     } else {
       button.value = null;
     }
@@ -416,25 +433,22 @@ class UpdateStudentController extends GetxController {
     );
     loading.value = true;
     button.value = null;
-    var result = await student.create();
-    // * Here "null" means student successfully created instantly
-    if (result != null) {
-      addButtonErr.value = result;
-      loading.value = false;
-      // return;
+    try {
+      var result = await student.update(studentDoc: ref);
+
+      // * Here "null" means student successfully Updated instantly
+      if (result != null) {
+        addButtonErr.value = result;
+        loading.value = false;
+        // return;
+      }
+    } on Exception catch (e) {
+      // TODO
     }
 
     // * if not means the use is not connected to the internet..and create the student in phone cache.
     addButtonErr.value = null;
 
-    Get.back();
-
-    print('Student Name $studentName');
-    print('Father Name $fatherName');
-    print('Mother Name $motherName');
-    print('School Name $institution');
-    print('Class $cls');
-    print('Roll $roll');
     for (var n in zippedNumbers) {
       print(n);
     }
