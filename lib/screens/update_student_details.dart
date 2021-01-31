@@ -14,6 +14,7 @@ class UpdateStudentDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UpdateStudentController _ = UpdateStudentController(
+      ref: currentDetail.ref,
       studentName: currentDetail.name,
       fatherName: currentDetail.fatherName,
       motherName: currentDetail.motherName,
