@@ -85,13 +85,13 @@ class STDTState extends State<STDT> {
                                 color: Colors.white,
                               ),
                             ),
-                            Text(
-                              v[v.keys.first],
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                              ),
-                            ), // Row(
+                            // Text(
+                            //   v[v.keys.first],
+                            //   style: TextStyle(
+                            //     fontSize: 16,
+                            //     color: Colors.white,
+                            //   ),
+                            // ), // Row(
                           ],
                         ),
                         FlatButton(
@@ -114,6 +114,329 @@ class STDTState extends State<STDT> {
           DetailsPart(
             detail: detail,
           ),
+          // !!______________________________________
+          // ExpandableNotifier(
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(10),
+          //     child: Card(
+          //       clipBehavior: Clip.antiAlias,
+          //       child: Column(
+          //         children: <Widget>[
+          //           ScrollOnExpand(
+          //             scrollOnExpand: true,
+          //             scrollOnCollapse: false,
+          //             child: ExpandablePanel(
+          //               theme: const ExpandableThemeData(
+          //                 headerAlignment:
+          //                     ExpandablePanelHeaderAlignment.center,
+          //                 tapBodyToCollapse: true,
+          //               ),
+          //               header: Padding(
+          //                 padding: EdgeInsets.all(10),
+          //                 child: Text(
+          //                   "Get Full Details",
+          //                   style:
+          //                       TextStyle(fontSize: 20, color: Colors.black54),
+          //                 ),
+          //               ),
+          //               expanded: Column(
+          //                 crossAxisAlignment: CrossAxisAlignment.start,
+          //                 children: <Widget>[
+          //                   Container(
+          //                     child: Column(
+          //                       children: [
+          //                         Container(
+          //                           padding: EdgeInsets.symmetric(
+          //                             vertical: 10,
+          //                             horizontal: 15,
+          //                           ),
+          //                           margin: EdgeInsets.symmetric(
+          //                             vertical: 5,
+          //                             // horizontal: 15,
+          //                           ),
+          //                           color: kDoneColor,
+          //                           child: Row(
+          //                             // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //                             children: [
+          //                               Expanded(
+          //                                 child: Text(
+          //                                   'Name :',
+          //                                   style: kTextStyle,
+          //                                 ),
+          //                               ),
+          //                               Text(
+          //                                 detail.name,
+          //                                 style: kTextStyle,
+          //                               ),
+          //                             ],
+          //                           ),
+          //                         ),
+          //                         Container(
+          //                           padding: EdgeInsets.symmetric(
+          //                             vertical: 10,
+          //                             horizontal: 15,
+          //                           ),
+          //                           margin: EdgeInsets.symmetric(
+          //                             vertical: 5,
+          //                             // horizontal: 15,
+          //                           ),
+          //                           color: kDoneColor,
+          //                           child: Row(
+          //                             mainAxisAlignment:
+          //                                 MainAxisAlignment.spaceAround,
+          //                             children: [
+          //                               Expanded(
+          //                                 child: Text(
+          //                                   'Father\'s Name :',
+          //                                   style: kTextStyle,
+          //                                 ),
+          //                               ),
+          //                               Text(
+          //                                 detail.fatherName,
+          //                                 style: kTextStyle,
+          //                               ),
+          //                             ],
+          //                           ),
+          //                         ),
+          //                         Container(
+          //                           padding: EdgeInsets.symmetric(
+          //                             vertical: 10,
+          //                             horizontal: 15,
+          //                           ),
+          //                           margin: EdgeInsets.symmetric(
+          //                             vertical: 5,
+          //                             // horizontal: 15,
+          //                           ),
+          //                           color: kDoneColor,
+          //                           child: Row(
+          //                             mainAxisAlignment:
+          //                                 MainAxisAlignment.spaceAround,
+          //                             children: [
+          //                               Expanded(
+          //                                 child: Text(
+          //                                   'Mother\'s Name :',
+          //                                   style: kTextStyle,
+          //                                 ),
+          //                               ),
+          //                               Text(
+          //                                 detail.motherName,
+          //                                 style: kTextStyle,
+          //                               ),
+          //                             ],
+          //                           ),
+          //                         ),
+          //                         Container(
+          //                           padding: EdgeInsets.symmetric(
+          //                             vertical: 10,
+          //                             horizontal: 15,
+          //                           ),
+          //                           margin: EdgeInsets.symmetric(
+          //                             vertical: 5,
+          //                             // horizontal: 15,
+          //                           ),
+          //                           color: kDoneColor,
+          //                           child: Row(
+          //                             mainAxisAlignment:
+          //                                 MainAxisAlignment.spaceAround,
+          //                             children: [
+          //                               Expanded(
+          //                                 child: Text(
+          //                                   'Institution\'s Name :',
+          //                                   style: kTextStyle,
+          //                                 ),
+          //                               ),
+          //                               Text(
+          //                                 detail.institutionName,
+          //                                 style: kTextStyle,
+          //                               ),
+          //                             ],
+          //                           ),
+          //                         ),
+          //                         Container(
+          //                           padding: EdgeInsets.symmetric(
+          //                             vertical: 10,
+          //                             horizontal: 15,
+          //                           ),
+          //                           margin: EdgeInsets.symmetric(
+          //                             vertical: 5,
+          //                             // horizontal: 15,
+          //                           ),
+          //                           color: kDoneColor,
+          //                           child: Row(
+          //                             mainAxisAlignment:
+          //                                 MainAxisAlignment.spaceAround,
+          //                             children: [
+          //                               Expanded(
+          //                                 child: Text(
+          //                                   'Class :',
+          //                                   style: kTextStyle,
+          //                                 ),
+          //                               ),
+          //                               Text(
+          //                                 detail.cls,
+          //                                 style: kTextStyle,
+          //                               ),
+          //                             ],
+          //                           ),
+          //                         ),
+          //                         Container(
+          //                           padding: EdgeInsets.symmetric(
+          //                             vertical: 10,
+          //                             horizontal: 15,
+          //                           ),
+          //                           margin: EdgeInsets.symmetric(
+          //                             vertical: 5,
+          //                             // horizontal: 15,
+          //                           ),
+          //                           color: kDoneColor,
+          //                           child: Row(
+          //                             mainAxisAlignment:
+          //                                 MainAxisAlignment.spaceAround,
+          //                             children: [
+          //                               Expanded(
+          //                                 child: Text(
+          //                                   'Roll Number :',
+          //                                   style: kTextStyle,
+          //                                 ),
+          //                               ),
+          //                               Text(
+          //                                 detail.roll,
+          //                                 style: kTextStyle,
+          //                               ),
+          //                             ],
+          //                           ),
+          //                         ),
+          //                         Container(
+          //                           padding: EdgeInsets.symmetric(
+          //                             vertical: 10,
+          //                             horizontal: 15,
+          //                           ),
+          //                           margin: EdgeInsets.symmetric(
+          //                             vertical: 5,
+          //                             // horizontal: 15,
+          //                           ),
+          //                           color: kDoneColor,
+          //                           child: Row(
+          //                             mainAxisAlignment:
+          //                                 MainAxisAlignment.spaceAround,
+          //                             children: [
+          //                               Expanded(
+          //                                 child: Text(
+          //                                   'P.Address :',
+          //                                   style: kTextStyle,
+          //                                 ),
+          //                               ),
+          //                               Text(
+          //                                 detail.address,
+          //                                 style: kTextStyle,
+          //                               ),
+          //                             ],
+          //                           ),
+          //                         ),
+          //                         Container(
+          //                           padding: EdgeInsets.symmetric(
+          //                             vertical: 10,
+          //                             horizontal: 15,
+          //                           ),
+          //                           margin: EdgeInsets.symmetric(
+          //                             vertical: 5,
+          //                             // horizontal: 15,
+          //                           ),
+          //                           color: kDoneColor,
+          //                           child: Row(
+          //                             mainAxisAlignment:
+          //                                 MainAxisAlignment.spaceAround,
+          //                             children: [
+          //                               Expanded(
+          //                                 child: Text(
+          //                                   'C.Address :',
+          //                                   style: kTextStyle,
+          //                                 ),
+          //                               ),
+          //                               Text(
+          //                                 detail.presentAddress,
+          //                                 style: kTextStyle,
+          //                               ),
+          //                             ],
+          //                           ),
+          //                         ),
+          //                         Container(
+          //                           padding: EdgeInsets.symmetric(
+          //                             vertical: 10,
+          //                             horizontal: 15,
+          //                           ),
+          //                           margin: EdgeInsets.symmetric(
+          //                             vertical: 5,
+          //                             // horizontal: 15,
+          //                           ),
+          //                           color: kDoneColor,
+          //                           child: Row(
+          //                             mainAxisAlignment:
+          //                                 MainAxisAlignment.spaceAround,
+          //                             children: [
+          //                               Expanded(
+          //                                 child: Text(
+          //                                   'Start Date :',
+          //                                   style: kTextStyle,
+          //                                 ),
+          //                               ),
+          //                               Text(
+          //                                 detail.joinDate
+          //                                     .format(DateTimeFormats.american)
+          //                                     .toString(),
+          //                                 style: kTextStyle,
+          //                               ),
+          //                             ],
+          //                           ),
+          //                         ),
+          //                         TextButton(
+          //                           child: Text(
+          //                             'Edit details',
+          //                             style: kTextStyle.copyWith(
+          //                                 color: Colors.black54),
+          //                           ),
+          //                           onPressed: () async {
+          //                             // print(Get.offAll(Home()));
+          //                             var result =
+          //                                 await Get.to(UpdateStudentDetails(
+          //                               currentDetail: detail,
+          //                             ));
+          //                             if (result == null) {
+          //                               showToast(
+          //                                   msg: 'Nothing updated!',
+          //                                   context: context);
+          //                             } else {
+          //                               showToast(
+          //                                   msg: 'Updated', context: context);
+          //                               updateUI();
+          //                             }
+          //                           },
+          //                         ),
+          //                       ],
+          //                     ),
+          //                   )
+          //                 ],
+          //               ),
+          //               builder: (_, collapsed, expanded) {
+          //                 return Padding(
+          //                   padding: EdgeInsets.only(
+          //                       left: 10, right: 10, bottom: 10),
+          //                   child: Expandable(
+          //                     collapsed: collapsed,
+          //                     expanded: expanded,
+          //                     theme:
+          //                         const ExpandableThemeData(crossFadePoint: 0),
+          //                   ),
+          //                 );
+          //               },
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // !!______________________________________
           BillsPart(
             detail: detail,
           ),
@@ -423,6 +746,8 @@ class DetailsPart extends StatelessWidget {
                               if (result == null) {
                                 showToast(
                                     msg: 'Nothing updated!', context: context);
+                              } else {
+                                showToast(msg: 'Updated', context: context);
                               }
                             },
                           ),

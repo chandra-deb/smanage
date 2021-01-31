@@ -31,7 +31,9 @@ class UpdateStudentController extends GetxController {
     @required this.studentPhone,
     this.fatherPhone,
     this.motherPhone,
-  });
+  }) {
+    print('MotherPhone is $motherPhone');
+  }
 
   Rx<Function> button = Rx<Function>(null);
   RxString studentNameErr = RxString(null);
@@ -331,6 +333,7 @@ class UpdateStudentController extends GetxController {
   }
 
   void getMotherPhoneErr(String pn) {
+    print(pn);
     var convertedPhoneNumber;
     if (pn != null) {
       convertedPhoneNumber = int.tryParse(pn);
@@ -413,6 +416,7 @@ class UpdateStudentController extends GetxController {
           'cAddress': presentAddress,
           'phoneNumbers': zippedNumbers,
         });
+        Get.back();
       };
     } else {
       button.value = null;
@@ -434,8 +438,9 @@ class UpdateStudentController extends GetxController {
     loading.value = true;
     button.value = null;
     try {
+      print(zippedNumbers);
       var result = await student.update(studentDoc: ref);
-
+      print(zippedNumbers);
       // * Here "null" means student successfully Updated instantly
       if (result != null) {
         addButtonErr.value = result;
@@ -473,6 +478,7 @@ class UpdateStudentController extends GetxController {
     }
     if (motherPhoneOk == true) {
       phoneNumbers.add({'Mother\'s Phone': motherPhone});
+      print(phoneNumbers);
     }
 
     return phoneNumbers;

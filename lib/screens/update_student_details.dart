@@ -23,7 +23,7 @@ class UpdateStudentDetails extends StatelessWidget {
       roll: int.parse(currentDetail.roll),
       studentPhone: currentDetail.phone,
       fatherPhone: currentDetail.fatherPhone,
-      motherPhone: currentDetail.motherName,
+      motherPhone: currentDetail.motherPhone,
       address: currentDetail.address,
       presentAddress: currentDetail.presentAddress,
     );
@@ -126,7 +126,7 @@ class UpdateStudentDetails extends StatelessWidget {
                         errorText: _.motherPhoneErr.value),
                     onChanged: (value) {
                       _.getMotherPhoneErr(value);
-                      print(value);
+                      print(value + ' From motherPhone');
                     },
                   ),
                   TextFormField(
