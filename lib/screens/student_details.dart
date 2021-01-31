@@ -776,6 +776,7 @@ class DetailsPart extends StatelessWidget {
 class BillsPart extends StatelessWidget {
   final StudentDetailsModel detail;
   BillsPart({@required this.detail});
+
   @override
   Widget build(BuildContext context) {
     return ExpandableNotifier(

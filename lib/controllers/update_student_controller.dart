@@ -107,51 +107,6 @@ class UpdateStudentController extends GetxController {
     enableButton();
   }
 
-  // void getStudentNameErr(String sName) {
-  //   getNameErr(
-  //     inputName: sName,
-  //     name: studentName,
-  //     nameErr: studentNameErr,
-  //     nameOk: studentNameOk,
-  //   );
-  // }
-
-  // void getFatherNameErr(String fName) {
-  //   getNameErr(
-  //     inputName: fName,
-  //     name: fatherName,
-  //     nameErr: fatherNameErr,
-  //     nameOk: fatherNameOk,
-  //   );
-  // }
-
-  // void getMotherNameErr(String mName) {
-  //   getNameErr(
-  //     inputName: mName,
-  //     name: motherName,
-  //     nameErr: motherNameErr,
-  //     nameOk: motherNameOk,
-  //   );
-  // }
-
-  // void getNameErr({
-  //   String inputName,
-  //   String name,
-  //   RxString nameErr,
-  //   bool nameOk,
-  // }) {
-  //   name = inputName;
-  //   if (name.length > 3) {
-  //     nameErr.value = null;
-  //     nameOk = true;
-  //   } else {
-  //     nameOk = false;
-  //     nameErr.value = 'Name must be 4 or more characters long!';
-  //   }
-
-  //   enableButton();
-  // }
-
   void getSchoolNameErr(String sn) {
     if (sn != null) {
       institution = sn;
@@ -395,6 +350,7 @@ class UpdateStudentController extends GetxController {
       presentAddressOk = false;
       presentAddressErr.value = 'Address must be 10 or more characters long!';
     }
+    enableButton();
   }
 
   void enableButton() {
