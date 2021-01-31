@@ -725,9 +725,7 @@ class DetailsPart extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  detail.joinDate
-                                      .format(DateTimeFormats.american)
-                                      .toString(),
+                                  detail.joinDate.format('D, M j Y').toString(),
                                   style: kTextStyle,
                                 ),
                               ],
