@@ -283,6 +283,7 @@ class UpdateStudentController extends GetxController {
           studentPhone.startsWith('014') ||
           studentPhone.startsWith('019') ||
           studentPhone.startsWith('016') ||
+          studentPhone.startsWith('018') ||
           studentPhone.startsWith('015')) {
         if (studentPhone.length == 11) {
           studentPhoneErr.value = null;
@@ -316,7 +317,8 @@ class UpdateStudentController extends GetxController {
           fatherPhone.startsWith('014') ||
           fatherPhone.startsWith('019') ||
           fatherPhone.startsWith('016') ||
-          fatherPhone.startsWith('015')) {
+          fatherPhone.startsWith('015') ||
+          fatherPhone.startsWith('018')) {
         if (fatherPhone.length == 11) {
           fatherPhoneErr.value = null;
           fatherPhoneOk = true;
@@ -350,7 +352,8 @@ class UpdateStudentController extends GetxController {
           motherPhone.startsWith('014') ||
           motherPhone.startsWith('019') ||
           motherPhone.startsWith('016') ||
-          motherPhone.startsWith('015')) {
+          motherPhone.startsWith('015') ||
+          motherPhone.startsWith('018')) {
         if (motherPhone.length == 11) {
           motherPhoneErr.value = null;
           motherPhoneOk = true;
