@@ -3,4 +3,4 @@ HOLD:
 [√] add student search functionalities on student details list
 [√] add another field called 'present address' on add student form
 [√] make the add student form as it can classNumber with Section
-[!] make the student details editable
+[√] make the student details editable
