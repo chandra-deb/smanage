@@ -134,7 +134,7 @@ class StudentDetailsOf extends StatelessWidget {
                   onTap: () {
                     Get.to(
                       StudentListForDetail(
-                        clsNumber: cls,
+                        clsNumber: cls.toString(),
                       ),
                     );
                   },
@@ -201,7 +201,7 @@ class RollCallOf extends StatelessWidget {
                   onTap: () {
                     Get.to(
                       StudentListForRC(
-                        clsNumber: cls,
+                        clsNumber: cls.toString(),
                       ),
                     );
                   },
