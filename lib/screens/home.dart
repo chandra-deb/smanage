@@ -142,7 +142,7 @@ class StudentDetailsOf extends StatelessWidget {
                     padding: const EdgeInsets.all(8),
                     child: Center(
                       child: Text(
-                        "Details of Class $cls",
+                        "Details - $cls",
                         style: kTextStyle.copyWith(fontSize: 30),
                         textAlign: TextAlign.center,
                       ),
@@ -209,7 +209,7 @@ class RollCallOf extends StatelessWidget {
                     padding: const EdgeInsets.all(8),
                     child: Center(
                       child: Text(
-                        "Roll Call of Class $cls",
+                        "Roll Call - $cls",
                         style: kTextStyle.copyWith(fontSize: 30),
                         textAlign: TextAlign.center,
                       ),
