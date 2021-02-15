@@ -58,7 +58,6 @@ class AddStudent extends StatelessWidget {
                     },
                   ),
                   TextField(
-                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                         labelText: 'Class', errorText: _.clsErr.value),
                     onChanged: (value) {
